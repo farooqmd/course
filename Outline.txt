@@ -1,0 +1,63 @@
+Time-stamp: <2013-02-05 10:30 olenz>
+
+Day 1: Programming in C
+-----------------------
+LECTURE
+* Fundamental syntax
+  * Blocks, functions, comments, tokens
+* Basic types: int, char
+* Data structures in C
+  * typedef
+  * static, const
+  * Pointers
+  * Memory Layout: Stack vs. Heap
+  * Arrays
+  * Structs (unions)
+  * Example: linked list?
+* Compilation
+  * Declaration vs. Definition
+  * Header/Source files
+  * Preprocessor
+  * Compilation units
+  * Libraries
+  * Unix three-step compilation (configure, make, make install)?
+
+EXERCISES
+  * Test, when linked list are actually faster than plain arrays
+  * Handling multidimensional arrays
+
+Day 2: Object-oriented programming
+----------------------------------
+* Basic ideas, UML
+* Class, Object/Instance, Field, Method
+* Class hierarchy, Inheritance, Virtual functions
+* Constructor, Destructor
+* Encapsulation: private, protected, public
+
+EXERCISES
+  * Present byg project
+  * Analyze and plan your byg
+
+Further topics
+--------------
+* Constness
+* Exceptions
+* Templates/STL
+* MPI?
+* Test driven programming?
+* Ideas of
+  * Design Patterns 
+  * Extreme Programming
+
+PROJECT
+* "Bygs"
+* Animals in 2D-periodic world
+* Food must be brought back to nest
+* Field can contain:
+  * Obstacle or not
+  * Byg or not
+  * Food or not
+  * Nest or not
+  * Enemy nest is obstacle?
+
+
