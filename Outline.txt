@@ -1,53 +1,111 @@
-Time-stamp: <2013-02-05 10:30 olenz>
+Time-stamp: <2013-02-05 16:46 olenz>
 
-Day 1: Programming in C
------------------------
-LECTURE
+Day 1
+-----
+LECTURE 1
+* History of C
 * Fundamental syntax
   * Blocks, functions, comments, tokens
 * Basic types: int, char
-* Data structures in C
-  * typedef
-  * static, const
-  * Pointers
-  * Memory Layout: Stack vs. Heap
-  * Arrays
-  * Structs (unions)
-  * Example: linked list?
 * Compilation
   * Declaration vs. Definition
   * Header/Source files
+  * Definition guards
   * Preprocessor
   * Compilation units
   * Libraries
   * Unix three-step compilation (configure, make, make install)?
 
-EXERCISES
-  * Test, when linked list are actually faster than plain arrays
-  * Handling multidimensional arrays
+LECTURE 2
+* Data structures in C
+  * typedef
+  * static, const
+  * Pointers
+  * Call-by-value, call-by-reference
+  * Memory Layout: Stack vs. Heap
+  * malloc, free, NULL
+  * Arrays
+  * Structs (unions)
+  * Example: linked list?
 
-Day 2: Object-oriented programming
-----------------------------------
+EXERCISES
+* Introduce project
+* Test, when linked list are actually faster than plain arrays
+* Handling multidimensional arrays -> Game board
+
+Day 2
+-----
+LECTURE 1
+* Referenzen
+* bool
+* Standard library: IOstream, string
+* STL: vector, hashmap, iterator, find, sort
+
+LECTURE 2
 * Basic ideas, UML
 * Class, Object/Instance, Field, Method
-* Class hierarchy, Inheritance, Virtual functions
-* Constructor, Destructor
-* Encapsulation: private, protected, public
+* Class Hierarchy, Inheritance
 
 EXERCISES
-  * Present byg project
-  * Analyze and plan your byg
+* Introduce Project
+* UML Design
+
+Day 3 
+-----
+LECTURE 1
+* Example: multidim valarray class
+* delete, new
+* Constructor, Destructor
+* Default constructor
+* Encapsulation: private, public
+* friend
+* Test Driven Programming?
+
+LECTURE 2
+* Function overloading
+* Operator overloading
+* Inheritance
+  * protected
+* Polymorphism
+  * Virtual Functions
+  * Abstract Base Classes
+  * Pure Virtual Functions
+* Multiple Inheritance
+
+EXERCISES
+* UML -> C++
+
+Day 4
+-----
+LECTURE 1
+* Exceptions
+* Namespaces
+
+LECTURE 2
+* Const Correctness
+* Copy Constructor
+* Automatic type conversion
+* Inline definitions
+
+EXERCISES
+
+Day 5
+-----
+LECTURE 1
+* Templates
+* STL
+
+LECTURE 2
+* Software Development Models
+  * Waterfall Model
+  * Modern SE
+    * Design Patterns
+    * "Agile" Development
+    * Extreme Programming
 
 Further topics
 --------------
-* Constness
-* Exceptions
-* Templates/STL
 * MPI?
-* Test driven programming?
-* Ideas of
-  * Design Patterns 
-  * Extreme Programming
 
 PROJECT
 * "Bygs"
