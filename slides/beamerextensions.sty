@@ -1,0 +1,20 @@
+\newcommand{\alerted}{\usebeamercolor[fg]{alerted text}}
+\newcommand{\alertedmath}[1]{\alerted\mathbf{#1}}
+
+\newcommand{\unskipbeameritemize}{\global\let\beamer@firstlineitemizeunskip=\relax}
+
+\newenvironment{alertbox}[1]{%
+  \begin{center}%
+    \begin{minipage}{#1}
+      \begin{alertblock}{}
+        \centering} {
+      \end{alertblock}\end{minipage}\end{center}
+}
+
+\newenvironment{alertblockwidth}[2]{%
+  \begin{center}%
+    \begin{minipage}{#2}
+      \begin{alertblock}{#1}
+      } {
+      \end{alertblock}\end{minipage}\end{center}
+}

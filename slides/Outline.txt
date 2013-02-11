@@ -1,8 +1,8 @@
-Time-stamp: <2013-02-05 16:46 olenz>
+Time-stamp: <2013-02-11 15:09 olenz>
 
 Day 1
 -----
-LECTURE 1
+LECTURE 1: OL
 * History of C
 * Fundamental syntax
   * Blocks, functions, comments, tokens
@@ -16,7 +16,7 @@ LECTURE 1
   * Libraries
   * Unix three-step compilation (configure, make, make install)?
 
-LECTURE 2
+LECTURE 2: AA
 * Data structures in C
   * typedef
   * static, const
@@ -35,13 +35,13 @@ EXERCISES
 
 Day 2
 -----
-LECTURE 1
+LECTURE 1: OL
 * Referenzen
 * bool
 * Standard library: IOstream, string
 * STL: vector, hashmap, iterator, find, sort
 
-LECTURE 2
+LECTURE 2: AA
 * Basic ideas, UML
 * Class, Object/Instance, Field, Method
 * Class Hierarchy, Inheritance
@@ -52,7 +52,7 @@ EXERCISES
 
 Day 3 
 -----
-LECTURE 1
+LECTURE 1: OL
 * Example: multidim valarray class
 * delete, new
 * Constructor, Destructor
@@ -61,7 +61,7 @@ LECTURE 1
 * friend
 * Test Driven Programming?
 
-LECTURE 2
+LECTURE 2: AA
 * Function overloading
 * Operator overloading
 * Inheritance
@@ -77,11 +77,11 @@ EXERCISES
 
 Day 4
 -----
-LECTURE 1
+LECTURE 1: OL
 * Exceptions
 * Namespaces
 
-LECTURE 2
+LECTURE 2: AA
 * Const Correctness
 * Copy Constructor
 * Automatic type conversion
@@ -91,11 +91,11 @@ EXERCISES
 
 Day 5
 -----
-LECTURE 1
+LECTURE 1: AA
 * Templates
 * STL
 
-LECTURE 2
+LECTURE 2: OL
 * Software Development Models
   * Waterfall Model
   * Modern SE

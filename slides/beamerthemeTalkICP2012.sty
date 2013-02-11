@@ -1,0 +1,232 @@
+\ProvidesPackage{beamerthemeTalkICP2012}
+\RequirePackage{icpcolors}
+\RequirePackage{helvet}
+\RequirePackage{tcolorbox}
+\RequirePackage{tikz}
+  
+\makeatletter
+
+\newlength{\icpblocktitleindent}
+\setlength{\icpblocktitleindent}{0.05\paperwidth}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\defbeamertemplate{caption}{nocap}{
+  \begin{minipage}{\textwidth}
+    \begin{center}
+      \insertcaption
+    \end{center}
+  \end{minipage}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\icpblockbegin}[1]{%
+  \usebeamercolor{block title#1}%
+  \usebeamerfont*{block title#1}%
+  \ifx\insertblocktitle\@empty
+  \relax
+  \else
+  \begin{tcolorbox}[arc=0pt,boxsep=0pt,top=0.2em,bottom=0.2em,
+    boxrule=0pt,leftupper=\icpblocktitleindent,
+    colframe=bg,colback=bg,coltext=fg
+    ]
+    \rule[-0.2em]{0pt}{\baselineskip}\insertblocktitle
+  \end{tcolorbox}\vspace*{-0.1em}
+  \fi
+  \usebeamercolor{block body#1}%
+  \normalsize\usebeamerfont*{normal text}%
+  \usebeamerfont{block body#1}%
+  \begin{tcolorbox}[arc=0pt,boxsep=0pt,top=0.2em,bottom=0.2em,
+    boxrule=0pt,leftupper=0pt,
+    colframe=bg,colback=bg,coltext=fg
+    ]
+    \noindent\ignorespaces%
+  }
+  \newcommand{\icpblockend}{\end{tcolorbox}}
+
+
+\defbeamertemplate{block begin}{icp}{\icpblockbegin{}\vspace*{\smallskipamount}}
+\defbeamertemplate{block end}{icp}{\icpblockend\vspace*{\smallskipamount}}
+
+\defbeamertemplate{block alerted begin}{icp}{\vspace*{\medskipamount}\icpblockbegin{ alerted}}
+\defbeamertemplate{block alerted end}{icp}{\icpblockend\vspace*{\medskipamount}}
+
+\defbeamertemplate{block example begin}{icp}{\icpblockbegin{ example}}
+\defbeamertemplate{block example end}{icp}{\icpblockend}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\defbeamertemplate{headline}{icp}{%
+  \begin{tikzpicture}[x=\paperwidth,y=\paperwidth]
+
+    \useasboundingbox (0,0) rectangle (1,-0.05);
+
+    % 1. draw the background "art"
+    \draw(0, 0) node[anchor=north west,inner sep=0] {%
+      \includegraphics[width=\paperwidth]{theme/slides_bg_icp_new}};
+    \draw(0.1,0.002) node[anchor=north west]{%
+      \includegraphics[height=0.048\paperwidth]{theme/logos/icp}} ;
+    \draw(1,0.002) node[anchor=north east]{\insertlogo} ;
+    % 2. typeset webpage to the left
+    \draw(0.02,-0.74) node[rotate=90,anchor=west] {\begin{minipage}{0.65\paperwidth}
+        \raggedright\usebeamerfont{title in headline}%
+        \usebeamercolor[fg]{title in headline}%
+        \icp@url\end{minipage}} ;
+  \end{tikzpicture}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% default logo, SRC
+\logo{\includegraphics[height=0.05\paperwidth]{theme/logos/SimTech}~\includegraphics[height=0.05\paperwidth]{theme/logos/uni}}
+
+\defbeamertemplate{footline}{icp}{
+  \hspace*{\Gm@lmargin}
+  \usebeamerfont{footline}\usebeamercolor[fg]{footline}
+  \insertshortauthor\hfill\insertshorttitle
+  \hfill
+  \usebeamerfont{page number in foot}\usebeamercolor[fg]{page number in foot}
+  \insertframenumber/\inserttotalframenumber
+  \hspace*{\Gm@rmargin}
+  \vspace*{0.25em}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% seems that there is normally no way to get the frame height, although
+% for layouting slides, that is not quite unimportant...
+\newlength{\titleheight}
+\setlength{\titleheight}{0.1\paperwidth}
+
+\defbeamertemplate{frametitle}{icp}{%
+  \raggedright\usebeamerfont{frametitle}%
+  \vspace*{0.0125\paperwidth}%
+  \hspace*{\icpblocktitleindent}%
+  \insertframetitle
+  \vspace*{-0.25em}
+}
+
+% no additional logo, we handle that ourselves
+\defbeamertemplate*{sidebar right}{icp}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\icpsetgroup}[1]{\renewcommand{\icp@group}{#1}}
+\newcommand{\icp@group}{.}
+\newcommand{\icpseturl}[1]{\renewcommand{\icp@url}{#1}}
+\newcommand{\icp@url}{http://www.icp.uni-stuttgart.de}
+\newcommand{\icpsetemail}[1]{\renewcommand{\icp@email}{#1}}
+\newcommand{\icp@email}{.}
+
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamersize{text margin left=0.05\paperwidth,
+  text margin right=0.05\paperwidth}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% poster background, body colors, and fonts
+\setbeamercolor*{normal text}{fg=black,bg=}
+\setbeamerfont*{normal text}{size=\normalsize}
+\setbeamercolor*{structure}{}
+\setbeamercolor{alerted text}{fg=CDviolet1}
+% cannot have bfseries in math mode
+\newcommand{\icpbfnomath}{%
+  \relax\ifmmode\relax\else\expandafter\bfseries\fi}
+\setbeamerfont{alerted text}{shape=\icpbfnomath}
+
+% caption without keyword before
+\setbeamertemplate{caption}[nocap]
+
+%titlepage
+\setbeamercolor{title}{fg=CDviolet1}
+\setbeamerfont{title}{shape=\bfseries,size=\huge}
+
+\setbeamercolor{author}{fg=CDgrey1}
+\setbeamerfont{author}{shape=\bfseries,size=\large}
+\setbeamercolor{institute}{fg=CDgrey1}
+\setbeamerfont{institute}{size=\normalsize}
+\setbeamercolor{date}{fg=CDgrey1}
+\setbeamerfont{date}{size=\small}
+
+% slide artwork colors and fonts, here only the URL, if set
+\setbeamercolor{title in headline}{fg=CDblue1}
+\setbeamerfont{title in headline}{size=\small}
+\setbeamertemplate{headline}[icp]
+
+% frame title
+\setbeamercolor{frametitle}{fg=CDviolet1}
+\setbeamerfont{frametitle}{shape=\bfseries,size=\large}
+\setbeamertemplate{frametitle}[icp]
+
+% footline
+\setbeamercolor{footline}{fg=CDgrey2}
+\setbeamerfont{footline}{size=\small}
+\setbeamertemplate{footline}[icp]
+
+% lines
+\setbeamercolor{separation line}{bg=CDgrey1}
+
+% block environment
+\setbeamercolor*{block body}{fg=black,bg=}
+\setbeamercolor*{block title}{fg=CDviolet1,bg=}
+\setbeamerfont{block title}{shape=\bfseries,size=\large}
+\setbeamertemplate{blocks}[icp]
+
+% alerted block environment
+\setbeamercolor{block title alerted}{fg=white,bg=CDviolet2}
+\setbeamerfont{block title alerted}{shape=\bfseries}
+\setbeamercolor{block body alerted}{fg=white,bg=CDviolet3}
+\setbeamerfont{block body alerted}{shape=\bfseries}
+
+% example environment
+\setbeamercolor*{block title example}{fg=CDviolet1,bg=CDblue4}
+\setbeamerfont{block title example}{size=\large,series=\bf}
+\setbeamercolor{block body example}{fg=CDviolet1,bg=CDblue4}
+\setbeamerfont{block body example}{}
+
+% items
+\setbeamercolor{description item}{fg=CDviolet2}
+\setbeamerfont{description item}{series=\bf}
+\setbeamertemplate{itemize items}[square]
+\setbeamercolor{itemize item}{fg=SRCorange}
+\setbeamercolor{itemize subitem}{fg=SRCorange}
+\setbeamercolor{itemize subsubitem}{fg=SRCorange}
+\setbeamercolor{enumerate item}{fg=CDviolet1}
+\setbeamercolor{enumerate subitem}{fg=CDviolet1}
+\setbeamercolor{enumerate subsubitem}{fg=CDviolet1}
+\setlength{\leftmargini}{1em}
+\setlength{\leftmarginii}{1em}
+\setlength{\leftmarginiii}{1em}
+
+% bib
+\setbeamertemplate{bibliography item}[text]
+
+\setbeamercolor*{bibliography item}{fg=black}
+\setbeamerfont*{bibliography item}{size=\small}
+
+\setbeamercolor*{bibliography entry}{fg=red}
+\setbeamerfont*{bibliography entry}{size=\small}
+
+\setbeamercolor*{bibliography entry author}{use={bibliography entry}}
+\setbeamerfont*{bibliography entry author}{parent={bibliography entry}}
+
+\setbeamercolor*{bibliography entry title}{use={bibliography entry}}
+\setbeamerfont*{bibliography entry title}{parent={bibliography entry},shape=\itshape}
+\setbeamertemplate{bibliography entry title}{}
+
+\setbeamercolor*{bibliography entry location}{use={bibliography entry}}
+\setbeamerfont*{bibliography entry location}{parent={bibliography entry},shape=\upshape}
+\setbeamertemplate{bibliography entry location}{\par\renewcommand{\em}{\bfseries\selectfont}}
+
+\setbeamercolor*{bibliography entry note}{use={bibliography entry}}
+\setbeamerfont*{bibliography entry note}{parent={bibliography entry}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-PDF-mode: t
+%%% TeX-master: "slides_example"
+%%% End: 

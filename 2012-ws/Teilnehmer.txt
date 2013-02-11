@@ -19,9 +19,9 @@ Lukasz Gricman          lukasz.gricman@itb.uni-stuttgart.de     -               
 Patrick Kreissl         patrick.kreissl@7kr.de                  2665472         Ph. BSc         5       pkreissl        Yes
 Helmut Frasch           hel.f@gmx.de                            2681090         Ph. BSc         5       -               Yes
 Nicolas Zuber           nico.zuber@web.de                       2663377         Ph. BSc         5       -               Yes
-
+Martina Schwarz         Marmsch@t-online.de                     2522117         MSc M.bau       1       -               No
+Johannes Schmidt        johannes.schmidt6489@gmail.com          2806244         Ph. MSc         1       -               Yes
 
 # abgemeldet
 Kai Szuttor             kai@icp.uni-stuttgart.de                2674706         Ph. BSc         5       kai             Yes
-Johannes Schmidt        johannes.schmidt6489@gmail.com          2806244         Ph. MSc         1       -               Yes
 
