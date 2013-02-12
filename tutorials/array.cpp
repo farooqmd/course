@@ -5,7 +5,7 @@
 const int min_length = 1024;
 const int max_length = 262144;
 const int num_loops = 10000;
-const int num_insdel = 1000;
+const int num_insdel = 10000;
 
 int main(int argc, char *argv[]) {
 
@@ -18,60 +18,48 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < length; ++i)
       thearray[i] = drand48();
 
-    { // loop
-      clock_t before = clock();
-      float sum = 0.0;
-      for (int i = 0; i < num_loops; ++i) {
-        for (int j = 0; j < length; ++j)
-          sum += thearray[j];
-      }
-      clock_t after = clock();
-      double elapsed = (after-before)/static_cast<double>(CLOCKS_PER_SEC*num_loops*length);
-      printf("\tloop_time=%le\n", elapsed);
+    clock_t before, after;
+    double elapsed;
+
+    // loop
+    before = clock();
+    float sum = 0.0;
+    for (int i = 0; i < num_loops; ++i) {
+      for (int j = 0; j < length; ++j)
+        sum += thearray[j];
     }
+    after = clock();
+    elapsed = (after-before)/(1.0*CLOCKS_PER_SEC*num_loops*length);
+    printf("\tloop_time=%le\n", elapsed);
+    // just to make sure the loop is not optimized out
+    if (sum < 0.0) printf("Error!\n");
     
-    { // randomly delete and insert elements
-      clock_t before = clock();
-      for (int i = 0; i < num_insdel; ++i) {
-        { // randomly delete element
-          // choose random element
-          int r = static_cast<int>(drand48()*(length-1));
-          // shift elements above
-          for (int j = r+1; j < length; ++j)
-            thearray[j-1] = thearray[j];
-          // realloc array
-          thearray = static_cast<float*>(realloc(thearray, (length-1)*sizeof(float)));
-        }
-        
-        { // randomly insert element
-          // choose random element
-          int r = static_cast<int>(drand48()*(length-1));
-          // shift element up
-          // realloc array
-          thearray = static_cast<float*>(realloc(thearray, length*sizeof(float)));
-          for (int j = length-1; j > r; --j)
-            thearray[j] = thearray[j-1];
-          thearray[r] = drand48();
-        }
-      }
-      clock_t after = clock();
-      double elapsed = (after-before)/static_cast<double>(CLOCKS_PER_SEC*num_insdel);
-      printf("\tinsdel_time=%le\n", elapsed);
-    }
+    // delete and insert elements
+    // choose element
+    int idx = length/2;
 
-    { // loop over array
-      clock_t before = clock();
-      float sum = 0.0;
-      for (int i = 0; i < num_loops; ++i) {
-        for (int j = 0; j < length; ++j)
-          sum += thearray[j];
-      }
-      clock_t after = clock();
-      double elapsed = (after-before)/static_cast<double>(CLOCKS_PER_SEC*num_loops*length);
-      printf("\tloop_time=%le\n", elapsed);
+    before = clock();
+    for (int i = 0; i < num_insdel; ++i) {
+      // delete element
+      // shift elements up
+      for (int j = idx+1; j < length; ++j)
+        thearray[j-1] = thearray[j];
+      // realloc array
+      thearray = static_cast<float*>(realloc(thearray, (length-1)*sizeof(float)));
+      
+      // insert element
+      // realloc array
+      thearray = static_cast<float*>(realloc(thearray, length*sizeof(float)));
+      // shift elements down 
+      for (int j = length-1; j > idx; --j)
+        thearray[j] = thearray[j-1];
+      thearray[idx-1] = drand48();
     }
-
-    // destroy list
+    after = clock();
+    elapsed = (after-before)/(1.0*CLOCKS_PER_SEC*num_insdel);
+    printf("\tinsdel_time=%le\n", elapsed);
+  
+    // destroy array
     free(thearray);
   }
 }

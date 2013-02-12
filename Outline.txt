@@ -1,4 +1,4 @@
-Time-stamp: <2013-02-12 12:04 olenz>
+Time-stamp: <2013-02-12 16:30 olenz>
 
 Day 1
 -----
@@ -7,6 +7,7 @@ LECTURE 1: OL
 * Fundamental syntax
   * Blocks, functions, comments, tokens
 * Basic types: int, char
+* printf
 * Compilation
   * Declaration vs. Definition
   * Header/Source files
@@ -17,12 +18,13 @@ LECTURE 1: OL
   * Unix three-step compilation (configure, make, make install)?
 
 LECTURE 2: AA
-* Data structures in C
+* Data structures in C99
   * typedef
   * static, const
   * Pointers
   * Call-by-value, call-by-reference
   * Memory Layout: Stack vs. Heap
+  * Pointer arithmetics
   * malloc, free, NULL
   * Arrays
   * Structs (unions)
@@ -42,6 +44,7 @@ LECTURE 1: OL
 * bool
 * Standard library: IOstream, string
 * STL: vector, hashmap, iterator, find, sort
+* Data structures
 
 LECTURE 2: AA
 * Basic ideas, UML
