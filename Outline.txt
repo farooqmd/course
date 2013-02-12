@@ -1,4 +1,4 @@
-Time-stamp: <2013-02-11 15:09 olenz>
+Time-stamp: <2013-02-12 12:04 olenz>
 
 Day 1
 -----
@@ -29,6 +29,8 @@ LECTURE 2: AA
   * Example: linked list?
 
 EXERCISES
+* gdb
+* git
 * Introduce project
 * Test, when linked list are actually faster than plain arrays
 * Handling multidimensional arrays -> Game board
@@ -108,14 +110,14 @@ Further topics
 * MPI?
 
 PROJECT
-* "Bygs"
-* Animals in 2D-periodic world
-* Food must be brought back to nest
-* Field can contain:
-  * Obstacle or not
-  * Byg or not
-  * Food or not
-  * Nest or not
-  * Enemy nest is obstacle?
+* Fearsome Floors
+* Stage 1:
+  * Simple Board
+  * Controllable Players
+  * Exercise: Implement monster
+* Stage 2:
+  * Implement board with given OOP design
+* Stage 3:
+  * AI for players, tournament
 
 
