@@ -22,6 +22,8 @@ Nicolas Zuber           nico.zuber@web.de                       2663377         
 Martina Schwarz         Marmsch@t-online.de                     2522117         MSc M.bau       1       -               No
 Johannes Schmidt        johannes.schmidt6489@gmail.com          2806244         Ph. MSc         1       -               Yes
 Michael Geiger          michageiger@gmx.de                      2666264         Ph. BSc         5       -               Yes
+Martin Hohmann
+David Schwörer          david_s@lavabit.com
 
 # abgemeldet
 Kai Szuttor             kai@icp.uni-stuttgart.de                2674706         Ph. BSc         5       kai             Yes
