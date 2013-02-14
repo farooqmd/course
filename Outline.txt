@@ -1,13 +1,20 @@
-Time-stamp: <2013-02-14 13:59:56 arnolda>
+Time-stamp: <2013-02-14 14:14 olenz>
 
 Day 1
 -----
 LECTURE 1: OL
 * History of C++
 * Fundamental syntax
-  * Blocks, functions, comments, tokens
-* Basic types: int, char
-* printf
+  * Blocks, comments, tokens
+  * if, do while, for
+* Variable declaration
+* Basic types: int, char, bool
+* References
+* Pointers (can be 0)
+* Functions
+  * Return values
+  * Call-by-value, call-by-reference
+  * auto
 * Compilation
   * Declaration vs. Definition
   * Header/Source files
@@ -17,23 +24,19 @@ LECTURE 1: OL
   * Libraries
   * qmake/make
 
-LECTURE 2: AA
-* Data structures in C99
-  * typedef
-  * static, const
-  * Pointers
-  * Call-by-value, call-by-reference
+LECTURE 2: AA (Data structures)
+* typedef
+* static, const
+* structs (unions)
+* arrays
+* ranged for
+* Dynamic data structures
   * Memory Layout: Stack vs. Heap
   * Pointer arithmetics
   * malloc, free, NULL
-  * Arrays
-  * Structs (unions)
-  * Example: linked list?
-* Referenzen
-* bool
+  * delete, new
 * Standard library: IOstream, string
 * STL: vector, hashmap, iterator, find, sort
-* Data structures
 
 EXERCISES
 * gdb
@@ -45,25 +48,26 @@ EXERCISES
 Day 2
 -----
 
-LECTURE 2: AA
+LECTURE 1: AA
 * Basic ideas, UML
 * Class, Object/Instance, Field, Method
 * Class Hierarchy, Inheritance
 
-EXERCISES
-* Introduce Project
-* UML Design
-
-Day 3 
------
-LECTURE 1: OL
+LECTURE 2: OL
 * Example: multidim valarray class
-* delete, new
+* Declaration vs. Definition of classes
 * Constructor, Destructor
 * Default constructor
 * Encapsulation: private, public
 * friend
-* Test Driven Programming?
+
+EXERCISES
+* Introduce project code
+* Debug project code
+* UML Design
+
+Day 3 
+-----
 
 LECTURE 2: AA
 * Function overloading
@@ -103,6 +107,7 @@ LECTURE 2: OL
 * Software Development Models
   * Waterfall Model
   * Modern SE
+    * Test Driven Programming
     * Design Patterns
     * "Agile" Development
     * Extreme Programming
