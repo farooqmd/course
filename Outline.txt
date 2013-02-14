@@ -1,4 +1,4 @@
-Time-stamp: <2013-02-14 14:14 olenz>
+Time-stamp: <2013-02-14 15:26 olenz>
 
 Day 1
 -----
@@ -15,6 +15,7 @@ LECTURE 1: OL
   * Return values
   * Call-by-value, call-by-reference
   * auto
+* Arrays
 * Compilation
   * Declaration vs. Definition
   * Header/Source files
@@ -23,12 +24,29 @@ LECTURE 1: OL
   * Compilation units
   * Libraries
   * qmake/make
+* Debugging
+* Source code management
 
-LECTURE 2: AA (Data structures)
+LECTURE 2: AA
+* Basic ideas, UML
+* Class, Object/Instance, Field, Method
+* Class Hierarchy, Inheritance
+
+EXERCISES
+* gcc
+* gdb
+* git
+* Introduce project
+* Modelling
+* Handling multidimensional arrays -> Game board
+
+Day 2
+-----
+
+LECTURE 1: OL (Data structures)
 * typedef
 * static, const
 * structs (unions)
-* arrays
 * ranged for
 * Dynamic data structures
   * Memory Layout: Stack vs. Heap
@@ -38,22 +56,7 @@ LECTURE 2: AA (Data structures)
 * Standard library: IOstream, string
 * STL: vector, hashmap, iterator, find, sort
 
-EXERCISES
-* gdb
-* git
-* Introduce project
-* Test, when linked list are actually faster than plain arrays
-* Handling multidimensional arrays -> Game board
-
-Day 2
------
-
-LECTURE 1: AA
-* Basic ideas, UML
-* Class, Object/Instance, Field, Method
-* Class Hierarchy, Inheritance
-
-LECTURE 2: OL
+LECTURE 2: AA
 * Example: multidim valarray class
 * Declaration vs. Definition of classes
 * Constructor, Destructor
