@@ -1,9 +1,9 @@
-Time-stamp: <2013-02-12 16:30 olenz>
+Time-stamp: <2013-02-14 13:59:56 arnolda>
 
 Day 1
 -----
 LECTURE 1: OL
-* History of C
+* History of C++
 * Fundamental syntax
   * Blocks, functions, comments, tokens
 * Basic types: int, char
@@ -15,7 +15,7 @@ LECTURE 1: OL
   * Preprocessor
   * Compilation units
   * Libraries
-  * Unix three-step compilation (configure, make, make install)?
+  * qmake/make
 
 LECTURE 2: AA
 * Data structures in C99
@@ -29,6 +29,11 @@ LECTURE 2: AA
   * Arrays
   * Structs (unions)
   * Example: linked list?
+* Referenzen
+* bool
+* Standard library: IOstream, string
+* STL: vector, hashmap, iterator, find, sort
+* Data structures
 
 EXERCISES
 * gdb
@@ -39,12 +44,6 @@ EXERCISES
 
 Day 2
 -----
-LECTURE 1: OL
-* Referenzen
-* bool
-* Standard library: IOstream, string
-* STL: vector, hashmap, iterator, find, sort
-* Data structures
 
 LECTURE 2: AA
 * Basic ideas, UML
