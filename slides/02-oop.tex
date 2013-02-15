@@ -1,5 +1,7 @@
 \documentclass{slides}
 
+\usepackage{tikz-uml}
+
 \lstset{language=C++}
 
 \begin{document}
@@ -20,10 +22,286 @@
 
 \begin{frame}
   \frametitle{Outline}
+
   \begin{itemize}
-  \item Basic ideas, UML
-  \item Classes, Object/Instance, Field, Method
-  \item Class Hierarchy, Inheritance
+  \item Basic ideas
+  \item UML -- Universal Markup Language
+  \item Classes, Interfaces and Methods
+  \item Objects/Instances
+  \item Composition/Fields
+  \item Inheritance
+  \item Polymorphism
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Object-oriented Programming (OOP)}
+
+  \begin{itemize}
+  \item OO is a language-indedependent concept
+  \item in principle not limited to programming (OO design)\\
+    $\implies$ databases, business plans
+  \item improves reusability and exchangability of code
+  \item separation of partial problems
+  \item ``real world'' modelling
+  \item representation in \alert{Universal Markup Language} (UML)
+  \end{itemize}
+  \medskip
+
+  \tikzumlset{font=\tiny}
+  \begin{tikzpicture}[scale=1.1]
+    \begin{umlsystem}[x=4, fill=red!10]{C++ course}
+      \umlusecase{Lectures}
+      \umlusecase[x=4]{Chapters}
+
+      \umlusecase[y=-1]{Exercises}
+      \umlusecase[x=4, y=-1]{Small tasks}
+      \umlusecase[x=3, y=-1.5]{Project}
+    \end{umlsystem}
+
+    \umlactor[scale=0.5]{Olaf/Axel}
+    \umlactor[scale=0.5,y=-1.5]{Participant}
+
+    \umlassoc{Participant}{usecase-1}
+    \umlassoc{Olaf/Axel}{usecase-1}
+    \umlassoc{Participant}{usecase-3}
+    \umlassoc{Olaf/Axel}{usecase-3}
+    \umlinclude{usecase-1}{usecase-2}
+    \umlinclude{usecase-3}{usecase-4}
+    \umlinclude{usecase-3}{usecase-5}
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Basic ideas}
+
+  \begin{itemize}
+  \item \alert{Everything is an object}\\
+    \emph{game board, Axel, Olaf, their playing pieces, monster}
+  \item \alert{Objects interact by sending/receiving messages}\\
+    \emph{Axel $\rightarrow$ playing piece: move one east}\\
+    \emph{Olaf $\rightarrow$ game board: what is the object at
+      position 1,2?}\\
+  \item \alert{An object consists of objects}\\
+    \emph{the game board consists of $12\times 12$ tiles}\\
+    \emph{Axel has 3 playing pieces in control}\\
+  \item \alert{Every object has a type}\\
+    \emph{Axel is a player}\\
+    \emph{the game board is a ``Fearsome floors'' game board}
+  \item \alert{All objects of the same type understand the same messages}\\
+    \emph{all playing pieces can move on the board}\\
+    \emph{Axel and Olaf can move their playing pieces}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Basic ideas -- in C++}
+
+  \begin{itemize}
+  \item \alert{Everything is an object}\\
+    \emph{objects are variables}
+  \item \alert{Objects interact by sending/receiving messages}\\
+    \emph{calling methods (functions) that act on an object (variable)}\\
+    \emph{exchanged information in arguments and return values}
+  \item \alert{An object consists of objects}\\
+    \emph{structured objects/records}\\
+    \emph{smallest units: C datatypes, int, char, ...}\\
+  \item \alert{Every object has a type}\\
+    \emph{classes or plain old data types in C++}\\
+    \emph{types can be derived from others }
+  \item \alert{All objects of the same type understand the same messages}\\
+    \emph{class declaration lists possible messages}\\
+    \emph{messages can be inherited}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \only<1>{\frametitle{Classes, Interfaces and Methods}}
+  \only<2>{\frametitle{Objects/Instances}}
+
+  \begin{center}
+    \begin{tikzpicture}
+      \umlclass[type=abstract]{Player}{ }{
+        getName() : string\\[\medskipamount]
+        setPlayerNum(playerNum : num)\\
+        getPlayerNum() : int\\[\medskipamount]
+        doNextMove(activePiece : Piece, Event : event, out string : message)\\
+      }
+    \end{tikzpicture}
+  \end{center}
+
+  \begin{onlyenv}<1>
+    \begin{itemize}
+    \item classes describe the type of objects
+    \item classes define the \alert{interface} of objects
+    \item the interface consists of \alert{methods}
+    \item methods are just normal functions that take\\
+      arguments and return values of arbitrary types
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<2>
+    \begin{itemize}
+    \item an object is created by naming it and its class
+    \item compare: declaration of a variable in C/C++
+    \end{itemize}
+  \end{onlyenv}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Overloading and signature}
+  
+  \begin{center}
+    \begin{tikzpicture}
+      \umlclass[type=abstract]{Tile}{ }{
+        \umlvirt{getRepresentation(representation : string)}\\[\medskipamount]
+        \umlvirt{tryStep(piece : Piece, how : Event, out message : string)}\\
+        \umlvirt{tryStep(monster : Monster, how : Event, out message : string)}\\
+      }
+    \end{tikzpicture}
+  \end{center}
+
+  \begin{itemize}
+  \item a method is described by name and \alert{signature}
+  \item signature is formed by the types of all taken arguments\\
+    \emph{piece : Piece, how : Event, out message : string}\\
+    \emph{monster : Monster, how : Event, out message : string}
+  \item return value is \emph{not} part of the signature
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Composing classes}
+
+  \begin{center}
+    \begin{tikzpicture}
+      \umlclass[type=abstract]{Player}{
+        playerNum : int\\
+        name : string
+      }{
+        setPlayerNum(int)\\
+        getPlayerNum() : int
+      }
+
+      \umlclass[x=6]{Piece}{
+        x, y: int
+      }{
+        getPosition(): int, int
+      }
+      \umlunicompo[mult2=*,anchors=10 and 170]{Player}{Piece}
+      \umluniassoc[mult2=1,anchors=-170 and -10]{Piece}{Player}
+    \end{tikzpicture}
+  \end{center}
+
+  \begin{onlyenv}<1>
+    \begin{itemize}
+    \item objects are made of objects (\alert{attributes}) ---\\
+      classes declare the types of these objects
+    \item ``has-a'' or ``has-many'' relations
+    \item simple attributes appear below class name
+    \item complex classes shown as \alert{composition}\\
+      \emph{a player has many playing pieces},
+      \emph{a piece belongs to one player}
+    \end{itemize}
+  \end{onlyenv}
+
+\end{frame}
+
+\begin{frame}
+  \only<1>{\frametitle{Inheritance and class hierarchy}}
+  \only<2>{\frametitle{Polymorphism}}
+  \only<3>{\frametitle{Abstract classes}}
+  \only<4>{\frametitle{Usability}}
+
+  \begin{center}
+    \begin{tikzpicture}
+      \umlclass[y=2,x=4,type=abstract]{Tile}{
+        game: Game
+      }{
+        \umlvirt{tryStep(...)}
+      }
+      \umlclass{FloorTile}{
+      }{
+        tryStep(...)
+      }
+
+      \umlclass[x=8]{WallTile}{
+      }{
+        tryStep(...)
+      }
+
+      \umlinherit{WallTile}{Tile}
+      \umlinherit{FloorTile}{Tile}
+    \end{tikzpicture}
+  \end{center}
+  \begin{onlyenv}<1>
+    \begin{itemize}
+    \item classes often are specializations of other classes\\
+      \emph{a human is a mammal is an animal ...}
+    \item \alert{hierarchy of classes}
+    \item reusability: implement the common properties only once
+    \end{itemize}
+  \end{onlyenv}
+  \begin{onlyenv}<2>
+    \begin{itemize}
+    \item subclasses support the same interface
+    \item subclasses inherit methods and attributes of all superclasses
+    \item .. but methods might behave differently
+      (\alert{polymorphism})
+    \item in C++: explicitely declared by keyword \alert{virtual}
+    \end{itemize}
+  \end{onlyenv}
+  \begin{onlyenv}<3>
+    \begin{itemize}
+    \item problem: \texttt{Tile} cannot implement \texttt{step}\\
+      since  all game tiles behave differently when stepped on
+    \item answer: \alert{abstract class}es implement only parts of the interface
+    \item in C++: a class with undeclared virtual functions is abstract
+    \end{itemize}
+  \end{onlyenv}
+  \begin{onlyenv}<4>
+    \begin{alertbox}{0.75\textwidth}
+      any object of a derived class can be used like an object of any
+      base class
+    \end{alertbox}
+  \end{onlyenv}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Implementation hiding}
+  \tikzumlset{font=\tiny}
+  \begin{center}
+    \begin{tikzpicture}
+      \umlclass[type=abstract]{Tile}{
+        \# game: Game
+      }{
+        \umlvirt{+ tryStep(...)}
+      }
+      \umlclass[y=-2]{WallTile}{
+      }{
+        + tryStep(...)
+      }
+      \umlclass[x=4,y=-1]{Player}{
+        - playerNum: int
+      }{
+      }
+      
+      \umlinherit{WallTile}{Tile}
+      \umldep{Player}{WallTile}
+      \umldep{Player}{Tile}
+    \end{tikzpicture}
+  \end{center}
+
+  \begin{itemize}
+  \item \alert{private} attributes and methods are \emph{not} visible to
+    other objects
+  \item \alert{public} elements are visible to all
+  \item \alert{protected} elements are only visible to derived classes
+  \item \texttt{game} is \alert{protected} $\implies$ only visible to
+    \texttt{WallTile}, not to \texttt{Player}
+  \item \texttt{Player} can access \texttt{tryStep} of all tiles
+  \item \texttt{playerNum} is not visible to anybody
   \end{itemize}
 \end{frame}
 
