@@ -1,8 +1,8 @@
-Time-stamp: <2013-02-14 15:26 olenz>
+Time-stamp: <2013-02-15 16:23 olenz>
 
 Day 1
 -----
-LECTURE 1: OL
+LECTURE: Procedural C/C++ 1
 * History of C++
 * Fundamental syntax
   * Blocks, comments, tokens
@@ -16,6 +16,8 @@ LECTURE 1: OL
   * Call-by-value, call-by-reference
   * auto
 * Arrays
+
+LECTURE: C/C++ Compilation
 * Compilation
   * Declaration vs. Definition
   * Header/Source files
@@ -27,7 +29,7 @@ LECTURE 1: OL
 * Debugging
 * Source code management
 
-LECTURE 2: AA
+LECTURE: OOP Basics
 * Basic ideas, UML
 * Class, Object/Instance, Field, Method
 * Class Hierarchy, Inheritance
@@ -38,12 +40,10 @@ EXERCISES
 * git
 * Introduce project
 * Modelling
-* Handling multidimensional arrays -> Game board
 
 Day 2
 -----
-
-LECTURE 1: OL (Data structures)
+LECTURE: Procedural C/C++ 2
 * typedef
 * static, const
 * structs (unions)
@@ -56,7 +56,7 @@ LECTURE 1: OL (Data structures)
 * Standard library: IOstream, string
 * STL: vector, hashmap, iterator, find, sort
 
-LECTURE 2: AA
+LECTURE: OOP in C++ 1
 * Example: multidim valarray class
 * Declaration vs. Definition of classes
 * Constructor, Destructor
@@ -65,6 +65,7 @@ LECTURE 2: AA
 * friend
 
 EXERCISES
+* Handling multidimensional arrays -> Game board
 * Introduce project code
 * Debug project code
 * UML Design
@@ -72,7 +73,7 @@ EXERCISES
 Day 3 
 -----
 
-LECTURE 2: AA
+LECTURE 1: OOP in C++ 2
 * Function overloading
 * Operator overloading
 * Inheritance
@@ -83,16 +84,13 @@ LECTURE 2: AA
   * Pure Virtual Functions
 * Multiple Inheritance
 
-EXERCISES
-* UML -> C++
-
 Day 4
 -----
-LECTURE 1: OL
+LECTURE: More C++ 1
 * Exceptions
 * Namespaces
 
-LECTURE 2: AA
+LECTURE 2: OOP in C++ 3
 * Const Correctness
 * Copy Constructor
 * Automatic type conversion
@@ -102,11 +100,11 @@ EXERCISES
 
 Day 5
 -----
-LECTURE 1: AA
+LECTURE 1: More C++ 2
 * Templates
 * STL
 
-LECTURE 2: OL
+LECTURE 2: Software Development
 * Software Development Models
   * Waterfall Model
   * Modern SE
