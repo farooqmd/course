@@ -25,8 +25,6 @@
 \RequirePackage[T1]{fontenc}
 \RequirePackage{beamerextensions}
 \RequirePackage{listings}
-% decimal comma in equations
-\RequirePackage{icomma}
 
 \hypersetup{
   pdfpagelabels=off,
