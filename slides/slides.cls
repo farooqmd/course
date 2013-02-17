@@ -60,7 +60,7 @@
   aboveskip=0.2em,
   belowskip=0.2em,
   showstringspaces=false,
-  basicstyle={\ttfamily\small},
+  basicstyle={\ttfamily\footnotesize},
   keywordstyle={\bfseries},
   commentstyle={\color{red!80!black}},
   stringstyle={\fontfamily{cmtt}\selectfont},

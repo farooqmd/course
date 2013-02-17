@@ -1,0 +1,457 @@
+\documentclass{slides}
+\usepackage{tikz-uml}
+
+\lstset{language=C++}
+
+\begin{document}
+
+\graphicspath{{figures/}}
+
+\title[Object-oriented Programming in C++]{\Large Object-oriented
+  Programming in C++}
+
+\author[A. Arnold and O. Lenz]{Axel Arnold \and Olaf Lenz} 
+\institute{Institut für Computerphysik\\Universit\"at Stuttgart}
+\date{February 18-22, 2013}
+
+\setbeamertemplate{footline}{}
+\begin{frame}
+  \titlepage
+\end {frame}
+\setbeamertemplate{footline}[icp]
+
+\begin{frame}
+  \frametitle{Outline}
+  \begin{itemize}
+  \item Definition of classes
+  \item Lifetime of objects
+  \item Constructor, destructor
+  \item Default and copy constructor
+  \item Encapsulation: private, public
+  \item Friends
+  \item Function and operator overloading
+  \item Inheritance
+  \item Protected encapsulation
+  \item Polymorphism and virtual functions
+  \item Abstract base classes and pure virtual functions
+  \item Multiple inheritance
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Definition of classes}
+
+  \begin{onlyenv}<1> \tikzumlset{font=\tiny}
+    \begin{tikzpicture}
+      \umlclass{Player}{
+        playerNum : int\\
+        name : string }{
+        setPlayerNum(playerNum : num)\\
+        getPlayerNum() : int\\[\medskipamount]
+        doNextMove(piece : Piece, Event : event, out string :
+        message) }
+    \end{tikzpicture}
+    ~~becomes
+    \medskip
+\end{onlyenv}
+
+\begin{lstlisting}
+class Player {
+public:
+  vector<Piece *> pieces;
+  int playerNum;
+  // setter and getter for the player number
+  void setPlayerNum(int playerNum);
+  int getPlayerNum();
+  // perform the next move
+  void doNextMove(Piece &piece, Event event, string &msg);
+};
+\end{lstlisting}
+
+\begin{onlyenv}<2>
+  \begin{itemize}
+  \item \alert{remember semicolon at the end of the definition!}
+  \item \lstinline!public! will be explained later
+  \item output parameters translate to references (\lstinline!message!)
+  \item no separator between member functions and variables required
+  \item good style to separate them
+  \end{itemize}
+\end{onlyenv}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{(Forward) declaration}
+
+This compiles as is:
+\begin{lstlisting}
+#include <vector>
+#include <string>
+using namespace std;
+enum Event { North, East, South, West, Skip };
+class Piece;
+
+class Player {
+public:
+  vector<Piece *> pieces;
+  void doNextMove(Piece &piece, Event event, string &msg);
+};
+\end{lstlisting}
+
+  \begin{itemize}
+  \item classes can be (forward) \alert{declared} (here: \lstinline!Piece!)
+  \item necessary if \lstinline!Piece! uses \lstinline!Player!
+    and vice versa
+  \item ok as long as only addresses are needed (pointers or references)
+  \item \lstinline!enum Event! however has to be defined
+  \end{itemize}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{A more complex example}
+
+  \begin{tikzpicture}
+    \umlclass[type=abstract]{Player}{
+      playerNum : int\\
+      name : string
+    }{}
+
+    \umlclass[x=6]{Piece}{
+      x, y: int
+    }{}
+    \umlunicompo[arg2=*,anchors=10 and 170]{Player}{Piece}
+    \umluniassoc[arg2=1,anchors=-170 and -10]{Piece}{Player}
+  \end{tikzpicture}
+  ~~becomes
+  \medskip
+
+\begin{lstlisting}
+class Player;
+class Piece {
+  int x, y;
+  Player &player;
+};
+class Player {
+  int playerNum;
+  vector< Piece* > pieces;
+};
+\end{lstlisting}
+
+  \begin{itemize}
+  \item here, a forward declaration is obviously necessary
+  \item Usually, declare the higher level class forward
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Definition of member functions}
+
+  \begin{onlyenv}<1-2>
+\begin{lstlisting}[title=Player.hpp]
+class Player {
+  void doNextMove(Piece &piece, Event ev, string &msg);
+  int getPlayerNum() { return playerNum; }
+};
+\end{lstlisting}
+
+\begin{lstlisting}[title=Player.cpp]
+void
+Player::doNextMove(Piece &piece, Event ev, string &msg) {
+  piece.tryStep(ev, msg);
+}
+\end{lstlisting}
+  \end{onlyenv}
+  \begin{onlyenv}<3-4>
+\begin{lstlisting}[title=Player.hpp]
+class Player {
+  void doNextMove(Piece *piece, Event ev, string &msg);
+  int getPlayerNum() { return playerNum; }
+};
+\end{lstlisting}
+
+\begin{lstlisting}[title=Player.cpp]
+void
+Player::doNextMove(Piece *piece, Event ev, string &msg) {
+  piece->tryStep(ev, msg);
+}
+\end{lstlisting}
+  \end{onlyenv}
+
+  \begin{onlyenv}<1>
+    \begin{itemize}
+    \item member functions are defined like normal functions
+    \item a member function is referred by its name and class
+    \item class name and member name are separated by ``::''
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<2>
+    \begin{itemize}
+    \item member functions are called by ``object.function()''
+    \item object name and member name are separated by ``.''
+    \item same holds for member variables
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<3>
+    \begin{itemize}
+    \item with a pointer to an object, you can use ``->'' like in C
+    \item ``(*pointer).function()'' is the same as ``pointer->function()''
+    \item almost true due to operator overloading (later)
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<4>
+    \begin{itemize}
+    \item class definitions are usually placed in header file ``\textit{class}.hpp''
+    \item member function definitions in separate cpp-file ``\textit{class}.cpp''
+    \item \emph{small} functions can be defined in the class definition (\alert{inlined})
+    \end{itemize}
+  \end{onlyenv}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Referring to yourself: this}
+
+\begin{lstlisting}
+void Piece::register() {
+  board.addPiece(this);
+}
+void Piece::escape() {
+  board.removePiece(this);
+}
+\end{lstlisting}
+
+  \begin{block}{}
+    How can an object refer to ``itself''?\\
+    \emph{\lstinline!Piece! registers itself with the board}
+  \end{block}
+
+  \begin{block}{Answer}
+    In a member function, \lstinline!this! always points to the
+    current object
+  \end{block}
+
+  \begin{itemize}
+  \item \lstinline!this! is a pointer, although guaranteed to be valid
+  \item there is no reference to the current object, use \lstinline!*this!
+    if necessary
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile,fragile]
+  \frametitle{Creation and life time of objects}
+
+  \begin{onlyenv}<1>
+\begin{lstlisting}
+int test() {
+  for (int i = 0; i < 10; ++i) {
+    Piece piece;
+    piece.register();
+    // here, piece is destroyed automatically
+  }
+}
+\end{lstlisting}
+
+    \begin{itemize}
+    \item objects are created like variables in C by giving type and name
+    \item ...and die at the end of the scope (code block)
+    \item exception: static variables like in C
+    \item therefore, after the loop above, not a single piece exists
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<2>
+\begin{lstlisting}
+int test() {
+  for (int i = 0; i < 10; ++i) {
+    Piece *piecePtr = new Piece;
+    piecePtr->register();
+    delete piecePtr;
+    // without the older pieces remain, inaccessible
+  }
+}
+\end{lstlisting}
+
+    \begin{itemize}
+    \item objects can also be created by \lstinline!new!
+    \item these live till they are destroyed by explicitely calling
+      \lstinline!delete! \emph{once}
+    \item there should be \emph{one} responsible object for
+      destroying, the \alert{owner}
+    \item more than one owner leads to segmentation faults
+    \item no owner (and therefore no \lstinline!delete!) to memory leaks
+    \item in OOP, ownership frequently changes, making things
+      difficult
+    \end{itemize}
+  \end{onlyenv}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Constructor}
+
+\begin{lstlisting}
+class Game {
+  Board* board;
+  vector< Player* > players;
+public:
+  Game(int numPlayers = 2): board(0) {
+    for (int i = 0; i < numPlayers; ++i)
+      player.push_back(new Player);
+  }
+};
+\end{lstlisting}
+
+  \begin{itemize}
+  \item constructor is a function initializing an object
+  \item has the same name as the classs (``class::class'')
+  \item can take arguments that specify what to create
+  \item there can be several constructors (see overloading)
+  \item initialize member variables after colon (here: \lstinline!board!)
+  \item multiple variables separated by comma
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Destructor}
+
+\begin{lstlisting}
+class Game {
+  Board* board;
+  vector< Player* > players;
+public:
+  ~Game() {
+    for (auto player: players) delete player;
+    delete board;
+  }
+};
+\end{lstlisting}
+
+  \begin{itemize}
+  \item destructor is called right \emph{before} unallocating the
+    memory
+  \item should clean up
+  \item in particular destroy all owned objects
+  \item inform other objects that have pointers to this object
+  \item the destructor cannot take arguments
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Default and copy constructor}
+
+
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Function overloading}
+  
+  \begin{center}
+    \begin{tikzpicture}
+      \umlclass[type=abstract]{Tile}{ }{
+        \umlvirt{getRepresentation(representation : string)}\\[\medskipamount]
+        \umlvirt{tryStep(piece : Piece, how : Event, out message : string)}\\
+        \umlvirt{tryStep(monster : Monster, how : Event, out message : string)}\\
+      }
+    \end{tikzpicture}
+  \end{center}
+
+  \begin{itemize}
+  \item arguments with initializers
+  \item a method is described by name and \alert{signature}
+  \item signature is formed by the types of all taken arguments\\
+    \emph{piece : Piece, how : Event, out message : string}\\
+    \emph{monster : Monster, how : Event, out message : string}
+  \item return value is \emph{not} part of the signature
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Operator overloading}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Inheritance}
+
+  \begin{center}
+    \begin{tikzpicture}
+      \umlclass[y=2,x=4,type=abstract]{Tile}{
+        game: Game
+      }{
+        \umlvirt{tryStep(...)}
+      }
+      \umlclass{FloorTile}{
+      }{
+        tryStep(...)
+      }
+
+      \umlclass[x=8]{WallTile}{
+      }{
+        tryStep(...)
+      }
+
+      \umlinherit{WallTile}{Tile}
+      \umlinherit{FloorTile}{Tile}
+    \end{tikzpicture}
+  \end{center}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Encapsulation: private, public, protected}
+
+  \tikzumlset{font=\tiny}
+  \begin{center}
+    \begin{tikzpicture}
+      \umlclass[type=abstract]{Tile}{
+        \# game: Game
+      }{
+        \umlvirt{+ tryStep(...)}
+      }
+      \umlclass[y=-2]{WallTile}{
+      }{
+        + tryStep(...)
+      }
+      \umlclass[x=4,y=-1]{Player}{
+        - playerNum: int
+      }{
+      }
+      
+      \umlinherit{WallTile}{Tile}
+      \umldep{Player}{WallTile}
+      \umldep{Player}{Tile}
+    \end{tikzpicture}
+  \end{center}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Friends}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Polymorphism: virtual functions}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Pure virtual functions and abstract base classes}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Multiple inheritance}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{The diamond problem}
+  
+\end{frame}
+
+\end{document}
