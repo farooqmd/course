@@ -1,4 +1,4 @@
-Time-stamp: <2013-02-15 16:23 olenz>
+Time-stamp: <2013-02-17 17:59 olenz>
 
 Day 1
 -----
@@ -15,7 +15,6 @@ LECTURE: Procedural C/C++ 1
   * Return values
   * Call-by-value, call-by-reference
   * auto
-* Arrays
 
 LECTURE: C/C++ Compilation
 * Compilation
@@ -35,7 +34,7 @@ LECTURE: OOP Basics
 * Class Hierarchy, Inheritance
 
 EXERCISES
-* gcc
+* g++
 * gdb
 * git
 * Introduce project
@@ -44,6 +43,7 @@ EXERCISES
 Day 2
 -----
 LECTURE: Procedural C/C++ 2
+* Arrays
 * typedef
 * static, const
 * structs (unions)
