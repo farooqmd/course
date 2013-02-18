@@ -3,6 +3,7 @@ List of participants
 
 Name                    Immatrikulation no.
 -------------------------------------------
+<<<<<<< HEAD
 Axel Arnold             XXXXXXXXXXXXXX
 Florian Dommert         XXXXXXXXXXXXXX
 Sascha Ehrhardt		2661942
@@ -12,6 +13,7 @@ Michael Geiger          XXXXXXXXXXXXXX
 Martin Hohmannn		XXXXXX
 Dominic Klein 		Blablablubb
 Patrick Kreissl		XXNoOneCaresXX
+Jan Kumlin              2677596
 Jonas Landsgesell
 Olaf Lenz               XXXXXXXXXXXXXX
 Jan Lotze		XXXXXXX
@@ -21,5 +23,6 @@ Johannes Schmidt	2806244
 Martina Schwarz		2522117
 David Schwoerer		xxxx
 Hannes Seeger           2683027
+Sebastian Weber	        2678579
 Matthias Wenzel		2572772
 Nicolas Zuber		XXXX-XXXX-XXXXXX
