@@ -4,6 +4,7 @@ List of participants
 Name                    Immatrikulation no.
 -------------------------------------------
 Axel Arnold             XXXXXXXXXXXXXX
-Henri Menke             XXXXXXXXX
+Michael Geiger          XXXXXXXXXXXXXX
 Olaf Lenz               XXXXXXXXXXXXXX
+Henri Menke             XXXXXXXXX
 Nicolas Zuber		XXXX-XXXX-XXXXXX
