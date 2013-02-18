@@ -5,6 +5,7 @@ Name                    Immatrikulation no.
 -------------------------------------------
 Michael Geiger          XXXXXXXXXXXXXX
 Axel Arnold             XXXXXXXXXXXXXX
+Henri Menke             XXXXXXXXX
 Olaf Lenz               XXXXXXXXXXXXXX
 
 
