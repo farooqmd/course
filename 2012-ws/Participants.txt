@@ -3,8 +3,8 @@ List of participants
 
 Name                    Immatrikulation no.
 -------------------------------------------
-<<<<<<< HEAD
 Michael Geiger          XXXXXXXXXXXXXX
-=======
+Axel Arnold             XXXXXXXXXXXXXX
 Olaf Lenz               XXXXXXXXXXXXXX
->>>>>>> origin/master
+
+
