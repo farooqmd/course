@@ -3,8 +3,14 @@ List of participants
 
 Name                    Immatrikulation no.
 -------------------------------------------
+
 Axel Arnold             XXXXXXXXXXXXXX
 Helmut Frasch
 Olaf Lenz               XXXXXXXXXXXXXX
+<<<<<<< HEAD
 Jan Kumlin              2677596
 Hannes Seeger           2683027
+=======
+Henri Menke             XXXXXXXXX
+Sebastian Weber	        2678579
+>>>>>>> sweber/master
