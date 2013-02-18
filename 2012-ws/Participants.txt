@@ -5,8 +5,11 @@ Name                    Immatrikulation no.
 -------------------------------------------
 Axel Arnold             XXXXXXXXXXXXXX
 Florian Dommert         XXXXXXXXXXXXXX
+Sascha Ehrhardt		343
 Michael Geiger          XXXXXXXXXXXXXX
 Patrick Kreissl		XXNoOneCaresXX
+Jonas Landsgesell
 Olaf Lenz               XXXXXXXXXXXXXX
 Henri Menke             XXXXXXXXXXXXXX
+Julian Michalowsky	267 30 79
 Nicolas Zuber		XXXX-XXXX-XXXXXX
