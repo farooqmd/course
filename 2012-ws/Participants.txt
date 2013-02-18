@@ -5,5 +5,7 @@ Name                    Immatrikulation no.
 -------------------------------------------
 Axel Arnold             XXXXXXXXXXXXXX
 David Schwoerer		xxxx
-Olaf Lenz               XXXXXXXXXXXXXX
 Johannes Schmidt	2806244	
+Martina Schwarz		2522117
+Matthias Wenzel		2572772
+Olaf Lenz               XXXXXXXXXXXXXX
