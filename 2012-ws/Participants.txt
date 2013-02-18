@@ -3,8 +3,8 @@ List of participants
 
 Name                    Immatrikulation no.
 -------------------------------------------
-
 Axel Arnold             XXXXXXXXXXXXXX
+Jan Kumlin              2677596
 Olaf Lenz               XXXXXXXXXXXXXX
 Henri Menke             XXXXXXXXX
 Sebastian Weber	        2678579
