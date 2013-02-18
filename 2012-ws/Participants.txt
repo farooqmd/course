@@ -3,4 +3,11 @@ List of participants
 
 Name                    Immatrikulation no.
 -------------------------------------------
+<<<<<<< HEAD
+
+=======
+Axel Arnold             XXXXXXXXXXXXXX
 Helmut Frasch
+Olaf Lenz               XXXXXXXXXXXXXX
+
+>>>>>>> origin/master
