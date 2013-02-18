@@ -3,4 +3,8 @@ List of participants
 
 Name                    Immatrikulation no.
 -------------------------------------------
-Michael Geiger          2666264
+<<<<<<< HEAD
+Michael Geiger          XXXXXXXXXXXXXX
+=======
+Olaf Lenz               XXXXXXXXXXXXXX
+>>>>>>> origin/master
