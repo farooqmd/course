@@ -5,4 +5,5 @@ Name                    Immatrikulation no.
 -------------------------------------------
 Axel Arnold             XXXXXXXXXXXXXX
 Olaf Lenz               XXXXXXXXXXXXXX
+Dominic Klein 		Blablablubb
 
