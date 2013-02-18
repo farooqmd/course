@@ -3,4 +3,6 @@ List of participants
 
 Name                    Immatrikulation no.
 -------------------------------------------
-Sebastian Weber	2678579
+
+Olaf Lenz               XXXXXXXXXXXXXX
+Sebastian Weber	        2678579
