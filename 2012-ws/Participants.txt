@@ -4,7 +4,11 @@ List of participants
 Name                    Immatrikulation no.
 -------------------------------------------
 Axel Arnold             XXXXXXXXXXXXXX
+Martin Hohmannn		XXXXXX
+Olaf Lenz               XXXXXXXXXXXXXX
 Jan Lotze		XXXXXXX
 Henri Menke             XXXXXXXXX
-Olaf Lenz               XXXXXXXXXXXXXX
-
+Johannes Schmidt	2806244	
+Martina Schwarz		2522117
+David Schwoerer		xxxx
+Matthias Wenzel		2572772
