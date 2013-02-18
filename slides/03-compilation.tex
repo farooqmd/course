@@ -1,0 +1,229 @@
+\documentclass{slides}
+
+\lstset{language=C++}
+
+\usepackage{xspace}
+
+\newcommand{\ie}{\textit{i.\thinspace e.}\xspace}
+\newcommand{\eg}{\textit{e.\thinspace g.}\xspace}
+
+\begin{document}
+
+\graphicspath{{figures/}}
+
+\title[The Compilation Process]{\Large The Compilation Process}
+
+\author[O. Lenz]{Olaf Lenz} 
+\institute{Institut für Computerphysik\\Universit\"at Stuttgart}
+\date{February 18-22, 2013}
+
+\setbeamertemplate{footline}{}
+\begin{frame}
+  \titlepage
+\end {frame}
+\setbeamertemplate{footline}[icp]
+
+\begin{frame}[fragile]
+  \frametitle{Separate Compilation}
+  \begin{itemize}
+  \item So far, all programs whre a single file
+  \item Large software projects consist of thousands of lines of
+    code.
+  \item Problem:
+    \begin{itemize}
+    \item Compilation may take very long
+    \item It is not feasible to have all code in a single file
+    \end{itemize}
+  \item Better: split the project into several files, \emph{compile}
+    them one by one and \emph{link} them together at the end
+  \item Problem: To be able to compile a function, some things about
+    all functions, variables and types that occur must be known
+    \begin{lstlisting}
+int main() {
+  cout << "Hello, World!" << endl;
+}    
+\end{lstlisting}
+    \item What is \lstinline!cout!, \lstinline!<<! and \lstinline!endl!?
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Declarations vs. Definitions}
+  \begin{itemize}
+  \item All functions and variables(\emph{symbols}) in C++ can be
+    \emph{declared} and \emph{defined}
+  \item \emph{Declaration} of symbols introduce names to the compiler:
+    ``This function or this variable exists somewhere and here is what
+    it should look like''
+  \item \emph{Definitions} tell the compiler: ``Make this variable
+    or function here.''
+  \item Declarations can be repeated, definitions must be unique
+  \item A \emph{header file} (\eg \texttt{.hpp}) should only contain
+    declarations (it is included in other header and source files)
+  \item A \emph{source file} (\eg \texttt{.cpp}) contains definitions
+    as well as declarations
+  \item All symbols declared in a header file should be defined in
+    exactly one source file
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Function Declarations and Definitions}
+  \begin{itemize}
+  \item Declaration
+    \begin{lstlisting}
+int func(int length, int width);
+    \end{lstlisting}
+  \item Names are ignored by the compiler
+  \item Gives the signature (name, parameters and return type) of a
+    function
+  \item Definition
+    \begin{lstlisting}
+int func(int length, int width) {
+  // function code
+  .
+  .
+}
+    \end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Variable Declarations and Definitions}
+  \begin{itemize}
+  \item Only interesting for \emph{global variables}
+  \item Declaration
+    \begin{lstlisting}
+extern int a;
+    \end{lstlisting}
+  \item Names are ignored by the compiler
+  \item Gives the signature (name, parameters and return type) of a
+    function
+  \item Definition
+    \begin{lstlisting}
+int a;
+    \end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Stage 1: Preprocessor inclusions}
+
+    \begin{itemize}
+    \item Pure text replacement
+    \item \lstinline!#include FILE! is replaced by the contents of the
+      \emph{header file} FILE
+    \item The files have to be in the \emph{include path}
+      \begin{itemize}
+      \item The default include path contains \eg \texttt{/usr/include}
+      \item It can be extended in the compiler call by \texttt{-I
+          <path>}
+      \item \lstinline!#include <file>! for system headers
+      \item \lstinline!#include "file.hpp"! for own headers
+      \end{itemize}
+    \item This \emph{was} used for contants (e.g. \lstinline!M_PI!)
+    \item Outputs a single file that should be a self-contained
+      C++-program
+    \item \lstinline!g++ -E FILE!: Preprocess FILE, output
+      \lstinline!.c!-file.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Stage 1: Preprocessor Macros}
+    \begin{itemize}
+    \item \lstinline!#define NAME REPLACEMENT! defines a
+      \emph{macro} with the given NAME
+    \item Whenever the macro name turns up in the file, it is replaced
+      by the REPLACEMENT
+    \item This \emph{was} used for constants (\eg \lstinline!M_PI!)
+    \item Nowadays mostly used for compile time guards
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Stage 1: Preprocessor Compile Time Guards}
+    \begin{itemize}
+    \item If a header is included several times, this prevents
+      multiply definitions of types
+      \begin{lstlisting}
+#ifndef __MYHEADER_HPP
+#define __MYHEADER_HPP
+.
+// The actual code
+.
+#endif          
+      \end{lstlisting}
+    \item Or they can be used for conditional compilation, \eg when a
+      program can use a library if it is there, but can still work
+      if not
+      \begin{lstlisting}
+#ifdef FFTW
+// code that uses FFTW
+#else
+// code without FFTW
+#endif        
+      \end{lstlisting}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Stage 2: Compiler}
+
+  \begin{itemize}
+  \item Performs \emph{static type checking}: do the types match?
+  \item The \emph{code generator} translates source code into machine
+    code, function by function
+  \item An \emph{optimizer} optimizes the machine code
+  \item Complains when a symbol is used that has not been declared
+  \item \dots but does \emph{not} complain when it is not defined!
+  \item It generates \lstinline!.o!-files (\emph{object
+      code}-files)\footnote{These objects have nothing to do with
+      objects from OOP!}
+    \begin{itemize}
+    \item For each \emph{defined symbol} in the code, it will store
+      the generated machine code together with the symbol
+    \item For each \emph{undefined symbol} that is used in the code
+      and that was only declared but not defined , it will store where
+      it is used
+    \end{itemize}
+  \item \lstinline!g++ -c FILE!: Preprocess and compile FILE, output
+    \lstinline!.o!-file
+  \item \lstinline!nm -C FILE.o!: Shows defined and undefined symbols
+    in \lstinline!.o!-file
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Stage 3: Linker}
+
+  \begin{itemize}
+  \item \emph{Links} several \lstinline!.o!-files together into a
+    single executable file
+  \item Starts with the function \texttt{main}
+  \item Recursively \emph{resolves} all undefined symbols
+    \begin{itemize}
+    \item puts the code of used symbols into the executable
+    \item puts the addresses of the symbol where the symbol is used
+    \end{itemize}
+  \item Fails when a symbol cannot be resolved
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Libraries}
+  \begin{itemize}
+  \item \lstinline!ar! can put several object files together into a
+    \emph{library}
+  \item The name is \lstinline!lib<name>.a! or
+    \lstinline!lib<name>.so! (\eg \lstinline!libgsl.a!)
+  \item A library file should come together with a set of header files
+    (\eg gsl.h)
+  \item A library file can be linked together with other object files
+    via the compiler option \texttt{-l<name>} (\eg \texttt{-lgsl})
+  \end{itemize}
+\end{frame}
+
+
+\end{document}
