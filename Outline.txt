@@ -1,4 +1,4 @@
-Time-stamp: <2013-02-17 17:59 olenz>
+Time-stamp: <2013-02-18 22:13 olenz>
 
 Day 1
 -----
@@ -16,15 +16,6 @@ LECTURE: Procedural C/C++ 1
   * Call-by-value, call-by-reference
   * auto
 
-LECTURE: C/C++ Compilation
-* Compilation
-  * Declaration vs. Definition
-  * Header/Source files
-  * Definition guards
-  * Preprocessor
-  * Compilation units
-  * Libraries
-  * qmake/make
 * Debugging
 * Source code management
 
@@ -42,18 +33,29 @@ EXERCISES
 
 Day 2
 -----
-LECTURE: Procedural C/C++ 2
-* Arrays
-* typedef
-* static, const
-* structs (unions)
-* ranged for
-* Dynamic data structures
-  * Memory Layout: Stack vs. Heap
-  * Pointer arithmetics
-  * malloc, free, NULL
-  * delete, new
-* Standard library: IOstream, string
+LECTURE: C/C++ Compilation
+* Compilation
+  * Declaration vs. Definition
+  * Header/Source files
+  * Definition guards
+  * Preprocessor
+  * Compilation units
+  * Libraries
+  * qmake/make
+* Procedural C/C++ 2
+  * pointers
+  * scoping
+  * typecasts
+  * static, const
+  * typedef
+  * structs (unions)
+  * arrays
+  * ranged for
+  * Dynamic data structures
+    * Memory Layout: Stack vs. Heap
+    * Pointer arithmetics
+    * malloc, free, NULL
+    * delete, new
 * STL: vector, hashmap, iterator, find, sort
 
 LECTURE: OOP in C++ 1
