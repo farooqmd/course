@@ -20,12 +20,12 @@ int main() {
   long double reallylarge;
 
   cout 
+    << "bool=" << sizeof(bool) << endl
     << "char=" << sizeof(protein) << endl
     << "int=" << sizeof(carbohydrates) << endl
     << "float=" << sizeof(fiber) << endl
     << "double=" << sizeof(fat) << endl
     << "unsigned int=" << sizeof(pos) << endl
-    << "long int=" << sizeof(large) << endl
     << "long int=" << sizeof(large) << endl
     << "long double=" << sizeof(reallylarge) << endl;
 

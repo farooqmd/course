@@ -21,6 +21,6 @@ int main() {
   
   // * RANGED FOR LOOP, C++11 style
   // * Like "foreach" in Python
-  for (string s: v)
+  for (string &s: v)
     cout << s << endl;
 } 

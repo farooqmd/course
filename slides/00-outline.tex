@@ -180,4 +180,80 @@
   \vfill
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{The Compilation Process}
+  
+  \begin{itemize}
+  \item Preprocessor
+    \begin{itemize}
+    \item Pure text replacement
+    \item Handles \lstinline!#include!, \lstinline!#define!,
+      \lstinline!#ifndef! etc.
+    \item Outputs a single file that should be a self-contained
+      C++-program
+    \end{itemize}
+  \item Compiler
+    \begin{itemize}
+    \item Translates C-code into machine code 
+    \item Keeps functions together
+    \item ``object code''
+    \end{itemize}
+  \item Linker
+    \begin{itemize}
+    \item \emph{Links} object code files together to yield an
+      executable
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Preprocessor}
+
+    \begin{itemize}
+    \item Pure text replacement
+    \item \lstinline!#include FILE! is replaced by the contents of FILE
+    \item \lstinline!#define NAME REPLACEMENT! defines a \emph{macro}
+      with the given NAME
+    \item whenever the macro name turns up in the file, it is replaced
+      by the REPLACEMENT
+    \item This \emph{was} used for contants (e.g. \lstinline!M_PI!)
+    \item Outputs a single file that should be a self-contained
+      C++-program
+    \item \lstinline!g++ -E FILE!: Preprocess FILE, output
+      \lstinline!.c!-file.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Compiler}
+
+  \begin{itemize}
+  \item Translates source code into machine code, function by function
+  \item \emph{Optimizes} the machine code, \ie transforms the code
+    such that it will run faster but does not change what it does
+  \item Keeps function and variable names
+  \item Generates \lstinline!.o!-files (``object''-files)
+  \item \lstinline!g++ -c FILE!: Preprocess and compile FILE, output
+    \lstinline!.o!-file.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Linker}
+
+  \begin{itemize}
+  \item \emph{Links} several \lstinline!.o!-files together into a
+    single executable file
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Declarations vs. Definitions}
+  \begin{itemize}
+  \item 
+  \end{itemize}
+\end{frame}
+
+
+
 \end{document}

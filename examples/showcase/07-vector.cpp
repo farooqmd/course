@@ -28,7 +28,7 @@ int main() {
   cout << "Counted " << v.size() << " words." << endl;
   
   // * Loop over all strings and output them to the screen
-  for (int i = 0; i < v.size(); i++)
+  for (unsigned int i = 0; i < v.size(); i++)
     // * access the elements using "[]"
     cout << v[i] << endl;
 } 

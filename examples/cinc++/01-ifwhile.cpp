@@ -7,7 +7,7 @@ int main() {
   cout << "Please enter your age and hit 'Enter'" << endl;
   cin >> age;
 
-  // * SYNTAX: if (<expression>) <statement> else <statement>
+  // * SYNTAX: if (<expression>) <statement> [else <statement>]
   // * "if" works with and without "else"
   // * EXPRESSION in brackets has to evaluate to a boolean value
   //   ("true" or "false")
