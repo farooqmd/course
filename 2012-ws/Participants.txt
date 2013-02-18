@@ -3,14 +3,8 @@ List of participants
 
 Name                    Immatrikulation no.
 -------------------------------------------
-
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> hfrasch/master
 Axel Arnold             XXXXXXXXXXXXXX
-Helmut Frasch
+Helmut Frasch		XXXXXXXXXXX
 Henri Menke             XXXXXXXXX
 Olaf Lenz               XXXXXXXXXXXXXX
 Hannes Seeger           2683027
