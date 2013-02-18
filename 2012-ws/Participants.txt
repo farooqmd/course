@@ -3,13 +3,17 @@ List of participants
 
 Name                    Immatrikulation no.
 -------------------------------------------
-Michael Geiger          XXXXXXXXXXXXXX
 Axel Arnold             XXXXXXXXXXXXXX
-Henri Menke             XXXXXXXXX
+Michael Geiger          XXXXXXXXXXXXXX
 Olaf Lenz               XXXXXXXXXXXXXX
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
 =======
+Nicolas Zuber		XXXX-XXXX-XXXXXX
+>>>>>>> nzuber/master
+=======
+Henri Menke             XXXXXXXXX
 Nicolas Zuber		XXXX-XXXX-XXXXXX
 >>>>>>> nzuber/master
