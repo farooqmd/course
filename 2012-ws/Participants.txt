@@ -3,4 +3,6 @@ List of participants
 
 Name                    Immatrikulation no.
 -------------------------------------------
-	Hannes Seeger 2683027
+
+Olaf Lenz               XXXXXXXXXXXXXX
+Hannes Seeger		2683027
