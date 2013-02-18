@@ -6,6 +6,8 @@ Name                    Immatrikulation no.
 
 Axel Arnold             XXXXXXXXXXXXXX
 Felix Engel		XxxxXXXxxxXXXx
-Henri Menke             XXXXXXXXX
 Olaf Lenz               XXXXXXXXXXXXXX
+Jan Lotze		XXXXXXX
+Henri Menke             XXXXXXXXX
+Dominic Klein 		Blablablubb
 
