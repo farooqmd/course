@@ -5,8 +5,13 @@ Name                    Immatrikulation no.
 -------------------------------------------
 
 =======
+<<<<<<< HEAD
+
+=======
+>>>>>>> hfrasch/master
 Axel Arnold             XXXXXXXXXXXXXX
 Helmut Frasch
 Henri Menke             XXXXXXXXX
 Olaf Lenz               XXXXXXXXXXXXXX
+Hannes Seeger           2683027
 
