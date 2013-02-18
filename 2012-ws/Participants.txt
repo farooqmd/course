@@ -5,5 +5,6 @@ Name                    Immatrikulation no.
 -------------------------------------------
 Axel Arnold             XXXXXXXXXXXXXX
 Jan Lotze		XXXXXXX
+Henri Menke             XXXXXXXXX
 Olaf Lenz               XXXXXXXXXXXXXX
 
