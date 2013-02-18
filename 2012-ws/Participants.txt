@@ -4,3 +4,5 @@ List of participants
 Name                    Immatrikulation no.
 -------------------------------------------
 Jan Lotze		XXXXXXX
+Olaf Lenz               XXXXXXXXXXXXXX
+
