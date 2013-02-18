@@ -3,4 +3,5 @@ List of participants
 
 Name                    Immatrikulation no.
 -------------------------------------------
+Olaf Lenz               XXXXXXXXXXXXXX
 Johannes Schmidt	2806244	
