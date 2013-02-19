@@ -35,7 +35,7 @@ void testNewWrong() {
     piecePtr = new CountOccurance;
     // the older pieces remain, but inaccessible
     // this makes it even worse...
-    //delete PiecePtr;
+    //delete piecePtr;
   }
   delete piecePtr;
 }

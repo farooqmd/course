@@ -2,9 +2,10 @@
 using namespace std;
 
 class Integer {
-public:
+private:
   int value;
 
+public:
   // unusual default constructor
   Integer(int _value = 42): value(_value) {}
   // this is likely to cause trouble!
@@ -14,11 +15,13 @@ public:
     // almost correct...
     return Integer(value + b.value + 1);
   }
+
+  int getValue() const { return value; }
 };
 
 // how to output our Integer class
 ostream &operator<<(ostream &stream, const Integer &a) {
-  return (stream << a.value);
+  return (stream << a.getValue());
 }
 
 
