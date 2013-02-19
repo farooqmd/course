@@ -1,17 +1,28 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
 
-string &99bottles(int i) {
-  switch (i) {
-  0: s = " bottle(s) of beer on the wall, ";
-  1: s = " bottle(s) of beer.";
-  2: s = " bottle(s) of beer on the wall."
+string bottles(int i) {
+  string s;
+  switch(i) {
+  case 0: 
+    s = " bottle(s) of beer on the wall, "; 
+    break;
+  case 1: 
+    s = " bottle(s) of beer."; 
+    break;
+  case 2: 
+    s = " bottle(s) of beer on the wall."; 
+    break;
   }
   return s;
 }
 
-vector <int> &reverse_vector() {
+vector <int> reverse_vector(vector <int> &v) {
   vector<int> vnew;
   
-  for (i = v.size(); i > 0; i--)
+  for (int i = v.size()-1; i > 0; i--)
     vnew.push_back(v[i]);
 
   return vnew;
@@ -21,17 +32,18 @@ int main() {
   vector<int> v;
 
   // create vector of number 0..99
-  for (i = 0; i < 100; i++)
-    v[i] = i;
-
-  // reverse vector
-  vector<int> &vnew = reverse_vector();
-
-  for (i : v) {
-    cout << i << 99bottles(0) << endl
-    cout << i << 99bottles(1) << endl
-    cout << (i-1) << 99bottles(2) << endl
+  for (int i = 0; i < 100; i++) {
+    v.push_back(i);
   }
 
-  return;
+  // reverse vector
+  vector<int>  vnew = reverse_vector(v);
+
+  for (int i : vnew) {
+    cout << i << bottles(0) << endl;
+    cout << i << bottles(1) << endl;
+    cout << (i-1) << bottles(2) << endl;
+  }
+
+  return 0;
 }
