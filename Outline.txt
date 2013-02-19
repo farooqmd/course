@@ -1,4 +1,4 @@
-Time-stamp: <2013-02-18 22:13 olenz>
+Time-stamp: <2013-02-19 06:46 olenz>
 
 Day 1
 -----
@@ -10,11 +10,9 @@ LECTURE: Procedural C/C++ 1
 * Variable declaration
 * Basic types: int, char, bool
 * References
-* Pointers (can be 0)
 * Functions
   * Return values
   * Call-by-value, call-by-reference
-  * auto
 
 * Debugging
 * Source code management
@@ -49,14 +47,14 @@ LECTURE: C/C++ Compilation
   * static, const
   * typedef
   * structs (unions)
-  * arrays
-  * ranged for
   * Dynamic data structures
     * Memory Layout: Stack vs. Heap
-    * Pointer arithmetics
-    * malloc, free, NULL
     * delete, new
-* STL: vector, hashmap, iterator, find, sort
+    * Pointer arithmetics
+    * arrays
+  * STL: vector, hashmap, iterator, find, sort
+    * ranged for
+    * auto
 
 LECTURE: OOP in C++ 1
 * Example: multidim valarray class
