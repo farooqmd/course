@@ -26,9 +26,9 @@
 \begin{frame}[fragile]
   \frametitle{Separate Compilation}
   \begin{itemize}
-  \item So far, all programs whre a single file
+  \item So far, all programs were a single file
   \item Large software projects consist of thousands of lines of
-    code.
+    code
   \item Problem:
     \begin{itemize}
     \item Compilation may take very long
@@ -51,11 +51,11 @@ int main() {
 \begin{frame}
   \frametitle{Declarations vs. Definitions}
   \begin{itemize}
-  \item All functions and variables(\emph{symbols}) in C++ can be
+  \item All functions and variables (\emph{symbols}) in C++ can be
     \emph{declared} and \emph{defined}
   \item \emph{Declaration} of symbols introduce names to the compiler:
     ``This function or this variable exists somewhere and here is what
-    it should look like''
+    it should look like.''
   \item \emph{Definitions} tell the compiler: ``Make this variable
     or function here.''
   \item Declarations can be repeated, definitions must be unique
@@ -75,9 +75,9 @@ int main() {
     \begin{lstlisting}
 int func(int length, int width);
     \end{lstlisting}
-  \item Names are ignored by the compiler
-  \item Gives the signature (name, parameters and return type) of a
+  \item Provides the signature (name, parameters and return type) of a
     function
+  \item The names are ignored by the compiler
   \item Definition
     \begin{lstlisting}
 int func(int length, int width) {
@@ -97,9 +97,6 @@ int func(int length, int width) {
     \begin{lstlisting}
 extern int a;
     \end{lstlisting}
-  \item Names are ignored by the compiler
-  \item Gives the signature (name, parameters and return type) of a
-    function
   \item Definition
     \begin{lstlisting}
 int a;
@@ -122,7 +119,6 @@ int a;
       \item \lstinline!#include <file>! for system headers
       \item \lstinline!#include "file.hpp"! for own headers
       \end{itemize}
-    \item This \emph{was} used for contants (e.g. \lstinline!M_PI!)
     \item Outputs a single file that should be a self-contained
       C++-program
     \item \lstinline!g++ -E FILE!: Preprocess FILE, output
@@ -132,14 +128,24 @@ int a;
 
 \begin{frame}[fragile]
   \frametitle{Stage 1: Preprocessor Macros}
-    \begin{itemize}
-    \item \lstinline!#define NAME REPLACEMENT! defines a
-      \emph{macro} with the given NAME
-    \item Whenever the macro name turns up in the file, it is replaced
-      by the REPLACEMENT
-    \item This \emph{was} used for constants (\eg \lstinline!M_PI!)
-    \item Nowadays mostly used for compile time guards
-    \end{itemize}
+  \begin{itemize}
+  \item \lstinline!#define NAME REPLACEMENT! defines a
+    \emph{macro} with the given NAME
+  \item Whenever the macro name turns up in the file, it is replaced
+    by the REPLACEMENT
+  \item This \emph{was} used for constants (\eg \lstinline!M_PI!)
+  \item Preprocessor Conditionals
+    \begin{lstlisting}
+#ifdef MACRO
+.
+.
+#else
+.
+.
+#endif
+    \end{lstlisting}
+  \item Nowadays mostly used for compile time guards
+  \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]

@@ -16,6 +16,6 @@ int main() {
   for (int *p = ns; p < ns+10; p++)
     cout << *p << endl;
 
-  delete ns;
+  delete[] ns;
 }
   
