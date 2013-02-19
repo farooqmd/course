@@ -18,10 +18,10 @@ string bottles(int i) {
   return s;
 }
 
-vector <int> reverse_vector(vector<int> v) {
+vector<int> reverse_vector(vector<int> &v) {
   vector<int> vnew;
 
-  for (int i = v.size(); i > 0; i--)
+  for (int i = v.size()-1; i >= 0; i--)
     vnew.push_back(v[i]);
 
   return vnew;
@@ -31,7 +31,7 @@ int main() {
   vector<int> v;
 
   // create vector of number 0..99
-  for (int i = 0; i < 100; i++)
+  for (int i = 1; i < 100; i++)
     v.push_back(i);
 
   // reverse vector
