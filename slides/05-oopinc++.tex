@@ -55,7 +55,7 @@
     \medskip
 \end{onlyenv}
 
-\begin{lstlisting}
+\begin{lstlisting}[emph={class,public}]
 class Player {
 public:
   vector<Piece *> pieces;
@@ -88,7 +88,7 @@ This compiles as is:
 #include <string>
 using namespace std;
 enum Event { North, East, South, West, Skip };
-class Piece;
+class Piece; // <-
 
 class Player {
 public:
@@ -127,7 +127,7 @@ public:
   \medskip
 
 \begin{lstlisting}
-class Player;
+class Player; // <-
 class Piece {
   int x, y;
   Player &player;
@@ -212,10 +212,38 @@ Player::doNextMove(Piece *piece, Event ev, string &msg) {
 
 \end{frame}
 
+
+\begin{frame}[fragile]
+  \frametitle{Static class members}
+
+\begin{lstlisting}[emph={static,getCount}]
+class CountOccurance {
+  static int cnt;
+public:
+  CountOccurance() { ++cnt; }
+  ~CountOccurance() { --cnt; }
+  static int getCount() { return cnt; }
+};
+int CountOccurance::cnt = 0;
+int main() {
+  new CountOccurance();
+  cout << CountOccurance::getCount() << endl;
+  return 0;
+}
+\end{lstlisting}
+
+  \begin{itemize}
+  \item class members (functions and variables) can be static
+  \item variable needs to be defined once somewhere (not in header!)
+  \item static member functions are called with \emph{class} prefix
+  \end{itemize}
+
+\end{frame}
+
 \begin{frame}[fragile]
   \frametitle{Referring to yourself: this}
 
-\begin{lstlisting}
+\begin{lstlisting}[emph={this}]
 void Piece::register() {
   board.addPiece(this);
 }
@@ -339,41 +367,124 @@ public:
   \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
   \frametitle{Default and copy constructor}
 
+\begin{lstlisting}
+class Game {
+public:
+  Game() { /* call default constructors of all objects */ }
+  Game(const Game &)  { /* use copy constructors instead */ }
+};
+\end{lstlisting}
 
-
+  \begin{itemize}
+  \item two \emph{predefined} constructors:
+    \begin{itemize}
+    \item Default constructor \lstinline!class::class()!
+      \begin{itemize}
+      \item initializes all objects using their default constructor
+      \item plain old data types (char, int, ...) are potentially
+        uninitialized
+      \item raises an error
+      \end{itemize}
+    \item Copy constructor \lstinline!class::class(const class &src)!
+      \begin{itemize}
+      \item copies all member variables from object \lstinline!src!
+      \item for pointers often a bad idea - ownership is not clear
+      \item also for \emph{big} classes
+      \end{itemize}
+    \end{itemize}
+  \item to avoid automatic generation, declare the functions
+    \emph{private}
+  \item you don't need to specify them
+  \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
   \frametitle{Function overloading}
   
   \begin{center}
     \begin{tikzpicture}
       \umlclass[type=abstract]{Tile}{ }{
-        \umlvirt{getRepresentation(representation : string)}\\[\medskipamount]
         \umlvirt{tryStep(piece : Piece, how : Event, out message : string)}\\
         \umlvirt{tryStep(monster : Monster, how : Event, out message : string)}\\
       }
     \end{tikzpicture}
   \end{center}
+  becomes
+  \medskip
+\begin{lstlisting}
+class Tile {
+public:
+  void tryStep(Piece &piece, Event how, string &message);
+  void tryStep(Monster &monster, Event how, string &message);
+};
+\end{lstlisting}
 
   \begin{itemize}
-  \item arguments with initializers
-  \item a method is described by name and \alert{signature}
-  \item signature is formed by the types of all taken arguments\\
-    \emph{piece : Piece, how : Event, out message : string}\\
-    \emph{monster : Monster, how : Event, out message : string}
+  \item several methods with same name but different signature
+  \item signature is formed by the types of all taken arguments
   \item return value is \emph{not} part of the signature
+  \item also global (C-style) functions can be overloaded
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Default arguments}
+  
+\begin{lstlisting}
+class QGameBoard
+{
+public:
+  QGameBoard(int tileSize = 20, QWidget *parent = 0);
+  void setTileSize(int sizeX, int sizeY = 0);
+};
+\end{lstlisting}
+
+  \begin{itemize}
+  \item another kind of function overloading are default arguments
+  \item works for any kind of functions, including constructors
+  \item values need not to be specified
+  \item always starts from the back:\\
+    \lstinline!QGameBoard(30)! is ok: \lstinline!parent = 0!\\
+    \lstinline!QGameBoard(otherWidget)! not:
+    \lstinline!parent = 0!, the pointer \lstinline!otherWidget! is cast into an
+    integer for \lstinline!tileSize!
+  \item here, this also overloads the default constructor
+    \lstinline!QGameBoard()!, which is therefore not generated
   \end{itemize}
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
   \frametitle{Operator overloading}
-  
+
+  \begin{itemize}
+  \item most operators can be overloaded
+  \item abuse can lead to \emph{big} confusion
+  \item obviously relies heavily on signatures
+  \end{itemize}
+
+Some examples:
+\begin{lstlisting}
+// output using iostream
+ostream &operator<<(ostream &stream, const Class &a);
+// assignment of any type:
+Class &Class::operator =(OtherClass b);
+// sum (product, difference,... analogously):
+RetClass Class::operator +(OtherClass b);
+// ++object:
+Class &Class::operator ++();
+// object++ (yes, they can differ):
+Class Class::operator++(int); // int is a dummy argument!
+// for objects representing functions:
+RetClass Class::operator ()(ParamClass a, ParamClass b, ...);
+\end{lstlisting}
+
 \end{frame}
+
+\end{document}
 
 \begin{frame}
   \frametitle{Inheritance}
