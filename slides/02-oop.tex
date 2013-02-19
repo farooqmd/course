@@ -89,7 +89,7 @@
   \item \alert{Objects interact by sending/receiving messages}\\
     \emph{Axel $\rightarrow$ playing piece: move one east}\\
     \emph{Olaf $\rightarrow$ game board: what is the object at
-      position 1,2?}\\
+      position A,B?}\\
   \item \alert{An object consists of objects}\\
     \emph{the game board consists of $12\times 12$ tiles}\\
     \emph{Axel has 3 playing pieces in control}\\
@@ -133,7 +133,7 @@
         getName() : string\\[\medskipamount]
         setPlayerNum(playerNum : num)\\
         getPlayerNum() : int\\[\medskipamount]
-        doNextMove(activePiece : Piece, Event : event, out string : message)\\
+        doNextMove(activePiece : Piece, event : Event, out message : string)\\
       }
     \end{tikzpicture}
   \end{center}

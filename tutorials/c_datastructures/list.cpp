@@ -1,31 +1,41 @@
-#include <cstdio>
-#include <cstdlib>
+#include <iostream>
 #include <ctime>
+#include <functional>
+#include <random>
+#include <stdexcept>
+
+using namespace std;
 
 const int min_length = 1024;
 const int max_length = 262144;
 const int num_loops = 10000;
 const int num_insdel = 1000000;
 
-typedef struct _SLnode {
-  float data;
-  struct _SLnode *next;
-} SLnode;
+// forward declaration
+struct Node;
 
-typedef SLnode* SLtype;
+struct Node {
+  float data;
+  Node *next;
+};
+
+typedef Node* List;
 
 int main(int argc, char *argv[]) {
+  default_random_engine rng;
+  uniform_real_distribution<float> dist;
+  auto random = bind(dist, rng);
 
   // loop over lengths
   for (int length = min_length; length <= max_length; length *= 2) {
-    printf("length=%6d\n", length);
+    cout << "length=" << length << endl;
 
     // create list of given length
-    SLtype thelist = NULL;
+    List thelist = NULL;
     for (int i = 0; i < length; ++i) {
-      SLtype tmplist = thelist;
-      thelist = static_cast<SLtype>(malloc(sizeof(SLnode)));
-      thelist->data = drand48();
+      List tmplist = thelist;
+      thelist = new Node;
+      thelist->data = random();
       thelist->next = tmplist;
     }
 
@@ -37,17 +47,17 @@ int main(int argc, char *argv[]) {
     before = clock();
     sum = 0.0;
     for (int i = 0; i < num_loops; ++i) {
-      for (SLtype rest = thelist; rest != NULL; rest = rest->next) {
+      for (List rest = thelist; rest != NULL; rest = rest->next) {
         sum += rest->data;
       }
     }
     after = clock();
     elapsed = (after-before)/(1.0*CLOCKS_PER_SEC*num_loops*length);
-    printf("\tloop_time=%le\n", elapsed);
+    cout << "\tloop_time=" << scientific << elapsed << endl;
     // just to make sure the loop is not optimized out
-    if (sum < 0.0) printf("Error!\n");
+    if (sum < 0.0) throw logic_error("Loop was optimized out!");
     
-    SLtype prev_element = thelist;
+    List prev_element = thelist;
     // advance to element in the middle
     for (int j = 0; j < length/2; j++)
       prev_element = prev_element->next;
@@ -56,32 +66,30 @@ int main(int argc, char *argv[]) {
     before = clock();
     for (int i = 0; i < num_insdel; ++i) {
       // delete element
-      SLtype tmp = prev_element->next;
+      List tmp = prev_element->next;
       prev_element->next = tmp->next;
       free(tmp);
         
       // insert random element before
-      tmp = static_cast<SLtype>(malloc(sizeof(SLnode)));
-      tmp->data = drand48();
+      tmp = new Node;
+      tmp->data = random();
       tmp->next = prev_element->next;
       prev_element->next = tmp;
     }
     after = clock();
     elapsed = (after-before)/(1.0*CLOCKS_PER_SEC*num_insdel);
-    printf("\tinsdel_time=%le\n", elapsed);
+    cout << "\tinsdel_time=" << scientific << elapsed << endl;
     
     // mix up list
-    SLtype newlist = NULL;
-    SLtype e;
+    List newlist = NULL;
+    List e;
     for (int i = length; i > 1; --i) {
-      //      printf("i = %d\n", i);
       e = thelist;
       // choose random element
-      for (int j = drand48()*(i-1); j > 1; --j) {
-        //        printf("%d\n", j);
+      for (int j = random()*(i-1); j > 1; --j) {
         e = e->next;
       }
-      SLtype tmp = e->next;
+      List tmp = e->next;
       // remove it
       e->next = e->next->next;
       // and insert it into new list
@@ -94,20 +102,20 @@ int main(int argc, char *argv[]) {
     before = clock();
     sum = 0.0;
     for (int i = 0; i < num_loops; ++i) {
-      for (SLtype rest = thelist; rest != NULL; rest = rest->next) {
+      for (List rest = thelist; rest != NULL; rest = rest->next) {
         sum += rest->data;
       }
     }
     after = clock();
     elapsed = (after-before)/(1.0*CLOCKS_PER_SEC*num_loops*length);
-    printf("\tloop_time=%le\n", elapsed);
+    cout << "\tloop_time=" << scientific << elapsed << endl;
     // just to make sure the loop is not optimized out
-    if (sum < 0.0) printf("Error!\n");
+    if (sum < 0.0) throw logic_error("Loop was optimized out!");
 
     // destroy list
     while (thelist != NULL) {
-      SLtype tmplist = thelist->next;
-      free(thelist);
+      List tmplist = thelist->next;
+      delete(thelist);
       thelist = tmplist;
     }
   }

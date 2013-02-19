@@ -1,8 +1,8 @@
-Time-stamp: <2013-02-17 17:59 olenz>
+Time-stamp: <2013-02-19 12:34 olenz>
 
 Day 1
 -----
-LECTURE: Procedural C/C++ 1
+LECTURE 1: Procedural C/C++ 1
 * History of C++
 * Fundamental syntax
   * Blocks, comments, tokens
@@ -10,25 +10,14 @@ LECTURE: Procedural C/C++ 1
 * Variable declaration
 * Basic types: int, char, bool
 * References
-* Pointers (can be 0)
 * Functions
   * Return values
   * Call-by-value, call-by-reference
-  * auto
 
-LECTURE: C/C++ Compilation
-* Compilation
-  * Declaration vs. Definition
-  * Header/Source files
-  * Definition guards
-  * Preprocessor
-  * Compilation units
-  * Libraries
-  * qmake/make
 * Debugging
 * Source code management
 
-LECTURE: OOP Basics
+LECTURE 2: Object-oriented Design
 * Basic ideas, UML
 * Class, Object/Instance, Field, Method
 * Class Hierarchy, Inheritance
@@ -42,21 +31,29 @@ EXERCISES
 
 Day 2
 -----
-LECTURE: Procedural C/C++ 2
-* Arrays
-* typedef
-* static, const
-* structs (unions)
-* ranged for
-* Dynamic data structures
-  * Memory Layout: Stack vs. Heap
-  * Pointer arithmetics
-  * malloc, free, NULL
-  * delete, new
-* Standard library: IOstream, string
-* STL: vector, hashmap, iterator, find, sort
+LECTURE 1: Compilation and Data types
+* Compilation
+  * Declaration vs. Definition
+  * Header/Source files
+  * Definition guards
+  * Preprocessor
+  * Compilation units
+  * Libraries
+  * qmake/make
+* Data types
+  * Pointers
+  * Scoping
+  * Typecasts
+  * Static
+  * structs (unions)
+  * Dynamic data structures
+    * Memory Layout: Stack vs. Heap
+    * delete, new
+    * Pointer arithmetics
+    * Arrays
+  * Example: linked lists
 
-LECTURE: OOP in C++ 1
+LECTURE 2: OOP in C++ 1
 * Example: multidim valarray class
 * Declaration vs. Definition of classes
 * Constructor, Destructor
@@ -64,16 +61,65 @@ LECTURE: OOP in C++ 1
 * Encapsulation: private, public
 * friend
 
-EXERCISES
-* Handling multidimensional arrays -> Game board
-* Introduce project code
-* Debug project code
-* UML Design
-
 Day 3 
 -----
+LECTURE 1: A Tour of the Standard C++ Library
+* Containers
+  * Data structures
+    * List-like
+      * Array
+      * Linked list
+    * Map-like
+      * Binary tree
+      * Hash map
+    * Comparison
+      * Memory requirement:
+        * Array: N
+        * Linked list: N+(N*ptrsize)
+        * Binary tree: N+(2*N*ptrsize)
+        * Hashmap: ~m*N (m~2)
+      * Random access
+        * Array: O(1)
+        * Linked list: O(N)
+        * Binary tree: O(log(N))
+        * Hash map: O(1)
+      * Insertion/deletion
+        * Array: O(N)
+        * Linked list: O(1)
+        * Binary tree: O(log(N))
+        * Hash map: O(1)
+      * Sorted insert
+        * Array: O(N)
+        * Linked list: O(N)
+        * Binary tree: O(log(N))
+        * Hash map: NA
+  * Iterators
+    * Generalized pointer
+    * Dereference
+    * Increment
+    * Possibly decrement, random access
+  * Iterator methods
+    * begin()
+    * end()
+    * insert()
+    * erase()
+    * rbegin()
+    * rend()
+  * Container methods
+    * swap()
+    * push_back()
+    * pop_back()
+    * back()
+    * front()
+    * size()
+    * resize()
+  * Algorithm
+    * sort
+    * find
+* Functional
+* ...more
 
-LECTURE 1: OOP in C++ 2
+LECTURE 2: OOP in C++ 2
 * Function overloading
 * Operator overloading
 * Inheritance
@@ -86,7 +132,7 @@ LECTURE 1: OOP in C++ 2
 
 Day 4
 -----
-LECTURE: More C++ 1
+LECTURE 1: More C++ 1
 * Exceptions
 * Namespaces
 
@@ -96,13 +142,10 @@ LECTURE 2: OOP in C++ 3
 * Automatic type conversion
 * Inline definitions
 
-EXERCISES
-
 Day 5
 -----
 LECTURE 1: More C++ 2
 * Templates
-* STL
 
 LECTURE 2: Software Development
 * Software Development Models
@@ -115,8 +158,6 @@ LECTURE 2: Software Development
 
 Further topics
 --------------
-* MPI?
-
 PROJECT
 * Fearsome Floors
 * Stage 1:
