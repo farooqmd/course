@@ -1,3 +1,4 @@
+
 #include <string>
 #include <vector>
 #include <iostream>
@@ -18,7 +19,16 @@ string bottles(int i) {
   return s;
 }
 
+<<<<<<< HEAD
 vector<int> reverse_vector(vector<int> &v) {
+=======
+vector <int> reverse_vector(vector<int> &v) {
+  vector<int> vnew;	
+  
+  for (int i = v.size()-1; i > 0; i--)
+
+vector <int> reverse_vector(vector<int> v) {
+>>>>>>> 6c024eb37ab88585fbaac6a56d68736cba624e83
   vector<int> vnew;
 
   for (int i = v.size()-1; i >= 0; i--)
