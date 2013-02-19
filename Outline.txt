@@ -1,8 +1,8 @@
-Time-stamp: <2013-02-18 22:13 olenz>
+Time-stamp: <2013-02-19 08:38 olenz>
 
 Day 1
 -----
-LECTURE: Procedural C/C++ 1
+LECTURE 1: Procedural C/C++ 1
 * History of C++
 * Fundamental syntax
   * Blocks, comments, tokens
@@ -10,16 +10,14 @@ LECTURE: Procedural C/C++ 1
 * Variable declaration
 * Basic types: int, char, bool
 * References
-* Pointers (can be 0)
 * Functions
   * Return values
   * Call-by-value, call-by-reference
-  * auto
 
 * Debugging
 * Source code management
 
-LECTURE: OOP Basics
+LECTURE 2: Object-oriented Design
 * Basic ideas, UML
 * Class, Object/Instance, Field, Method
 * Class Hierarchy, Inheritance
@@ -33,7 +31,7 @@ EXERCISES
 
 Day 2
 -----
-LECTURE: C/C++ Compilation
+LECTURE 1: Compilation and Data types
 * Compilation
   * Declaration vs. Definition
   * Header/Source files
@@ -42,23 +40,21 @@ LECTURE: C/C++ Compilation
   * Compilation units
   * Libraries
   * qmake/make
-* Procedural C/C++ 2
+* Data types
   * pointers
   * scoping
   * typecasts
   * static, const
   * typedef
   * structs (unions)
-  * arrays
-  * ranged for
   * Dynamic data structures
     * Memory Layout: Stack vs. Heap
-    * Pointer arithmetics
-    * malloc, free, NULL
     * delete, new
-* STL: vector, hashmap, iterator, find, sort
+    * pointer arithmetics
+    * arrays
+  * Example: linked lists
 
-LECTURE: OOP in C++ 1
+LECTURE 2: OOP in C++ 1
 * Example: multidim valarray class
 * Declaration vs. Definition of classes
 * Constructor, Destructor
@@ -66,16 +62,16 @@ LECTURE: OOP in C++ 1
 * Encapsulation: private, public
 * friend
 
-EXERCISES
-* Handling multidimensional arrays -> Game board
-* Introduce project code
-* Debug project code
-* UML Design
-
 Day 3 
 -----
+LECTURE 1: A Tour of the Standard C++ Library
+* containers
+* iterators
+* algorithm
+* functional stuff
+* ...more
 
-LECTURE 1: OOP in C++ 2
+LECTURE 2: OOP in C++ 2
 * Function overloading
 * Operator overloading
 * Inheritance
@@ -88,7 +84,7 @@ LECTURE 1: OOP in C++ 2
 
 Day 4
 -----
-LECTURE: More C++ 1
+LECTURE 1: More C++ 1
 * Exceptions
 * Namespaces
 
@@ -98,13 +94,10 @@ LECTURE 2: OOP in C++ 3
 * Automatic type conversion
 * Inline definitions
 
-EXERCISES
-
 Day 5
 -----
 LECTURE 1: More C++ 2
 * Templates
-* STL
 
 LECTURE 2: Software Development
 * Software Development Models
@@ -117,8 +110,6 @@ LECTURE 2: Software Development
 
 Further topics
 --------------
-* MPI?
-
 PROJECT
 * Fearsome Floors
 * Stage 1:

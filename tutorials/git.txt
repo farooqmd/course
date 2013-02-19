@@ -1,0 +1,110 @@
+Time-stamp: <2013-02-18 20:09 olenz>
+
+GIT
+---
+* Overview
+  * Versioning control system
+  * Stores files and their history in a REPOSITORY
+  * Each stored state is a REVISION
+  * Allows to return to any previous revision
+  * Has a log of the previous revisions
+  * Helps to cooperate on a set of files
+
+* Get a copy of the repository
+  > git clone /home/icpwiki/repos/teaching/C++.git
+  * Fetches a clone of the repository
+  * Can be a URL or a directory
+  * Generates subdir participants/
+  * Contains a copy of the files
+
+* Browse the history
+  > git log
+  * Shows the history of the file
+  * A revision has an ID
+  > git diff ID
+  * Show the changes done in a commit
+  > qgit
+  * More comfortable
+
+* Go to a past state
+  > git checkout <ID>
+  * The ID can be used to go to the corresponding state
+  * Only the first few characters of the id are needd
+
+  > git checkout master
+  * Return to the "master"
+
+* Do changes to files
+  * Modify file (add your name)
+  > git add <file>
+  * Add the current state of the file
+  > git rm <file>
+  * Remove the file from the current state
+
+* Review changes
+  > git status
+  * Shows what files have been changed and which would be committed
+  > git diff
+  * Shows the differences between the stored revision and the current
+    state
+
+* Commit the changes to the repository
+  > git commit
+  * Commit all changes in files to the repository
+  * Add commit message, decribe what you have done
+  > git commit -a
+  * Will automatically commit changes to files in the repository (no
+    "add" required)
+
+* Look at the history again
+  > git log
+  * The changes are in your local repository now
+  * Other people have done other things
+  * How to get them?
+  * Git will not do any network communication in any of the previous
+    commands
+
+* Fetch commits from other repository
+  > git remote 
+  * Shows the different "remote" repositories
+  * When cloning, the cloned repo appears as "origin"
+  > git fetch <remote>
+  * Fetch the commits from the repository
+
+* Look at the history again
+  * Other commits are there, but on another BRANCH  
+  
+* Merge histories
+  > git merge origin master
+  * Creates a new MERGE COMMIT
+  * Might cause CONFLICTS
+  * Have to be resolved manually
+  > git commit -a
+  * commit afterwards
+  > git merge --abort
+  * To abort a merge  
+
+* Pull
+  > git pull origin
+  * To fetch and merge in one operation
+
+* Push
+  > git push origin master
+  * To push to a remote repository, if you have write permissions
+
+* Connect to another remote repository
+  > git remote add <name> <dir>
+  > git fetch <remote>
+
+* Outlook
+  * Pull or Push style
+  * Branches: Several histories
+
+EXERCISE
+--------
+* Generate alphabetically sorted list of all participants
+* Connect to repository of neighbor
+* Choose one as the "integrator"
+* Merge the changes
+* Build hierarchy up to one integrator
+
