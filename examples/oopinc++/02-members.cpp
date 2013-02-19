@@ -18,5 +18,7 @@ int main()
   // here, dot is more natural
   b.setValue(3);
   cout << b.getValue() << endl;
+
+  return 0;
 }
     

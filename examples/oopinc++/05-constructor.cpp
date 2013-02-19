@@ -44,4 +44,6 @@ int main()
 {
   Game game;
   print(game);
+
+  return 0;
 }

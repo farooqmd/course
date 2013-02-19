@@ -43,4 +43,6 @@ int main()
   printerWRef(a);
   // again strange, here the copy constructor kicks in
   printer(a);
+
+  return 0;
 }

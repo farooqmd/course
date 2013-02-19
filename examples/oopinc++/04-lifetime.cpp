@@ -50,5 +50,6 @@ int main()
   cout << "left: " << CountOccurance::getCount() << endl;
   testNewWrong();
   cout << "left: " << CountOccurance::getCount() << endl;
-  
+
+  return 0;
 }

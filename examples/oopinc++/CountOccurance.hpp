@@ -5,6 +5,7 @@ class CountOccurance {
   static int cnt;
 public:
   CountOccurance() { ++cnt; }
+  CountOccurance(const CountOccurance &) { ++cnt; }
   ~CountOccurance() { --cnt; }
 
   static int getCount() { return cnt; }
