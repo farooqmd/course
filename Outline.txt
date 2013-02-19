@@ -1,4 +1,4 @@
-Time-stamp: <2013-02-19 08:36 olenz>
+Time-stamp: <2013-02-19 08:38 olenz>
 
 Day 1
 -----
@@ -13,7 +13,6 @@ LECTURE 1: Procedural C/C++ 1
 * Functions
   * Return values
   * Call-by-value, call-by-reference
-  * auto
 
 * Debugging
 * Source code management
@@ -50,10 +49,9 @@ LECTURE 1: Compilation and Data types
   * structs (unions)
   * Dynamic data structures
     * Memory Layout: Stack vs. Heap
-    * Pointer arithmetics
-    * malloc, free, NULL
     * delete, new
-  * arrays
+    * pointer arithmetics
+    * arrays
   * Example: linked lists
 
 LECTURE 2: OOP in C++ 1
