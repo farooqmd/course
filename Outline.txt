@@ -1,4 +1,4 @@
-Time-stamp: <2013-02-19 08:38 olenz>
+Time-stamp: <2013-02-19 12:34 olenz>
 
 Day 1
 -----
@@ -41,17 +41,16 @@ LECTURE 1: Compilation and Data types
   * Libraries
   * qmake/make
 * Data types
-  * pointers
-  * scoping
-  * typecasts
-  * static, const
-  * typedef
+  * Pointers
+  * Scoping
+  * Typecasts
+  * Static
   * structs (unions)
   * Dynamic data structures
     * Memory Layout: Stack vs. Heap
     * delete, new
-    * pointer arithmetics
-    * arrays
+    * Pointer arithmetics
+    * Arrays
   * Example: linked lists
 
 LECTURE 2: OOP in C++ 1
@@ -65,10 +64,59 @@ LECTURE 2: OOP in C++ 1
 Day 3 
 -----
 LECTURE 1: A Tour of the Standard C++ Library
-* containers
-* iterators
-* algorithm
-* functional stuff
+* Containers
+  * Data structures
+    * List-like
+      * Array
+      * Linked list
+    * Map-like
+      * Binary tree
+      * Hash map
+    * Comparison
+      * Memory requirement:
+        * Array: N
+        * Linked list: N+(N*ptrsize)
+        * Binary tree: N+(2*N*ptrsize)
+        * Hashmap: ~m*N (m~2)
+      * Random access
+        * Array: O(1)
+        * Linked list: O(N)
+        * Binary tree: O(log(N))
+        * Hash map: O(1)
+      * Insertion/deletion
+        * Array: O(N)
+        * Linked list: O(1)
+        * Binary tree: O(log(N))
+        * Hash map: O(1)
+      * Sorted insert
+        * Array: O(N)
+        * Linked list: O(N)
+        * Binary tree: O(log(N))
+        * Hash map: NA
+  * Iterators
+    * Generalized pointer
+    * Dereference
+    * Increment
+    * Possibly decrement, random access
+  * Iterator methods
+    * begin()
+    * end()
+    * insert()
+    * erase()
+    * rbegin()
+    * rend()
+  * Container methods
+    * swap()
+    * push_back()
+    * pop_back()
+    * back()
+    * front()
+    * size()
+    * resize()
+  * Algorithm
+    * sort
+    * find
+* Functional
 * ...more
 
 LECTURE 2: OOP in C++ 2
