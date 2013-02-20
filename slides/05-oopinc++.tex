@@ -48,8 +48,8 @@
         name : string }{
         setPlayerNum(playerNum : num)\\
         getPlayerNum() : int\\[\medskipamount]
-        doNextMove(piece : Piece, Event : event, out string :
-        message) }
+        doNextMove(piece : Piece, event : Event, out message :
+        string) }
     \end{tikzpicture}
     ~~becomes
     \medskip
@@ -58,8 +58,8 @@
 \begin{lstlisting}[emph={class,public}]
 class Player {
 public:
-  vector<Piece *> pieces;
   int playerNum;
+  string name;
   // setter and getter for the player number
   void setPlayerNum(int playerNum);
   int getPlayerNum();
@@ -212,34 +212,6 @@ Player::doNextMove(Piece *piece, Event ev, string &msg) {
 
 \end{frame}
 
-
-\begin{frame}[fragile]
-  \frametitle{Static class members}
-
-\begin{lstlisting}[emph={static,getCount}]
-class CountOccurance {
-  static int cnt;
-public:
-  CountOccurance() { ++cnt; }
-  ~CountOccurance() { --cnt; }
-  static int getCount() { return cnt; }
-};
-int CountOccurance::cnt = 0;
-int main() {
-  new CountOccurance();
-  cout << CountOccurance::getCount() << endl;
-  return 0;
-}
-\end{lstlisting}
-
-  \begin{itemize}
-  \item class members (functions and variables) can be static
-  \item variable needs to be defined once somewhere (not in header!)
-  \item static member functions are called with \emph{class} prefix
-  \end{itemize}
-
-\end{frame}
-
 \begin{frame}[fragile]
   \frametitle{Referring to yourself: this}
 
@@ -327,14 +299,14 @@ class Game {
 public:
   Game(int numPlayers = 2): board(0) {
     for (int i = 0; i < numPlayers; ++i)
-      player.push_back(new Player);
+      players.push_back(new Player);
   }
 };
 \end{lstlisting}
 
   \begin{itemize}
   \item constructor is a function initializing an object
-  \item has the same name as the classs (``class::class'')
+  \item has the same name as the classs (``Class::Class'')
   \item can take arguments that specify what to create
   \item there can be several constructors (see overloading)
   \item initialize member variables after colon (here: \lstinline!board!)
@@ -373,22 +345,23 @@ public:
 \begin{lstlisting}
 class Game {
 public:
-  Game() { /* call default constructors of all objects */ }
-  Game(const Game &)  { /* use copy constructors instead */ }
+  Game()      { /* call default constructors of all objects */ }
+  Game(const Game &src)  { /* use copy constructors instead */ }
 };
 \end{lstlisting}
 
   \begin{itemize}
   \item two \emph{predefined} constructors:
     \begin{itemize}
-    \item Default constructor \lstinline!class::class()!
+    \item Default constructor \lstinline!Class::Class()!
       \begin{itemize}
+      \item only if no user-defined constructor
       \item initializes all objects using their default constructor
       \item plain old data types (char, int, ...) are potentially
         uninitialized
-      \item raises an error
+      \item raises a warning in this case
       \end{itemize}
-    \item Copy constructor \lstinline!class::class(const class &src)!
+    \item Copy constructor \lstinline!Class::Class(const Class &src)!
       \begin{itemize}
       \item copies all member variables from object \lstinline!src!
       \item for pointers often a bad idea - ownership is not clear
@@ -399,6 +372,33 @@ public:
     \emph{private}
   \item you don't need to specify them
   \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Static class members}
+
+\begin{lstlisting}[emph={static,getCount}]
+class CountOccurance {
+  static int cnt;
+public:
+  CountOccurance() { ++cnt; }
+  ~CountOccurance() { --cnt; }
+  static int getCount() { return cnt; }
+};
+int CountOccurance::cnt = 0;
+int main() {
+  new CountOccurance();
+  cout << CountOccurance::getCount() << endl;
+  return 0;
+}
+\end{lstlisting}
+
+  \begin{itemize}
+  \item class members (functions and variables) can be static
+  \item variable needs to be defined once somewhere (not in header!)
+  \item static member functions are called with \emph{class} prefix
+  \end{itemize}
+
 \end{frame}
 
 \begin{frame}[fragile]
@@ -413,7 +413,6 @@ public:
     \end{tikzpicture}
   \end{center}
   becomes
-  \medskip
 \begin{lstlisting}
 class Tile {
 public:
@@ -445,7 +444,7 @@ public:
   \begin{itemize}
   \item another kind of function overloading are default arguments
   \item works for any kind of functions, including constructors
-  \item values need not to be specified
+  \item values need not to be specified when calling
   \item always starts from the back:\\
     \lstinline!QGameBoard(30)! is ok: \lstinline!parent = 0!\\
     \lstinline!QGameBoard(otherWidget)! not:
@@ -471,98 +470,368 @@ Some examples:
 // output using iostream
 ostream &operator<<(ostream &stream, const Class &a);
 // assignment of any type:
-Class &Class::operator =(OtherClass b);
+Class &Class::operator=(OtherClass b);
 // sum (product, difference,... analogously):
-RetClass Class::operator +(OtherClass b);
+RetClass Class::operator+(OtherClass b);
 // ++object:
-Class &Class::operator ++();
+Class &Class::operator++();
 // object++ (yes, they can differ):
 Class Class::operator++(int); // int is a dummy argument!
 // for objects representing functions:
-RetClass Class::operator ()(ParamClass a, ParamClass b, ...);
+RetClass Class::operator()(ParamClass a, ParamClass b, ...);
 \end{lstlisting}
 
 \end{frame}
 
-\end{document}
-
-\begin{frame}
+\begin{frame}[fragile]
   \frametitle{Inheritance}
+  \tikzumlset{font=\tiny}
+  \begin{tikzpicture}
+    \umlclass{Tile}{
+      x, y : int
+    }{
+      getPosition(out int, out int)\\
+      tryStep(...)
+    }
+      
+    \umlclass[x=5]{WallTile}{
+    }{
+      tryStep(...)
+    }
 
-  \begin{center}
-    \begin{tikzpicture}
-      \umlclass[y=2,x=4,type=abstract]{Tile}{
-        game: Game
-      }{
-        \umlvirt{tryStep(...)}
-      }
-      \umlclass{FloorTile}{
-      }{
-        tryStep(...)
-      }
+    \umlinherit{WallTile}{Tile}
+  \end{tikzpicture}
+  ~~becomes
+  \medskip
+\begin{lstlisting}[emph={public}]
+class Tile {
+  int x, y;
+  void getPosition(int x, int y);
+  virtual void tryStep(Piece &piece, Event how, string &message);
+};
+class WallTile : public Tile {
+  virtual void tryStep(Piece &piece, Event how, string &message);
+};
+\end{lstlisting}
 
-      \umlclass[x=8]{WallTile}{
-      }{
-        tryStep(...)
-      }
-
-      \umlinherit{WallTile}{Tile}
-      \umlinherit{FloorTile}{Tile}
-    \end{tikzpicture}
-  \end{center}
-  
+  \begin{itemize}
+  \item derived classes declare super classes after class name and colon
+  \item getPosition also exists in WallTile (\alert{inherited} from \lstinline!Tile!)
+  \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
+  \frametitle{Constructor and base classes}
+
+\begin{lstlisting}
+class Tile {
+public:
+  Tile();
+  ~Tile();
+};
+class WallTile: public Tile {
+public:
+  WallTile(): Tile() { }  
+  WallTile(int) { }  
+  ~WallTile();
+};
+\end{lstlisting}
+
+  \begin{onlyenv}<1>
+    \begin{itemize}
+    \item base classes are initialized in constructor following colon\\
+      (like member variables)
+    \item using default constructors can be omitted (\lstinline!WallTile(int)!)
+    \item arguments to constructors can be computed freely
+    \item base classes are automatically destroyed
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<2>
+    \begin{itemize}
+    \item order follows matryoshka principle: from general to special
+    \item base class constructors come \emph{first}
+    \item base class destructors come \emph{last}
+    \end{itemize}
+  \end{onlyenv}
+\end{frame}
+
+\begin{frame}[fragile]
   \frametitle{Encapsulation: private, public, protected}
 
-  \tikzumlset{font=\tiny}
-  \begin{center}
-    \begin{tikzpicture}
-      \umlclass[type=abstract]{Tile}{
-        \# game: Game
-      }{
-        \umlvirt{+ tryStep(...)}
-      }
-      \umlclass[y=-2]{WallTile}{
-      }{
-        + tryStep(...)
-      }
-      \umlclass[x=4,y=-1]{Player}{
-        - playerNum: int
-      }{
-      }
+  \begin{onlyenv}<1>
+    \tikzumlset{font=\tiny}
+    \begin{center}
+      \begin{tikzpicture}
+        \umlclass[type=abstract]{Tile}{
+          - notvisible: bool\\
+          \# x, y: int }{ + getPosition(out int, out int) }
+        \umlemptyclass[y=-1,x=3.5]{WallTile}
+        \umlemptyclass[x=6]{Player}
       
-      \umlinherit{WallTile}{Tile}
-      \umldep{Player}{WallTile}
-      \umldep{Player}{Tile}
-    \end{tikzpicture}
-  \end{center}
+        \umlinherit{WallTile}{Tile} \umldep{Player}{WallTile}
+        \umldep{Player}{Tile}
+      \end{tikzpicture}
+    \end{center}
+    \vspace{-\baselineskip}
+    becomes
+    \medskip
+  \end{onlyenv}
 
+\begin{lstlisting}[emph={public,private,protected}]
+class Tile {
+private:
+  bool notvisible;
+protected:
+  int x, y;
+public:
+  void getPosition(int x, int y);
+};
+class WallTile : public Tile { };
+\end{lstlisting}
+
+  \begin{onlyenv}<2>
+    \begin{itemize}
+    \item \alert{private} members are only accessible to members of
+      the class
+    \item \alert{protected} is also accessible to members of derived
+      classes
+    \item \alert{public} members are visible to all
+    \item no difference between function and variable members
+    \item a non-public destructor hinders destroying objects ---
+      rarely a good idea
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<3>
+    \begin{itemize}
+    \item \lstinline!notvisible! is only accessible to
+      \lstinline!Tile!  instances (\alert{private})
+    \item \lstinline!x! and !y! are accessible to instances of classes
+      \lstinline!Tile! and \lstinline!WallTile! (\alert{protected})
+    \item \lstinline!getPosition! is visible to all, including
+      e.g. \lstinline!Player! instances (\alert{public})
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<4>
+    \begin{itemize}
+    \item base classes also have a visibility (private, protected or public)
+    \item most stringent visibility applies
+    \item private members never become protected or public
+    \item protected members never become public
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<5>
+    \begin{itemize}
+    \item objects are always also base class objects\\
+      \emph{(a \lstinline!WallTile! is a \lstinline!Tile!, a
+      \lstinline!Mammal! an \lstinline!Animal!)}\\
+      $\implies$ \alert{base class (interface) should be public}
+    \item ... if not strong reasons against
+    \item Qt: $\approx 2300$ public inheritances, $\approx 30$ private
+      and $\approx 10$ protected
+    \end{itemize}
+  \end{onlyenv}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
   \frametitle{Friends}
-  
+
+\begin{lstlisting}[emph={friend}]
+class Hidden {
+private:
+  Hidden();
+  Hidden(const Hidden &);
+  ~Hidden();
+  friend ostream &operator<<(ostream &, const Hidden &);
+  friend class HiddenFactory;
+};
+\end{lstlisting}
+  \begin{itemize}
+  \item \lstinline!friend! overrides any visibility restrictions
+  \item friends are declared in the class definition\\
+    $\implies$ you cannot inject friends
+  \item friends can be classes or (member) functions
+  \item common use is allowing the \lstinline!<<!-operator to access inner parts
+  \item here, it enforces to use \lstinline!HiddenFactor! to create objects
+  \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
   \frametitle{Polymorphism: virtual functions}
+
+  \begin{onlyenv}<1>
+\begin{lstlisting}
+class Tile {
+  string whatAmI() { return "tile"; }
+};
+class FloorTile: public Tile {
+  string whatAmI() { return "floor tile"; }
+};
+void informMe(Tile &tile) {
+  cout << "this is a " << tile.whatAmI() << endl;
+}
+\end{lstlisting}
+
+    \begin{itemize}
+    \item doesn't work --- \lstinline!informMe! always says it is a ``tile''
+    \item even for a \lstinline!FloorTile!, \lstinline!Tile::whatAmI!
+      is called, since \lstinline!tile! is a (reference to) \lstinline!Tile!
+    \item when accessed through a base class pointer or reference,
+      the object ``forgets'' its true type
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<2>
+\begin{lstlisting}[emph={virtual}]
+class Tile {
+  virtual string whatAmI() { return "tile"; }
+};
+class FloorTile: public Tile {
+  virtual string whatAmI() { return "floor tile"; }
+};
+void informMe(Tile &tile) {
+  cout << "this is a " << tile.whatAmI() << endl;
+}
+\end{lstlisting}
+
+    \begin{itemize}
+    \item \lstinline!virtual! declares a function to be \alert{polymorph}
+    \item it acts differently depending on the \emph{actual} type of the object
+    \item therefore, \lstinline!Tile::whatAmI! is different for a
+      \lstinline!Tile! and a \lstinline!WallTile!
+    \item classes with virtual functions carry a pointer to a table of
+      virtual functions (vtable)
+    \item forgetting to define a virtual function leads to undefined
+      references to the ``vtable for Class''
+    \end{itemize}
+  \end{onlyenv}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
   \frametitle{Pure virtual functions and abstract base classes}
-  
+
+\begin{lstlisting}
+class Tile {
+  virtual string whatAmI() = 0;
+};
+class FloorTile: public Tile {
+  virtual string whatAmI() { return "floor tile"; }
+};
+int main() {
+  // Error! Abstract class, cannot be instantiated
+  Tile tile;
+}
+\end{lstlisting}
+
+    \begin{itemize}
+    \item pure virtual (abstract) functions are not be defined for the
+      base class, only for derived classes
+    \item classes with pure virtual functions are \alert{abstract}
+      classes
+    \item you cannot create objects of abstract classes
+    \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
   \frametitle{Multiple inheritance}
   
+  \begin{onlyenv}<1>
+    \tikzumlset{font=\tiny}
+    \begin{tikzpicture}
+      \umlclass{Person}{ name: string }{} \umlclass[x=5]{Horse}{
+        tailLength : float }{} \umlemptyclass[x=2.5,y=-1]{Centaur}
+
+      \umlinherit{Centaur}{Person} \umlinherit{Centaur}{Horse}
+    \end{tikzpicture}
+    ~~becomes
+  \end{onlyenv}
+
+\begin{lstlisting}[emph={public}]
+class Person {
+  string name;
+  Person(const string &n): name(n) {}
+};
+class Horse {
+  float tailLength;
+  Horse(float t): tailLength(t) {}
+};
+class Centaur: public Person, public Horse {
+  Centaur(const string &n, float t) : Person(n), Horse(t) {}
+};
+\end{lstlisting}
+
+  \begin{onlyenv}<2>
+    \begin{itemize}
+    \item multiple base classes are separated by commas
+    \item each carries a visibility (public, protected or private)
+    \item class has member variables and functions of both base
+      classes
+    \end{itemize}
+  \end{onlyenv}
 \end{frame}
 
 \begin{frame}
   \frametitle{The diamond problem}
-  
+
+  \begin{center}
+    \tikzumlset{font=\tiny}
+    \begin{tikzpicture}
+      \umlclass[x=3]{Person}{
+        name: string
+      }{
+        getNameAndTitle() : string
+      }
+      \umlclass[y=-2.5]{Student}{}{
+        \umlvirt{getNameAndTitle() : string}
+      }
+      \umlclass[y=-2.5,x=6]{Teacher}{}{
+        \umlvirt{getNameAndTitle() : string}
+      }
+      \umlclass[y=-5,x=3]{StudyingTeacher}{}{
+        \umlvirt{getNameAndTitle() : string}
+      }
+      
+      \umlinherit{StudyingTeacher}{Teacher}
+      \umlinherit{StudyingTeacher}{Student}
+      \umlinherit{Teacher}{Person}
+      \umlinherit{Student}{Person}
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{The diamond problem --- solution in C++}
+
+\begin{lstlisting}[basicstyle={\ttfamily\tiny},emph={virtual}]
+class Person {
+protected: string name;
+public:    Person(const string &_name): name(_name) { }
+           virtual string getNameAndTitle();
+};
+class Teacher: virtual public Person {
+public:    Teacher(const string &_name): Person(_name) { }
+           virtual string getNameAndTitle();
+};
+class Student: virtual public Person {
+public:    Student(const string &_name): Person(_name) { }
+           virtual string getNameAndTitle();
+};
+class StudyingTeacher
+  : virtual public Teacher, virtual public Student {
+public:    StudyingTeacher(const string &n)
+             : Person(n), Teacher(n), Student(n) {}
+           virtual string getNameAndTitle();
+};
+\end{lstlisting}
+
+  \begin{itemize}
+  \item declare base classes virtual
+  \item requires also to initialize the common ancestor in the constructor
+  \item initializiation of ancestor in intermediate classes is skipped
+  \end{itemize}
 \end{frame}
 
 \end{document}
