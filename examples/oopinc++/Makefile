@@ -1,7 +1,12 @@
 CXXFLAGS=-O3 -g --std=c++0x -Wall
 
-members: members.cpp Integer.cpp
+default:
 
-static-members: static-members.cpp CountOccurance.cpp
+02-members: 02-members.cpp Integer.cpp
+	$(CXX) $^ -o $@
 
-lifetime: lifetime.cpp CountOccurance.cpp
+03-static-members: 03-static-members.cpp CountOccurance.cpp
+	$(CXX) $^ -o $@
+
+04-lifetime: 04-lifetime.cpp CountOccurance.cpp
+	$(CXX) $^ -o $@
