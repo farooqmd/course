@@ -1,4 +1,4 @@
-Time-stamp: <2013-02-19 12:34 olenz>
+Time-stamp: <2013-02-20 13:46:12 arnolda>
 
 Day 1
 -----
@@ -138,9 +138,8 @@ LECTURE 1: More C++ 1
 
 LECTURE 2: OOP in C++ 3
 * Const Correctness
-* Copy Constructor
 * Automatic type conversion
-* Inline definitions
+* Type casting
 
 Day 5
 -----
