@@ -138,8 +138,8 @@ LECTURE 1: More C++ 1
 
 LECTURE 2: OOP in C++ 3
 * Const Correctness
+* Type casting: static_cast, dynamic_cast, const_cast
 * Automatic type conversion
-* Type casting
 
 Day 5
 -----
