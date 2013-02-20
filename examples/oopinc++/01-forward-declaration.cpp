@@ -33,6 +33,8 @@ int main()
   Player player;
 
   AnotherPlayer anotherPlayer;
+
+  return 0;
 }
 
 
