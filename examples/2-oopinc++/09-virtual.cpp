@@ -18,31 +18,26 @@ public:
   virtual string virtualWhatAmI() { return whatAmI(); }
 };
 
+class WallTile: public FloorTile {
+public:
+  string whatAmI() { return "wall tile"; }
+  virtual string virtualWhatAmI() { return whatAmI(); }
+};
+
 void informMe(Tile &tile)
 {
   cout << "virtual it is a " << tile.virtualWhatAmI() << endl;
   cout << "but like this a " << tile.whatAmI() << endl;
 }
 
-/* two small classes that demonstrate that objects with
-   virtual Functions carry more information.
-   SimpleVirtual is larger in size than Simple with gcc. */
-class Simple {
-  int x;
-};
-class SimpleVirtual {
-  int x;
-  virtual void virtualFunction();
-};
-
 int main() {
   Tile tile;
   FloorTile floorTile;
+  WallTile wallTile;
+
   informMe(tile);
   informMe(floorTile);
-
-  cout << "size of Simple: " << sizeof(Simple) << endl;
-  cout << "size of SimpleVirtual" << sizeof(SimpleVirtual) << endl;
+  informMe(wallTile);
 
   return 0;
 }

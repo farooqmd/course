@@ -834,4 +834,341 @@ public:    StudyingTeacher(const string &n)
   \end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{constant objects --- const}
+  \begin{onlyenv}<1>
+\begin{lstlisting}[emph={const}]
+const int theNumber = 42;
+const char *nonConstantPtrToConstChar = "Hase";
+nonConstantPtrToConstChar = "Igel";
+const char * const constantPtrToConstChar = "Hase";
+const QPointF constantPoint(2, 3);
+\end{lstlisting}
+
+    \begin{itemize}
+    \item \lstinline!const! objects cannot be changed
+    \item can be of any type (plain old data type, pointer, struct or class)
+    \item the compiler generates code based on this assumption!
+    \item be careful with pointers
+      \begin{itemize}
+      \item \lstinline!const! \emph{on the left} binds to the data
+        type pointed to ---\\
+        you cannot change the data, but point to different data
+      \item \lstinline!const! \emph{on the right} makes the address
+        pointed to unchangeable
+      \end{itemize}
+    \item C-string constants are of type \lstinline!const char!,
+      i.e. cannot be changed after compilation
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<2>
+\begin{lstlisting}[emph={const}]
+class Class {
+public:
+  const int myInitialValue;
+  Class(int n): myInitialValue(n) { }
+};
+\end{lstlisting}
+
+    \begin{itemize}
+    \item classes can define constant member variables
+    \item even if public, they cannot be changed by any object
+    \item they have to be initialized in the initializer list of the
+      constructor(s) (after the colon)
+    \end{itemize}
+
+  \end{onlyenv}
+
+  \begin{onlyenv}<3>
+\begin{lstlisting}[emph={const}]
+class Class {
+  int myNumber;
+public:
+  Class(int n) { myNumber = n; }
+  void setMyNumber(int i) { myNumber = i; }
+  int getMyNumber()  const { return myNumber; }
+};
+\end{lstlisting}
+    
+    \begin{itemize}
+    \item classes need to be \alert{const-aware} to make use of constant objects
+    \item on constant objects, only member functions declared
+      \lstinline!const! can be called\\
+      \emph{here, only \lstinline!getMyNumber!, but not \lstinline!setMyNumber!}
+    \item \lstinline!const! functions can also called on non-const objects
+    \item \lstinline!const! member functions cannot change
+      any member variables
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<4>
+\begin{lstlisting}[emph={const}]
+class Class {
+public:
+  void test()       { cout << "nonconst" << endl; }
+  void test() const { cout << "const" << endl; }
+};
+Class changeable(1);
+const Class unchangeable(2);
+\end{lstlisting}
+
+    \begin{itemize}
+    \item \lstinline!const! is part of the \emph{signature}
+    \item \lstinline!const! and non-\lstinline!const! versions of the
+      same function can exist
+    \item here, \lstinline!changeable.test()! will output
+      ``nonconst'', \lstinline!unchangeable.test()! will output
+      ``const''
+    \item return values can differ (used frequently in STL)
+\begin{lstlisting}
+class vector {
+  iterator       begin();
+  const_iterator begin() const;
+\end{lstlisting}
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<5>
+    \begin{block}{Pros}
+      \vspace{-\bigskipamount}
+      \begin{itemize}
+      \item const-aware programs are less error-prone
+      \item functions that should not change anything cannot do so
+      \item allows the compiler to optimize more aggressively
+      \item if writing libraries, const-awareness is necessary for
+        others to be able to program const-aware
+      \end{itemize}
+    \end{block}
+
+    \begin{block}{Cons}
+      \vspace{-\bigskipamount}
+      \begin{itemize}
+      \item sometimes difficult to say whether you need to change an
+        object (a calls b calls c ...)
+      \item leads often to code duplication
+      \item vector e.g. needs const and non-const iterators, which
+        essentially do the same
+      \item templates reduce programming overhead, but not
+        code size
+      \end{itemize}
+    \end{block}
+  \end{onlyenv}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{\lstinline!dynamic_cast! and \lstinline!static_cast!}
+
+  \begin{onlyenv}<1>
+\begin{lstlisting}[emph={static_cast}]
+class Tile {
+
+};
+class WallTile: public Tile { };
+
+int main() {
+  Tile *tile = new Tile;
+  WallTile *wall = new WallTile;
+  Tile *tilePtr = static_cast<Tile *>(wall);
+  WallTile *wallPtr = static_cast<WallTile *>(tile);
+}
+\end{lstlisting}
+    \begin{itemize}
+    \item \lstinline!static_cast! on class pointers only checks
+      compatibility (target class should be super or derived class)
+    \item ends badly if a base object gets cast to a derived object
+    \item here, \lstinline!wallPtr! should not be used!
+    \item still better than C-like casting, which \alert{you shall not use!}
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<2>
+\begin{lstlisting}[emph={dynamic_cast}]
+class Tile {
+
+};
+class WallTile: public Tile { };
+
+int main() {
+  Tile *tile = new Tile;
+  WallTile *wall = new WallTile;
+  Tile *tilePtr = dynamic_cast<Tile *>(wall);
+  WallTile *wallPtr = dynamic_cast<WallTile *>(tile);
+}
+\end{lstlisting}
+    \begin{itemize}
+    \item \lstinline!dynamic_cast! checks full compatibility
+    \item here, the cast to \lstinline!WallTile! for
+      \lstinline!wallPtr! causes a compiler error
+    \item without polymorphism only casting to base classes possible
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<3>
+\begin{lstlisting}[emph={dynamic_cast,makeMePolymorph}]
+class Tile {
+  virtual void makeMePolymorph() {};
+};
+class WallTile: public Tile { };
+
+int main() {
+  Tile *tile = new Tile;
+  WallTile *wall = new WallTile;
+  Tile *tilePtr = dynamic_cast<Tile *>(wall);
+  WallTile *wallPtr = dynamic_cast<WallTile *>(tile);
+  if (wallPtr) use(wallPtr);
+}
+\end{lstlisting}
+    \begin{itemize}
+    \item on polymorphic classes (with at least one virtual function)
+      \lstinline!dynamic_cast! returns 0 if the cast is impossible
+    \item here, the cast to \lstinline!WallTile! for
+      \lstinline!wallPtr! is syntactically ok
+    \item but \lstinline!wallPtr! will be 0
+    \end{itemize}
+  \end{onlyenv}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Example of using \lstinline!dynamic_cast!}
+\begin{lstlisting}
+for (auto it : content->items()) {
+  QGraphicsTextItem *item =
+    dynamic_cast<QGraphicsTextItem *>(it);
+  if (item)
+    item->setFont(QFont("Helvetica"));
+}
+\end{lstlisting}
+
+  \begin{itemize}
+  \item working with lists of different items (e.g. \lstinline!QGraphicsScene!)
+  \item all elements are pointers to a common base class (here:
+    \lstinline!QGraphicsItem!)
+  \item for each item, you can check whether it is e.g. a
+    \lstinline!QGraphicsTextItem! and then change the font
+  \end{itemize}  
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{const -- non-const conversion: \lstinline!const_cast!}
+
+\begin{lstlisting}
+const char *unchangeable;
+char *changeable =
+          const_cast<char *>(unchangeable);
+
+char *changeable2;
+const char *unchangeable2 =
+          const_cast<const char *>(changeable2);
+\end{lstlisting}
+
+  \begin{itemize}
+  \item \lstinline!const_cast! converts between const and non-const variables
+  \item if \lstinline!unchangeable! points to a true C-string, writing
+    to \lstinline!changeable! will still cause a segmentation fault
+  \item only use: interfacing with C-libraries that are not const-aware
+  \item you need to know that the function doesn't change anything
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Automatic type conversion}
+
+  \begin{onlyenv}<1>
+\begin{lstlisting}
+class String {
+  string value;
+public:
+  String(const string &val): value(val) {}
+};
+int main()
+{
+  String s("Hallo");
+}
+\end{lstlisting}
+
+    \begin{itemize}
+    \item this code works due to \alert{automatic type conversion}
+    \item compiler sees that String's constructor takes a
+      \lstinline!string! instance
+    \item it tries to convert the \lstinline!const char *! to a string
+      using any string's constructors
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<2>
+\begin{lstlisting}
+class MyString {
+public:
+  MyString(const char *val);
+};
+class User {
+public:
+  User(MyString bla);
+  User(string bla);
+};
+int main() {
+  User user("Hallo");
+}
+\end{lstlisting}
+
+    \begin{itemize}
+    \item creating \lstinline!user! fails since the conversion is
+      \alert{ambigous}
+    \item the intermediate class could equally be \lstinline!MyString!
+      or \lstinline!string!
+    \item both are accepted by the User class
+    \item both can be constructed from \lstinline!const char *!
+    \end{itemize}
+  \end{onlyenv}
+
+  \begin{onlyenv}<3>
+\begin{lstlisting}[emph={explicit}]
+class MyString {
+public:
+  explicit MyString(const char *val);
+};
+class User {
+public:
+  User(MyString bla);
+  User(string bla);
+};
+int main() {
+  User user("Hallo");
+  User user2(MyString("Welt"));
+}
+\end{lstlisting}
+
+    \begin{itemize}
+    \item \lstinline!explicit! excludes constructors from
+      consideration for implicit conversion
+    \item you can use them by explicitely (!) calling the constructor
+    \item solves the ambiguity
+    \end{itemize}
+  \end{onlyenv}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{The \lstinline!auto! data type}
+
+\begin{lstlisting}
+void print(const vector<int> &v) {
+  for (auto value: v) 
+    cout << value << endl;
+}
+const auto theNumber = 5;
+\end{lstlisting}
+
+  \begin{itemize}
+  \item C++11 adds the data type \lstinline!auto!
+  \item determines the data type from the right hand sides datatype
+  \item works if the right hand side has a unique type
+    \begin{itemize}
+    \item constants and other variables
+    \item return values of functions (return value cannot be overloaded!)
+    \end{itemize}
+  \item in particular useful with range-based for (see STL, Olaf)
+  \end{itemize}
+\end{frame}
 \end{document}
