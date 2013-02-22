@@ -1,9 +1,10 @@
 #include <iostream>
+#include <string>
 #include <vector>
 using namespace std;
 
-template<class STLVectorClass>
-void printIndexedTable(const STLVectorClass &vec)
+template<class RangedContainer>
+void printIndexedTable(const RangedContainer &vec)
 {
   cout << "\\begin{tabular}{r|l}" << endl;
   int i = 0;
@@ -33,8 +34,19 @@ void float_example()
   printIndexedTable(vecNums);
 }
 
+void string_example()
+{
+  vector< string > vecNums(10);
+  // fill the vectors with some numbers
+  for (unsigned int i = 0; i < vecNums.size(); ++i) {
+    vecNums[i] = "Hase";
+  }
+  printIndexedTable<vector<string>>(vecNums);
+}
+
 int main()
 {
   int_example();
   float_example();
+  string_example();
 }

@@ -16,7 +16,7 @@ public:
   
   // classes can contain types and classes
   typedef T *iterator;
-  typedef const T*const_iterator;
+  typedef const T *const_iterator;
 
   iterator begin() { return data; }
   iterator end()   { return data + size; }
