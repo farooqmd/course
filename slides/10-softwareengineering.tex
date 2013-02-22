@@ -2,13 +2,17 @@
 
 \lstset{language=C++}
 
+\usepackage{xspace}
+\newcommand{\ie}{\textit{i.\thinspace e.}\xspace}
+\newcommand{\eg}{\textit{e.\thinspace g.}\xspace}
+
 \begin{document}
 
 \graphicspath{{figures/}}
 
-\title[Software Engineering]{\Large Software Engineering}
+\title[Some Hints on Software Development]{\Large Some Hints on Software Development}
 
-\author[A. Arnold and O. Lenz]{Axel Arnold \and Olaf Lenz} 
+\author[O. Lenz]{Olaf Lenz} 
 \institute{Institut für Computerphysik\\Universit\"at Stuttgart}
 \date{February 18-22, 2013}
 
@@ -21,14 +25,74 @@
 \begin{frame}
   \frametitle{Outline}
   \begin{itemize}
-  \item Software Development Models
-  \item Waterfall Model
-  \item Modern SE
+  \item Test Driven Development
+  \item Design Patterns
+  \item Anti-patterns
+  \item Coding Conventions for C++
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Test Driven Development}
+  \begin{itemize}
+  \item Idea: \emph{first} write tests for a \emph{unit} (\eg class,
+    function or module), \emph{then} implement it
+  \item Shows what interface you really need
+  \item Can test whether it works already during development
+  \item The tests also serve as a \emph{specification}
+  \item Useful tool for TDD: \emph{Unit testing framework}
+  \item Allows to easily write tests for classes
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Design Patterns}
+  \begin{itemize}
+  \item Gamma, Helm, Johnson, Vlissides: ``\textit{Design Patterns}'',
+    Addison Wesley 1995 (``Gang of Four'')
+  \item Describe common problems in OO design and an object pattern
+    for their solution
+  \item Examples
     \begin{itemize}
-    \item Design Patterns
-    \item "Agile" Development
-    \item Extreme Programming
+    \item Composite
+    \item Decorator
+    \item Observer
     \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Anti-patterns}
+  \begin{itemize}
+  \item Patterns of OO design that frequently occur but that are to be avoided
+  \item Examples
+    \begin{itemize}
+    \item \emph{God object} (or \emph{Monster object}): One huge object that
+      does everything
+    \item \emph{Alien spider}: Many objects that all are interacting with all
+      others
+    \item \emph{Sequential coupling}: An object where it is important
+      to call the methods in a specific order
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Coding Conventions in C++}
+  \begin{itemize}
+  \item Classes are capitalized (\eg \lstinline!Player!)
+  \item Methods and variables (class instances) use a lower-case first
+    letter (\eg \lstinline!doSomething();!, \lstinline!Player player;!)
+  \item Method names should start with a verb (\eg
+    \lstinline!player.doNextMove()!)
+    \begin{itemize}
+    \item Example: \lstinline!game.over()!: Is this used to test
+      whether the game is over, or to set the game to being over?
+    \item Better: \lstinline!game.isOver()! or
+      \lstinline!game.endGame()!
+    \end{itemize}
+
+
   \end{itemize}
 \end{frame}
 
