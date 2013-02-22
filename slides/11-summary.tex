@@ -1,0 +1,106 @@
+\documentclass{slides}
+
+\lstset{language=C++}
+
+\usepackage{xspace}
+\newcommand{\ie}{\textit{i.\thinspace e.}\xspace}
+\newcommand{\eg}{\textit{e.\thinspace g.}\xspace}
+
+\begin{document}
+
+\graphicspath{{figures/}}
+
+\title[Summary]{\Large Summary}
+
+\author[O. Lenz and A. Arnold]{Olaf Lenz \and Axel Arnold} 
+\institute{Institut für Computerphysik\\Universit\"at Stuttgart}
+\date{February 18-22, 2013}
+
+\setbeamertemplate{footline}{}
+\begin{frame}
+  \titlepage
+\end {frame}
+\setbeamertemplate{footline}[icp]
+
+\begin{frame}
+  \frametitle{Pros of C++}
+  \begin{itemize}
+  \item General purpose \emph{jack-of-all-trades}
+    \begin{itemize}
+    \item Allows both low and high level programming
+    \item Applicable in all possible scenarios
+    \end{itemize}
+  \item Allows for maximal performance
+  \item Reasonably well-known by many people
+  \item Open and free language, not owned/controlled by a particular
+    company
+  \item Can be used to ``pimp up'' or simplify C-code
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Cons of C++}
+  \begin{itemize}
+  \item Very complex language
+    \begin{itemize}
+    \item Const-correctness, Templates
+    \item Many different ways to do \emph{almost} the same
+    \item Unnecessary cruft from C
+    \item Nobody really knows all details of the language
+    \end{itemize}
+  \item Slow compilation
+  \item Limited portability: Various dialects exist
+  \item Maximal performance is hard to obtain
+  \item Not-too-powerful standard library
+  \item More: ``FQA'' (Frequently Questioned Answers) \url{http://yosefk.com/c++fqa/}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Possible Alternatives}
+  \begin{itemize}
+  \item Java/C\#
+    \begin{itemize}
+    \item Pro: Significantly simpler
+    \item Con: Not compiled languages, maybe less performance\\
+      (\eg for number crunching), controlled by companies (free
+      open-source copilers are available)
+    \end{itemize}
+  \item D
+    \begin{itemize}
+    \item \url{http://dlang.org/}
+    \item Pro: No C cruft, otherwise comparable to C++
+    \item Con: Not as mature and well-known, controlled by a company
+      (free open-source compilers are available)
+    \end{itemize}
+  \item Combine different languages
+    \begin{itemize}
+    \item \eg Python for high level programming, C/C++ for performance
+    \item Pro: Use languages optimized for the application domain
+    \item Con: Two languages to learn, possible interoperability
+      issues
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Summary}
+  \begin{itemize}
+  \item C++ is a powerful, general purpose language
+  \item \dots with certain issues
+  \item C++ is compiled and \emph{can} be very efficient (when used
+    correctly)
+  \item C++ is a significant improvement over C
+  \item C++11 is a significant improvement over C++98
+  \item Own experience
+    \begin{itemize}
+    \item C++ might be useful for many projects
+    \item If you use C++, better do not use \emph{all} language
+      features to the greatest extent (\eg template metaprogramming)
+    \item Maybe a combination of languages is often a better
+      alternative?
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\end{document}
