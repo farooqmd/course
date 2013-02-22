@@ -7,9 +7,9 @@ class String {
 public:
   /* this we only need for constructs like String x = "Hallo".
      Otherwise, the conversion from const string & is enough */
-  String(const char *val): value(val) {
-    cout << "const char * constructor" << endl;
-  }
+  //String(const char *val): value(val) {
+  //  cout << "const char * constructor" << endl;
+  //}
   String(const string &val): value(val)  {
     cout << "const string & constructor" << endl;
   }
