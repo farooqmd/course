@@ -144,35 +144,40 @@ class Player {
   \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]
+\begin{frame}[squeeze,fragile]
   \frametitle{Definition of member functions}
 
-  \begin{onlyenv}<1-2>
-\begin{lstlisting}[title=Player.hpp]
+  \begin{onlyenv}<1-3>
+\begin{lstlisting}[title={\footnotesize\bfseries Player.hpp}]
 class Player {
+  Piece *currentPiece;
   void doNextMove(Piece &piece, Event ev, string &msg);
   int getPlayerNum() { return playerNum; }
 };
 \end{lstlisting}
 
-\begin{lstlisting}[title=Player.cpp]
+\begin{lstlisting}[title={\footnotesize\bfseries Player.cpp}]
 void
 Player::doNextMove(Piece &piece, Event ev, string &msg) {
+  currentPiece = &piece;
   piece.tryStep(ev, msg);
 }
 \end{lstlisting}
   \end{onlyenv}
-  \begin{onlyenv}<3-4>
-\begin{lstlisting}[title=Player.hpp]
+
+  \begin{onlyenv}<4-5>
+\begin{lstlisting}[title={\footnotesize\bfseries Player.hpp}]
 class Player {
+  Piece *currentPiece;
   void doNextMove(Piece *piece, Event ev, string &msg);
   int getPlayerNum() { return playerNum; }
 };
 \end{lstlisting}
 
-\begin{lstlisting}[title=Player.cpp]
+\begin{lstlisting}[title={\footnotesize\bfseries Player.cpp}]
 void
 Player::doNextMove(Piece *piece, Event ev, string &msg) {
+  currentPiece = *piece;
   piece->tryStep(ev, msg);
 }
 \end{lstlisting}
@@ -188,13 +193,20 @@ Player::doNextMove(Piece *piece, Event ev, string &msg) {
 
   \begin{onlyenv}<2>
     \begin{itemize}
+    \item all class members are in the scope of a member function
+    \item member variables and function can be used like global
+      functions/variables
+    \end{itemize}
+  \end{onlyenv}
+  \begin{onlyenv}<3>
+    \begin{itemize}
     \item member functions are called by ``object.function()''
     \item object name and member name are separated by ``.''
     \item same holds for member variables
     \end{itemize}
   \end{onlyenv}
 
-  \begin{onlyenv}<3>
+  \begin{onlyenv}<4>
     \begin{itemize}
     \item with a pointer to an object, you can use ``->'' like in C
     \item ``(*pointer).function()'' is the same as ``pointer->function()''
@@ -202,7 +214,7 @@ Player::doNextMove(Piece *piece, Event ev, string &msg) {
     \end{itemize}
   \end{onlyenv}
 
-  \begin{onlyenv}<4>
+  \begin{onlyenv}<5>
     \begin{itemize}
     \item class definitions are usually placed in header file ``\textit{class}.hpp''
     \item member function definitions in separate cpp-file ``\textit{class}.cpp''

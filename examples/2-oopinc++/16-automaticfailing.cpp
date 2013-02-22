@@ -7,7 +7,7 @@ class MyString {
 public:
   /* putting "explicit" here forbids the implicit conversion
      and thus solves the ambiguity */
-  MyString(const char *val): value(val) {}
+  explicit MyString(const char *val): value(val) {}
 
   const string &getContent() {return value; }
 };

@@ -6,7 +6,7 @@
 
 \graphicspath{{figures/}}
 
-\title[Templates and the STL]{\Large Templates and the STL}
+\title[Templates]{\Large Templates}
 
 \author[A. Arnold and O. Lenz]{Axel Arnold \and Olaf Lenz} 
 \institute{Institut für Computerphysik\\Universit\"at Stuttgart}
@@ -18,12 +18,106 @@
 \end {frame}
 \setbeamertemplate{footline}[icp]
 
-\begin{frame}
-  \frametitle{Outline}
+\begin{frame}[fragile]
+  \frametitle{Template functions}
+\begin{lstlisting}[emph={template}]
+template<typename STLVectorClass>
+void print(const STLVectorClass &vec) {
+  for (auto val: vec) {
+    cout << val << endl;
+  }
+}
+\end{lstlisting}
+
   \begin{itemize}
-  \item Templates
-  \item STL
+  \item templates are regular functions or classes pretented by the
+    \lstinline!template! keyword
+  \item implement compile time polymorphism
+  \item template parameters can be types or constants
+  \item for each data type used, a seperate function is compiled
+  \item definitions need to be in the header files
   \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Template classes}
+
+\begin{lstlisting}[emph={template}]
+template<typename T> class Vector {
+  T *data;
+  int size;
+public:
+  Vector(int len);
+  int getSize() const { return size; }
+
+  T       &operator[](int i)       { return data[i]; }
+  const T &operator[](int i) const { return data[i]; }
+};
+template<typename T> Vector<T>::Vector(int len): data(0)
+{ allocate(len); }
+\end{lstlisting}
+
+  \begin{itemize}
+  \item template classes the same
+  \item compare STL vector<type> (but \emph{way} more complex)
+  \item using templates as type is possible, e.g.
+    \lstinline!Vector<vector<int> >!
+  \item \lstinline!Vector<vector<int>>! does \emph{not} work (missing space)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Multiple parameters, default values}
+
+\begin{lstlisting}
+template<typename T, int size = 3>
+class ValArray {
+  T data[size];
+public:
+  int getSize() const { return size; }
+
+  T       &operator[](int i)       { return data[i]; }
+  const T &operator[](int i) const { return data[i]; }
+};
+\end{lstlisting}
+
+  \begin{onlyenv}<1>
+    \begin{itemize}
+    \item templates can have multiple parameters,\\
+      here second is of type \lstinline!int!
+    \item second parameter has default value 3
+    \item default value can be derived from first parameter\\
+      \lstinline!size = DefaultArraySize<T>!, for example
+    \item commonly used in the STL, \lstinline!allocator<T>!
+    \end{itemize}
+  \end{onlyenv}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Class and type members}
+
+\begin{lstlisting}[emph={typedef}]
+template<typename T, int size = 3>
+class ValArray {
+  T data[size];
+public:
+  typedef T *iterator;
+  typedef const T*const_iterator;
+  iterator begin() { return data; }
+  iterator end()   { return data + size; }
+  const_iterator begin() const { return data; }
+  const_iterator end()   const { return data + size; }
+};
+\end{lstlisting}
+
+  \begin{itemize}
+  \item classes can contain type definitions or classes
+  \item useful for template classes that derive types
+  \item here: iterator types
+  \item use for example as \lstinline!ValArray<int>::iterator it!
+  \item \lstinline!for(auto v : valArrayInstance)! works with this interface!
+  \end{itemize}
+
 \end{frame}
 
 \end{document}
