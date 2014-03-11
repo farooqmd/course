@@ -1,4 +1,4 @@
-Time-stamp: <2013-02-20 13:46:12 arnolda>
+Time-stamp: <2014-03-11 18:17 olenz>
 
 Day 1
 -----
@@ -7,31 +7,15 @@ LECTURE 1: Procedural C/C++ 1
 * Fundamental syntax
   * Blocks, comments, tokens
   * if, do while, for
-* Variable declaration
+* Variable declarations
 * Basic types: int, char, bool
 * References
 * Functions
   * Return values
   * Call-by-value, call-by-reference
+* Struct/Class
 
-* Debugging
-* Source code management
-
-LECTURE 2: Object-oriented Design
-* Basic ideas, UML
-* Class, Object/Instance, Field, Method
-* Class Hierarchy, Inheritance
-
-EXERCISES
-* g++
-* gdb
-* git
-* Introduce project
-* Modelling
-
-Day 2
------
-LECTURE 1: Compilation and Data types
+LECTURE 2: Compilation/Libraries
 * Compilation
   * Declaration vs. Definition
   * Header/Source files
@@ -40,30 +24,22 @@ LECTURE 1: Compilation and Data types
   * Compilation units
   * Libraries
   * qmake/make
-* Data types
-  * Pointers
-  * Scoping
-  * Typecasts
-  * Static
-  * structs (unions)
-  * Dynamic data structures
-    * Memory Layout: Stack vs. Heap
-    * delete, new
-    * Pointer arithmetics
-    * Arrays
-  * Example: linked lists
 
-LECTURE 2: OOP in C++ 1
-* Example: multidim valarray class
-* Declaration vs. Definition of classes
-* Constructor, Destructor
-* Default constructor
-* Encapsulation: private, public
-* friend
+LECTURE 3: Object-oriented Design
+* Basic ideas, UML
+* Class, Object/Instance, Field, Method
+* Class Hierarchy, Inheritance
 
-Day 3 
+EXERCISES
+* Compilation
+* Simple program: ZeroMQ
+* Introduce project
+* Modelling
+
+Day 2
 -----
 LECTURE 1: A Tour of the Standard C++ Library
+* Using templates
 * Containers
   * Data structures
     * List-like
@@ -119,6 +95,34 @@ LECTURE 1: A Tour of the Standard C++ Library
 * Functional
 * ...more
 
+LECTURE 2: OOP in C++ 1
+* Example: multidim valarray class
+* Declaration vs. Definition of classes
+* Constructor, Destructor
+* Default constructor
+* Encapsulation: private, public
+* friend
+
+TUTORIAL:
+* Source code management
+
+Day 3 
+-----
+LECTURE 1: Fundamental data types in C
+* Data types
+  * Pointers
+  * Scoping
+  * Typecasts
+  * Static
+  * Structs (unions)
+  * Dynamic data structures
+    * Memory Layout: Stack vs. Heap
+    * delete, new
+    * Pointer arithmetics
+    * Arrays
+  * Example: linked lists
+* Debugging
+
 LECTURE 2: OOP in C++ 2
 * Function overloading
 * Operator overloading
@@ -144,7 +148,7 @@ LECTURE 2: OOP in C++ 3
 Day 5
 -----
 LECTURE 1: More C++ 2
-* Templates
+* Implementing templates
 
 LECTURE 2: Software Development
 * Software Development Models
