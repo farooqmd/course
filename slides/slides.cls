@@ -87,10 +87,6 @@
 
 \newcommand{\textrightarrow}{\ensuremath{\rightarrow}}
 
-\newcommand{\densemath}{%
-  \setlength{\abovedisplayskip}{0.3em}
-  \setlength{\belowdisplayskip}{0.3em}}
-
 % length to skip at the beginning of a block, if a itemize follows
 % otherwise, the gap is optically too big.
 \newlength{\biskip}

@@ -1,16 +1,26 @@
+\RequirePackage{ifthen}
+\RequirePackage{ragged2e}
+\RequirePackage{tikz}
+\usetikzlibrary{shadows}
+\RequirePackage{tcolorbox}
+\tcbuselibrary{skins}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 \newcommand{\alerted}{\usebeamercolor[fg]{alerted text}}
+%
 \newcommand{\alertedmath}[1]{\alerted\mathbf{#1}}
-
-\newcommand{\unskipbeameritemize}{\global\let\beamer@firstlineitemizeunskip=\relax}
-
+%
 \newenvironment{alertbox}[1]{%
+  \normalsize\usebeamerfont*{normal text}%
+  \usebeamerfont{block body alerted}%
+  \usebeamercolor{block body alerted}%
   \begin{center}%
-    \begin{minipage}{#1}
-      \begin{alertblock}{}
-        \centering} {
-      \end{alertblock}\end{minipage}\end{center}
-}
-
+  \begin{tcolorbox}[skin=beamer,width=#1,colframe=bg,colback=bg,coltext=fg]%
+    \noindent\ignorespaces\centering%
+  }{%
+  \end{tcolorbox}\end{center}}
+%
 \newenvironment{alertblockwidth}[2]{%
   \begin{center}%
     \begin{minipage}{#2}
@@ -18,3 +28,37 @@
       } {
       \end{alertblock}\end{minipage}\end{center}
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newlength{\taggedpictureheight}
+\newcommand{\taggedpicture}[3][]{%
+  \ifthenelse{\equal{#1}{}}{%
+    \setlength{\taggedpictureheight}{0.33\textheight}%
+  }{%
+    \setlength{\taggedpictureheight}{#1}%
+  }%
+  \includegraphics[height=\taggedpictureheight]{#2}%
+  ~\rotatebox{90}{%
+    \begin{minipage}{\taggedpictureheight}%
+      \scriptsize\selectfont%
+      \textcolor{CDgrey2}{\RaggedRight #3}%
+    \end{minipage}%
+  }%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\figcaption}[1]{%
+\scriptsize \color{CDgrey2} #1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\sidearticle}[1]{%
+  \begin{tikzpicture}[overlay,x=\textwidth,y=\baselineskip]
+    \draw(1,1) node[anchor=north east, rotate=90] {%
+      \textcolor{CDgrey3}{\tiny #1}} ;
+  \end{tikzpicture}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\densemath}{%
+  \setlength{\abovedisplayskip}{0.3em}
+  \setlength{\belowdisplayskip}{0.3em}}
