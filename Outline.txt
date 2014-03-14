@@ -1,4 +1,4 @@
-Time-stamp: <2014-03-11 18:17 olenz>
+Time-stamp: <2014-03-12 18:36 olenz>
 
 Day 1
 -----
@@ -8,33 +8,31 @@ LECTURE 1: Procedural C/C++ 1
   * Blocks, comments, tokens
   * if, do while, for
 * Variable declarations
-* Basic types: int, char, bool
+* Basic types: int, char, bool, string
 * References
 * Functions
   * Return values
   * Call-by-value, call-by-reference
 * Struct/Class
+* Compilation slides
 
-LECTURE 2: Compilation/Libraries
-* Compilation
-  * Declaration vs. Definition
-  * Header/Source files
-  * Definition guards
-  * Preprocessor
-  * Compilation units
-  * Libraries
-  * qmake/make
-
-LECTURE 3: Object-oriented Design
+LECTURE 2: Object-oriented Design
 * Basic ideas, UML
 * Class, Object/Instance, Field, Method
 * Class Hierarchy, Inheritance
 
-EXERCISES
-* Compilation
-* Simple program: ZeroMQ
-* Introduce project
-* Modelling
+TUTORIAL: Compilation/Libraries
+* Declaration vs. Definition
+* Header/Source files
+* Definition guards
+* Preprocessor
+* Compilation units
+* Libraries
+* qmake
+
+TUTORIAL: Simple program: ZeroMQ
+
+TUTORIAL: Project intro and modelling
 
 Day 2
 -----
@@ -103,8 +101,10 @@ LECTURE 2: OOP in C++ 1
 * Encapsulation: private, public
 * friend
 
-TUTORIAL:
-* Source code management
+LECTURE 3: TDD
+* gtest
+
+TUTORIAL: Git
 
 Day 3 
 -----
