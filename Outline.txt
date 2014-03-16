@@ -1,19 +1,19 @@
-Time-stamp: <2014-03-16 09:03 olenz>
+Time-stamp: <2014-03-16 11:24 olenz>
 
 Day 1
 -----
 LECTURE 1: Using C++
 * History of C++
-* Fundamental syntax
-  * Blocks, comments, tokens
-  * if, do while, for
+* Fundamental syntax: Blocks, comments, tokens
+* Basic types: int, char, bool
 * Variable declarations
-* Basic types: int, char, bool, string
-* References
+* if, do while, for
+* References/Pointers
 * Functions
   * Return values
   * Call-by-value, call-by-reference
-* Struct/Class
+* Scoping
+* String: an object, using an object
 * Compilation slides
 
 LECTURE 2: Object-oriented Design
@@ -100,15 +100,14 @@ LECTURE 2: OOP in C++
 * Encapsulation: private, public
 * friend
 
-LECTURE 3: TDD
+LECTURE 3: TDD in a Nutshell
 * gtest
 
 TUTORIAL: Git
 
 Day 3 
 -----
-LECTURE 1: Getting Closer to the Metal: Pointers and Stuff
-* Scoping
+LECTURE 1: The Magic of Pointers
 * Data types
   * Pointer arithmetics
   * Static
@@ -121,7 +120,7 @@ LECTURE 1: Getting Closer to the Metal: Pointers and Stuff
   * Example: linked lists
 * Debugging
 
-LECTURE 2: OOP in C++ 2
+LECTURE 2: OOP: Overloading, Inheritance and Polymorphism 
 * Function overloading
 * Operator overloading
 * Inheritance
