@@ -1,43 +1,29 @@
-#include <zmqpp/zmqpp.hpp>
-#include <string>
 #include <iostream>
+#include <string>
 
-int main(int argc, char *argv[]) {
-  if (argc < 2) return 2;
-  zmqpp::context context;
+using namespace std;
 
-  std::cout << "Waiting for incoming connection on " << argv[1] 
-            << "..." << std::endl;
-  zmqpp::socket pull_socket (context, zmqpp::socket_type::pull);
-  pull_socket.bind(argv[1]);
+void replace_all(string &haystack, 
+                 const string needle, 
+                 const string replacement) {
+  for (size_t pos = haystack.find(needle);
+       pos != string::npos; 
+       pos = haystack.find(needle, pos)) 
+    haystack.replace(pos, 2, replacement);
+}
 
-  std::cout << "Opening connection to " << argv[2] 
-            << "..." << std::endl;
-  zmqpp::socket push_socket (context, zmqpp::socket_type::push);
-  push_socket.connect(argv[2]);
+int main() {
+  string text = 
+    "$1 bottles of beer on the wall. $1 bottles of beer.\n"
+    "Take one down and pass it around, $2 bottles of beer.\n";
+  int amount = 99;
 
-  while (true) {
-    std::cout << "Waiting to receive message..." << std::endl;
-    
-    int number;
-    std::string text;
+  while (amount > 0) {
+    string s = text;
+    replace_all(s, "$1", to_string(amount));
+    amount--;
+    replace_all(s, "$2", to_string(amount));
 
-    {
-      zmqpp::message message;
-      pull_socket.receive(message);
-      message >> number >> text;
-    }
-
-    std::cout << "Received: \"" << number << text << "\"" << std::endl;
-    number--;
-
-    {
-      zmqpp::message message;
-      message << number << text;
-      std::cout << "Sending: \"" << number << text << "\"" << std::endl;
-      push_socket.send(message);
-    }
+    std::cout << s << std::endl;
   }
-
-  return 0;
 }

@@ -14,7 +14,7 @@
 
 \author[A. Arnold and O. Lenz]{Axel Arnold \and Olaf Lenz} 
 \institute{Institut für Computerphysik\\Universit\"at Stuttgart}
-\date{February 18-22, 2013}
+\date{March 17-21, 2014}
 
 \setbeamertemplate{footline}{}
 \begin{frame}
@@ -25,17 +25,16 @@
 \begin{frame}
   \frametitle{General Information}
   \begin{itemize}
-  \item „Fachübergreifende Schlüsselqualifikation, Kompetenzbereich 1“
+  \item ``Fachübergreifende Schlüsselqualifikation, Kompetenzbereich 1''
   \item 3 LP
   \item Requirement: Basic knowledge of programming\\ (C, FORTRAN \emph{or} Python)
   \item Lectures in the morning (9:15 - 12:30)
   \item Exercises in the afternoon (14:00 - 17:00)
     \begin{itemize}
-    \item Some small exercises
-    \item One project: „Finstere Flure“
-    \item Possibly a tournament on Friday
+    \item Mon: small exercises on Monday
+    \item Tue-Fri: Team project: Spies!
+    \item Possibly a contest on Friday
     \end{itemize}
-  \item We are open to suggestions
   \end{itemize}
 \end{frame}
 
@@ -44,28 +43,29 @@
   \begin{itemize}
   \item Day 1
     \begin{itemize}
-    \item The C in C++ I
-    \item Object-oriented design
+    \item Using C++
+    \item Object-Oriented Design
+    \item Compilation and Libraries (Tutorial)
     \end{itemize}
   \item Day 2
     \begin{itemize}
-    \item The C in C++ II
-    \item OO concepts in C++
+    \item A Tour of the Standard Library
+    \item OOP in C++
+    \item Test Driven Development in a Nutshell (Tutorial)
     \end{itemize}
   \item Day 3
     \begin{itemize}
-    \item Objects and encapsulation in C++
-    \item Inheritance and polymorphism in C++
+    \item Getting Closer to the Metal: Pointers and Stuff
+    \item OOP: Overloading, Inheritance and Polymorphism 
     \end{itemize}
     \item Day 4
       \begin{itemize}
       \item Exceptions and namespaces
-      \item Data type conversions in C++
+      \item OOP in C++ 2
       \end{itemize}
     \item Day 5
       \begin{itemize}
-      \item Templates and STL
-      \item Software development models
+      \item Templates
       \end{itemize}
   \end{itemize}
 \end{frame}
@@ -89,7 +89,6 @@
     (Addison-Wesley Professional; 4 edition, 2013)
     \begin{itemize}
     \item The reference for all things C++
-    \item Not yet out
     \item Includes new \textit{C++11} standard
     \item Not very good to \emph{learn} the language
     \end{itemize}
@@ -99,78 +98,123 @@
 \begin{frame}
   \frametitle{History of C}
   \begin{columns}[c,onlytextwidth]
-    \column{0.6\textwidth}
+    \column{0.7\textwidth}
     \begin{tabular}{r<{:}p{0.8\textwidth}}
       1969 -- 73 & Developed by D. M. Ritchie (based on ``B'')\\
-      1978 & ``\emph{The C Programming Language}'' by Kernighan und Ritchie (``K\&R-C'')\\
+      1978 & ``\emph{The C Programming Language}'' by Kernighan und Ritchie (``K\&R'')\\
       1989 & Standard ANSI C89 = ISO C90\\
       1999 & Standard ISO C99\\
       2011 & Standard ISO C11
     \end{tabular}
 
-    \column{0.3\textwidth}
-    \centering
-    \includegraphics[height=0.25\textheight]{ritchie}\\
-    {\small D. M. Ritchie\\1941 -- 2011}
-  \end{columns}
-  \vspace{0.5em}
-
   \begin{itemize}
   \item ``Procedural'' language
-  \item Nowadays used mainly for system and embedded programming
+  \item Nowadays used mainly for system and embedded programming, \eg
+    to implement
     \begin{itemize}
     \item Operating systems (\eg Unix, Windows)
     \item Other programming languages (\eg Python)
     \item \dots and in physics (only the young ones, the old ones use FORTRAN)
     \end{itemize}
-  \item In this course, we will not distinguish between C and C++
   \end{itemize}
+
+    \column{0.25\textwidth}
+    \centering
+    \includegraphics[height=0.25\textheight]{ritchie}\\
+    {\tiny D. M. Ritchie, 1941 -- 2011}
+    \vspace{\baselineskip}
+
+    \includegraphics[height=0.4\textheight]{kr-c}\\
+  \end{columns}
 \end{frame}
 
 \begin{frame}
-  \frametitle{History of Object-Oriented Programming and C++}
+  \frametitle{History of Object-Oriented Programming}
   \begin{columns}[c,onlytextwidth]
-    \column{0.5\textwidth}
+    \column{0.70\textwidth}
     \begin{tabular}{r<{:}p{0.9\textwidth}}
-      1967 & \textit{Simula 67}: first OO language by O. Dahl and K. Nygaard\\
+      1967 & \textit{Simula 67}: first object-oriented (OO) language
+      by O. Dahl and K. Nygaard\\
+      1971 & \textit{Smalltalk}: pure object-oriented language by
+      A. Kay\\
+    \end{tabular}
+    \begin{itemize}
+    \item Object-oriented programming is a \emph{programming paradigm},
+      \ie a way to think about and implement programs
+    \item OOP was a part of the solution to tackle the ``software
+      crisis'' of the 1970s
+    \item Most modern languages are OO (\eg Java, C\#, Python, \dots)
+    \end{itemize}
+
+    \column{0.25\textwidth}
+    \centering
+    \includegraphics[height=0.25\textheight]{dahl}\\
+    {\tiny O. Dahl, 1931 -- 2002}
+    \vspace{\baselineskip}
+
+    \includegraphics[height=0.25\textheight]{nygaard}\\
+    {\tiny K. Nygaard, 1926 -- 2002}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{History of C++}
+  \begin{columns}[c,onlytextwidth]
+    \column{0.6\textwidth}
+    \begin{tabular}{r<{:}p{0.9\textwidth}}
       1979 & B. Stroustrup develops ``C with classes'' based on Simula 67\\
       1983 & Language is renamed to \textbf{C++}\\
       1985 & ``\emph{The C++ Programming Language}'' by Stroustrup\\
       1998 & Standard ISO C++98\\
       2011 & Standard ISO C++11
     \end{tabular}
-
-    \column{0.5\textwidth}
+    
+    \column{0.25\textwidth}
     \centering
     \includegraphics[height=0.25\textheight]{stroustrup}\\
-    {\small B. Stroustrup, *1950}
+    {\tiny B. Stroustrup, *1950}
   \end{columns}
 
   \vspace{0.5em}
   \begin{itemize}
-  \item OOP was seen as a possible solution to the ``software crisis''
-  \item Most languages nowadays are object-oriented (\eg Java, C\#, Python, \dots)
   \item C++: C with Objects
-  \item C++11-standard is explicitly marked
+  \item A compiler for C++98 exists for virtually all operating
+    systems
+  \item \dots but not yet for \emph{C++11} (old machines with old OS)
+  \item $\Rightarrow$ C++11 is explicitly marked
   \end{itemize}
-
 \end{frame}
 
 \begin{frame}
   \frametitle{Features of C++}
-  C++ \dots
   \begin{description}
-  \item[\dots is compatible with C.] \emph{Was} important, now a problem.
-  \item[\dots is an imperative, procedural programming language.]
-  \item[\dots is an object-oriented programming language.]
-  \item[\dots is a compiled language.] The code is translated (\textit{compiled}) into machine code
-    by a \textit{compiler}.
-  \item[\dots can be used for low-level programming.] Hardware can be programmed pretty directly.
-  \item[\dots is (pretty much) portable.] A C++ compiler exists for virtually any platform. However,
-    the dialects vary.
-  \item[\dots has libraries for anything.] 
-  \item[\dots is used for almost anything.] Many application programs are implemented in C++.
+  \item[C++ is compatible with C.] \emph{Was} important, now a problem.
+  \item[C++ is an imperative, procedural programming language.]
+  \item[C++ is an object-oriented programming language.]
+  \item[C++ is a compiled language.] The code is translated
+    (\textit{compiled}) into machine code by a \textit{compiler}.
+  \item[C++ can be used for low-level programming.] Hardware can be
+    programmed pretty directly.
+  \item[C++ can be used for high-level programming.] Complex
+    programs and complex libraries can be implemented.
+  \item[C++ is (pretty much) portable.] A C++ compiler exists for
+    virtually any platform. However, the dialects vary.
+  \item[C++ has libraries for anything.] 
+  \item[C++ is used for almost anything.] Many application programs
+    are implemented in C++.
   \end{description}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Level of Abstraction}
+  \centering
+  \includegraphics[width=0.9\textwidth]{languages}
+\end{frame}
+
+\begin{frame}
+  \frametitle{On the Other Hand}
+  \centering
+  \includegraphics[width=0.9\textwidth]{complexity}
 \end{frame}
 
 \begin{frame}

@@ -10,23 +10,14 @@ int main(int argc, char *argv[]) {
   zmqpp::socket push_socket (context, zmqpp::socket_type::push);
   push_socket.connect(argv[1]);
 
-  std::cout << "Waiting for incoming connection on " << argv[2] 
-            << "..." << std::endl;
-  zmqpp::socket pull_socket (context, zmqpp::socket_type::pull);
-  pull_socket.bind(argv[2]);
+  {
+    zmqpp::message message;
+    message << 99 
+            << "$1 bottles of beer on the wall. $1 bottles of beer.\n"
+               "Take one down and pass it around, $2 bottles of beer.\n";
+    push_socket.send(message);
+  }
 
-  int number = 99;
-  std::string text = " bottles of beer on the wall. Take one down, pass it around. ";
-
-  zmqpp::message message;
-  message << number << text;
-  push_socket.send(message);
-  std::cout << "Sending: \"" << number << text << "\"" << std::endl;
-
-  pull_socket.receive(message);
-  message.get(number, 0);
-  message.get(text, 1);
-  std::cout << "Received: \"" << number << text << "\"" << std::endl;
-
+  std::cout << "Finished." << std::endl;
   return 0;
 }

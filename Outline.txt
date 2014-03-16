@@ -1,8 +1,8 @@
-Time-stamp: <2014-03-12 18:36 olenz>
+Time-stamp: <2014-03-16 09:03 olenz>
 
 Day 1
 -----
-LECTURE 1: Procedural C/C++ 1
+LECTURE 1: Using C++
 * History of C++
 * Fundamental syntax
   * Blocks, comments, tokens
@@ -21,7 +21,7 @@ LECTURE 2: Object-oriented Design
 * Class, Object/Instance, Field, Method
 * Class Hierarchy, Inheritance
 
-TUTORIAL: Compilation/Libraries
+TUTORIAL: Compilation and Libraries
 * Declaration vs. Definition
 * Header/Source files
 * Definition guards
@@ -31,12 +31,11 @@ TUTORIAL: Compilation/Libraries
 * qmake
 
 TUTORIAL: Simple program: ZeroMQ
-
 TUTORIAL: Project intro and modelling
 
 Day 2
 -----
-LECTURE 1: A Tour of the Standard C++ Library
+LECTURE 1: A Tour of the Standard Library
 * Using templates
 * Containers
   * Data structures
@@ -93,7 +92,7 @@ LECTURE 1: A Tour of the Standard C++ Library
 * Functional
 * ...more
 
-LECTURE 2: OOP in C++ 1
+LECTURE 2: OOP in C++
 * Example: multidim valarray class
 * Declaration vs. Definition of classes
 * Constructor, Destructor
@@ -108,11 +107,10 @@ TUTORIAL: Git
 
 Day 3 
 -----
-LECTURE 1: Fundamental data types in C
+LECTURE 1: Getting Closer to the Metal: Pointers and Stuff
+* Scoping
 * Data types
-  * Pointers
-  * Scoping
-  * Typecasts
+  * Pointer arithmetics
   * Static
   * Structs (unions)
   * Dynamic data structures
@@ -136,28 +134,17 @@ LECTURE 2: OOP in C++ 2
 
 Day 4
 -----
-LECTURE 1: More C++ 1
-* Exceptions
-* Namespaces
+LECTURE 1: Exceptions and Namespaces
 
-LECTURE 2: OOP in C++ 3
+LECTURE 2: OOP in C++
 * Const Correctness
 * Type casting: static_cast, dynamic_cast, const_cast
 * Automatic type conversion
 
 Day 5
 -----
-LECTURE 1: More C++ 2
+LECTURE 1: Templates
 * Implementing templates
-
-LECTURE 2: Software Development
-* Software Development Models
-  * Waterfall Model
-  * Modern SE
-    * Test Driven Programming
-    * Design Patterns
-    * "Agile" Development
-    * Extreme Programming
 
 Further topics
 --------------
