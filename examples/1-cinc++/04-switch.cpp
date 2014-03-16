@@ -9,7 +9,7 @@ int main() {
   int secret = 15;
 
   do {
-    cout << "Guess my number:" << endl;
+    cout << "Guess my number: ";
     cin >> guess;
     switch (guess) {
     case 1:

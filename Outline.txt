@@ -1,19 +1,19 @@
-Time-stamp: <2014-03-16 11:24 olenz>
+Time-stamp: <2014-03-16 16:59 olenz>
 
 Day 1
 -----
 LECTURE 1: Using C++
 * History of C++
 * Fundamental syntax: Blocks, comments, tokens
-* Basic types: int, char, bool
 * Variable declarations
-* if, do while, for
-* References/Pointers
-* Functions
-  * Return values
-  * Call-by-value, call-by-reference
-* Scoping
+* Basic types: int, float, bool
 * String: an object, using an object
+* if, do while, for
+* Functions
+* References
+* Call-by-value, call-by-reference
+* Scoping
+* Pointers
 * Compilation slides
 
 LECTURE 2: Object-oriented Design
@@ -36,7 +36,9 @@ TUTORIAL: Project intro and modelling
 Day 2
 -----
 LECTURE 1: A Tour of the Standard Library
+* auto
 * Using templates
+* I/O-streams
 * Containers
   * Data structures
     * List-like
@@ -109,13 +111,11 @@ Day 3
 -----
 LECTURE 1: The Magic of Pointers
 * Data types
-  * Pointer arithmetics
   * Static
-  * Structs (unions)
   * Dynamic data structures
     * Memory Layout: Stack vs. Heap
+    * Pointers and arithmetics
     * delete, new
-    * Pointer arithmetics
     * Arrays
   * Example: linked lists
 * Debugging
