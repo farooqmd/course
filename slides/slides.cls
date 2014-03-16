@@ -69,7 +69,7 @@
   basewidth={0.55em},
   escapechar=@
 }
-\lstdefinestyle{inline}{columns=fullflexible}
+\lstdefinestyle{inline}{basicstyle={\ttfamily\small},columns=fullflexible}
 \lstdefinestyle{unframed}{frame={},aboveskip=0.25em,belowskip=0.25em}
 \lstdefinestyle{output}{frame=single,backgroundcolor=\color{CDblue4},xleftmargin=2em,xrightmargin=0.3333em}
 

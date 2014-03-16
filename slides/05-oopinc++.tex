@@ -12,7 +12,7 @@
 
 \author[A. Arnold and O. Lenz]{Axel Arnold \and Olaf Lenz} 
 \institute{Institut für Computerphysik\\Universit\"at Stuttgart}
-\date{February 18-22, 2013}
+\date{March 17-21, 2014}
 
 \setbeamertemplate{footline}{}
 \begin{frame}
@@ -82,43 +82,11 @@ public:
 \begin{frame}[fragile]
   \frametitle{(Forward) declaration}
 
-This compiles as is:
-\begin{lstlisting}
-#include <vector>
-#include <string>
-using namespace std;
-enum Event { North, East, South, West, Skip };
-class Piece; // <-
-
-class Player {
-public:
-  vector<Piece *> pieces;
-  void doNextMove(Piece &piece, Event event, string &msg);
-};
-\end{lstlisting}
-
-  \begin{itemize}
-  \item classes can be (forward) \alert{declared} (here: \lstinline!Piece!)
-  \item necessary if \lstinline!Piece! uses \lstinline!Player!
-    and vice versa
-  \item ok as long as only addresses are needed (pointers or references)
-  \item \lstinline!enum Event! however has to be defined
-  \end{itemize}
-  
-\end{frame}
-
-
-\begin{frame}[fragile]
-  \frametitle{A more complex example}
-
   \begin{tikzpicture}
     \umlclass[type=abstract]{Player}{
-      playerNum : int\\
-      name : string
     }{}
 
     \umlclass[x=6]{Piece}{
-      x, y: int
     }{}
     \umlunicompo[arg2=*,anchors=10 and 170]{Player}{Piece}
     \umluniassoc[arg2=1,anchors=-170 and -10]{Piece}{Player}
@@ -129,99 +97,87 @@ public:
 \begin{lstlisting}
 class Player; // <-
 class Piece {
-  int x, y;
   Player &player;
 };
 class Player {
-  int playerNum;
   vector< Piece* > pieces;
 };
 \end{lstlisting}
 
   \begin{itemize}
-  \item here, a forward declaration is obviously necessary
-  \item Usually, declare the higher level class forward
+  \item classes can be (forward) \alert{declared} (here: \lstinline!Player!)
+  \item necessary if \lstinline!Piece! uses \lstinline!Player!
+    and vice versa
+  \item ok as long as only addresses are needed (pointers or references)
+  \item usually, forward declare higher level classes
   \end{itemize}
+\end{frame}
+
+\begin{frame}[squeeze,fragile]
+  \frametitle{Declaration of member functions}
+
+\begin{lstlisting}[title={\footnotesize\bfseries Player.hpp}]
+#ifndef PLAYER_HPP
+#define PLAYER_HPP
+class Player {
+  void doNextMove(Piece &piece, Event ev, string &msg);
+  int getPlayerNum() { return playerNum; }
+};
+#endif
+\end{lstlisting}
+
+    \begin{itemize}
+    \item member functions are declared inside the class definition
+    \item definition of \emph{short} functions in class (\lstinline[inline]!inline!)
+    \item class definitions are usually placed in header file `\textit{class}.hpp'
+    \item preprocessor guards to avoid double definition of class
+    \end{itemize}
 \end{frame}
 
 \begin{frame}[squeeze,fragile]
   \frametitle{Definition of member functions}
 
-  \begin{onlyenv}<1-3>
 \begin{lstlisting}[title={\footnotesize\bfseries Player.hpp}]
 class Player {
-  Piece *currentPiece;
   void doNextMove(Piece &piece, Event ev, string &msg);
   int getPlayerNum() { return playerNum; }
 };
 \end{lstlisting}
 
 \begin{lstlisting}[title={\footnotesize\bfseries Player.cpp}]
-void
-Player::doNextMove(Piece &piece, Event ev, string &msg) {
-  currentPiece = &piece;
+void Player::doNextMove(Piece &piece, Event ev, string &msg) {
   piece.tryStep(ev, msg);
 }
 \end{lstlisting}
-  \end{onlyenv}
 
-  \begin{onlyenv}<4-5>
-\begin{lstlisting}[title={\footnotesize\bfseries Player.hpp}]
+    \begin{itemize}
+    \item full member identifier: \lstinline[style=inline,deletekeywords={class}]!class::member!
+    \item only one definition per member function (including inline def's)
+    \item member function definitions in separate cpp-file `\textit{class}.cpp'
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[squeeze,fragile]
+  \frametitle{Scope of member functions}
+
+\begin{lstlisting}
 class Player {
   Piece *currentPiece;
-  void doNextMove(Piece *piece, Event ev, string &msg);
-  int getPlayerNum() { return playerNum; }
+  void doNextMove(Piece &piece, Event ev, string &msg) {
+    currentPiece = &piece;
+    if (piece.tryStep(ev, msg))
+      currentPiece->doStep(ev, msg);
+  }
 };
 \end{lstlisting}
 
-\begin{lstlisting}[title={\footnotesize\bfseries Player.cpp}]
-void
-Player::doNextMove(Piece *piece, Event ev, string &msg) {
-  currentPiece = *piece;
-  piece->tryStep(ev, msg);
-}
-\end{lstlisting}
-  \end{onlyenv}
-
-  \begin{onlyenv}<1>
-    \begin{itemize}
-    \item member functions are defined like normal functions
-    \item a member function is referred by its name and class
-    \item class name and member name are separated by ``::''
-    \end{itemize}
-  \end{onlyenv}
-
-  \begin{onlyenv}<2>
-    \begin{itemize}
-    \item all class members are in the scope of a member function
-    \item member variables and function can be used like global
-      functions/variables
-    \end{itemize}
-  \end{onlyenv}
-  \begin{onlyenv}<3>
-    \begin{itemize}
-    \item member functions are called by ``object.function()''
-    \item object name and member name are separated by ``.''
-    \item same holds for member variables
-    \end{itemize}
-  \end{onlyenv}
-
-  \begin{onlyenv}<4>
-    \begin{itemize}
-    \item with a pointer to an object, you can use ``->'' like in C
-    \item ``(*pointer).function()'' is the same as ``pointer->function()''
-    \item almost true due to operator overloading (later)
-    \end{itemize}
-  \end{onlyenv}
-
-  \begin{onlyenv}<5>
-    \begin{itemize}
-    \item class definitions are usually placed in header file ``\textit{class}.hpp''
-    \item member function definitions in separate cpp-file ``\textit{class}.cpp''
-    \item \emph{small} functions can be defined in the class definition (\alert{inlined})
-    \end{itemize}
-  \end{onlyenv}
-
+  \begin{itemize}
+  \item call member functions by \lstinline[style=inline]!object.function()!
+  \item also access to member variables, if public
+  \item compare C struct syntax
+  \item pointers can be dereferenced using `->' like in C
+  \item only almost true due to operator overloading (later)
+  \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -367,22 +323,18 @@ public:
     \begin{itemize}
     \item Default constructor \lstinline!Class::Class()!
       \begin{itemize}
-      \item only if no user-defined constructor
+      \item only defined if no user-defined constructor declared
       \item initializes all objects using their default constructor
-      \item plain old data types (char, int, ...) are potentially
-        uninitialized
-      \item raises a warning in this case
+      \item plain old data types (char, int, ...) are uninitialized
       \end{itemize}
     \item Copy constructor \lstinline!Class::Class(const Class &src)!
       \begin{itemize}
       \item copies all member variables from object \lstinline!src!
-      \item for pointers often a bad idea - ownership is not clear
-      \item also for \emph{big} classes
+      \item for pointers often a bad idea - duplicates ownership
       \end{itemize}
     \end{itemize}
-  \item to avoid automatic generation, declare the functions
+  \item to avoid automatic generation, declare constructors
     \emph{private}
-  \item you don't need to specify them
   \end{itemize}
 \end{frame}
 
@@ -455,17 +407,15 @@ public:
 
   \begin{itemize}
   \item another kind of function overloading are default arguments
-  \item works for any kind of functions, including constructors
-  \item values need not to be specified when calling
+  \item values get predefined values if not specified when calling
   \item always starts from the back:\\
     \lstinline!QGameBoard(30)! is ok: \lstinline!parent = 0!\\
     \lstinline!QGameBoard(otherWidget)! not:
     \lstinline!parent = 0!, the pointer \lstinline!otherWidget! is cast into an
     integer for \lstinline!tileSize!
   \item here, this also overloads the default constructor
-    \lstinline!QGameBoard()!, which is therefore not generated
+    \lstinline!QGameBoard()!
   \end{itemize}
-
 \end{frame}
 
 \begin{frame}[fragile]
@@ -662,41 +612,18 @@ private:
 };
 \end{lstlisting}
   \begin{itemize}
-  \item \lstinline!friend! overrides any visibility restrictions
+  \item \lstinline[style=inline]!friend! overrides any visibility restrictions
   \item friends are declared in the class definition\\
     $\implies$ you cannot inject friends
   \item friends can be classes or (member) functions
-  \item common use is allowing the \lstinline!<<!-operator to access inner parts
-  \item here, it enforces to use \lstinline!HiddenFactor! to create objects
+  \item common use is allowing the \lstinline[style=inline]!<<!-operator to access inner parts
+  \item here, it enforces to use \lstinline[style=inline]!HiddenFactory! to create objects
   \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
   \frametitle{Polymorphism: virtual functions}
 
-  \begin{onlyenv}<1>
-\begin{lstlisting}
-class Tile {
-  string whatAmI() { return "tile"; }
-};
-class FloorTile: public Tile {
-  string whatAmI() { return "floor tile"; }
-};
-void informMe(Tile &tile) {
-  cout << "this is a " << tile.whatAmI() << endl;
-}
-\end{lstlisting}
-
-    \begin{itemize}
-    \item doesn't work --- \lstinline!informMe! always says it is a ``tile''
-    \item even for a \lstinline!FloorTile!, \lstinline!Tile::whatAmI!
-      is called, since \lstinline!tile! is a (reference to) \lstinline!Tile!
-    \item when accessed through a base class pointer or reference,
-      the object ``forgets'' its true type
-    \end{itemize}
-  \end{onlyenv}
-
-  \begin{onlyenv}<2>
 \begin{lstlisting}[emph={virtual}]
 class Tile {
   virtual string whatAmI() { return "tile"; }
@@ -709,17 +636,15 @@ void informMe(Tile &tile) {
 }
 \end{lstlisting}
 
-    \begin{itemize}
-    \item \lstinline!virtual! declares a function to be \alert{polymorph}
-    \item it acts differently depending on the \emph{actual} type of the object
-    \item therefore, \lstinline!Tile::whatAmI! is different for a
-      \lstinline!Tile! and a \lstinline!WallTile!
-    \item classes with virtual functions carry a pointer to a table of
-      virtual functions (vtable)
-    \item forgetting to define a virtual function leads to undefined
-      references to the ``vtable for Class''
-    \end{itemize}
-  \end{onlyenv}
+\begin{itemize}
+\item without virtual, \lstinline[style=inline]!informMe! always says ``this is a tile''
+\item \lstinline!virtual! declares a function to be \alert{polymorph}
+\item acts differently depending on the \emph{actual} type of the object
+\item \lstinline!Tile::whatAmI! is different for a
+	\lstinline!Tile! and a \lstinline!WallTile!
+\item forgetting to define a virtual function leads to undefined
+      references to the `vtable for class'
+\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -739,9 +664,8 @@ int main() {
 \end{lstlisting}
 
     \begin{itemize}
-    \item pure virtual (abstract) functions are not be defined for the
-      base class, only for derived classes
-    \item classes with pure virtual functions are \alert{abstract}
+    \item purely virtual (abstract) functions are only defined for derived classes
+    \item classes with purely virtual functions are \alert{abstract}
       classes
     \item you cannot create objects of abstract classes
     \end{itemize}
@@ -956,8 +880,7 @@ class vector {
     \begin{block}{Cons}
       \vspace{-\bigskipamount}
       \begin{itemize}
-      \item sometimes difficult to say whether you need to change an
-        object (a calls b calls c ...)
+      \item hard to interface non-const-aware code (e.g. plain C)
       \item leads often to code duplication
       \item vector e.g. needs const and non-const iterators, which
         essentially do the same
