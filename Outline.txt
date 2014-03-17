@@ -1,4 +1,4 @@
-Time-stamp: <2014-03-16 16:59 olenz>
+Time-stamp: <2014-03-17 21:19 olenz>
 
 Day 1
 -----
@@ -36,63 +36,57 @@ TUTORIAL: Project intro and modelling
 Day 2
 -----
 LECTURE 1: A Tour of the Standard Library
-* auto
-* Using templates
 * I/O-streams
+  * <iostream>: cin, cout, cerr
+  * <fstream>: ifstream, ofstream
+  * <sstream>: istringstream, ostringstream
+  * Flags: 
+    * Bool: boolalpha, noboolalpha
+    * Integer: dec, hex, oct
+    * Float: fixed, scientific
+    * Adjust: left, right
+  * <iomanip>: setprecision, setw, setfill
+* Using templates
 * Containers
-  * Data structures
-    * List-like
-      * Array
-      * Linked list
-    * Map-like
-      * Binary tree
-      * Hash map
-    * Comparison
-      * Memory requirement:
-        * Array: N
-        * Linked list: N+(N*ptrsize)
-        * Binary tree: N+(2*N*ptrsize)
-        * Hashmap: ~m*N (m~2)
-      * Random access
-        * Array: O(1)
-        * Linked list: O(N)
-        * Binary tree: O(log(N))
-        * Hash map: O(1)
-      * Insertion/deletion
-        * Array: O(N)
-        * Linked list: O(1)
-        * Binary tree: O(log(N))
-        * Hash map: O(1)
-      * Sorted insert
-        * Array: O(N)
-        * Linked list: O(N)
-        * Binary tree: O(log(N))
-        * Hash map: NA
+  * Example: vector
+  * Ranged for loop (C++11)
+  * Auto
   * Iterators
     * Generalized pointer
     * Dereference
     * Increment
     * Possibly decrement, random access
   * Iterator methods
-    * begin()
-    * end()
-    * insert()
-    * erase()
-    * rbegin()
-    * rend()
+    * begin(), end()
+    * rbegin(), rend()
+    * insert(), erase()
   * Container methods
     * swap()
-    * push_back()
-    * pop_back()
-    * back()
-    * front()
-    * size()
-    * resize()
-  * Algorithm
-    * sort
-    * find
-* Functional
-* ...more
+    * push_back(), pop_back()
+    * back(), front()
+    * size(), resize()
+  * Different containers
+    * <vector>: efficient random access, resizable
+    * <array>: efficient random access
+    * <list>/<forward_list>: efficient insertion, deletion, iteration
+    * <deque>: efficient insertion/deletion at front/end
+    * <unordered_[multi]set>: efficient insertion, deletion, find
+    * <[multi]set>: efficient insertion, deletion, find, ordered 
+    * <unordered_[multi]map>: associative list, unordered
+    * <[multi]map>: associative list, ordered
+* <algorithm>
+  * works on ranges of elements
+  * sort
+  * find
+* More
+  * <memory> shared_ptr / weak_ptr
+  * <functional> Map, Bind
+  * <chrono> Time
+  * <complex> Complex numbers
+  * <limits> Numerical limits
+  * <tuple> Tuple objects
+  * <valarray> array of numbers, with mathematical functions
+  * Multi-threading
 
 LECTURE 2: OOP in C++
 * Example: multidim valarray class
@@ -104,6 +98,7 @@ LECTURE 2: OOP in C++
 
 LECTURE 3: TDD in a Nutshell
 * gtest
+* jenkins
 
 TUTORIAL: Git
 
@@ -115,9 +110,9 @@ LECTURE 1: The Magic of Pointers
   * Dynamic data structures
     * Memory Layout: Stack vs. Heap
     * Pointers and arithmetics
-    * delete, new
     * Arrays
-  * Example: linked lists
+    * delete, new
+  * Example: Linked lists
 * Debugging
 
 LECTURE 2: OOP: Overloading, Inheritance and Polymorphism 
