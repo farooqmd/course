@@ -11,7 +11,7 @@ string read_text() {
   getline(in, text);
 
   return text;
-} 
+} // <-- destroy text
 
 int main() {
   // creates a copy of the string!

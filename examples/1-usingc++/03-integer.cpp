@@ -9,7 +9,7 @@ int main() {
   int n = 42;
   // a constant: cannot be modified
   const int N = 42;
-  
+
   // in hex notation
   int n2 = 0xAFFE;
   // oct

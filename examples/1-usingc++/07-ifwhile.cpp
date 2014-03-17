@@ -21,7 +21,7 @@ int main() {
     }
 
     int guess;
-    int secret = 42;
+    const int secret = 42;
     // * SYNTAX: do <statement> while (<expression>);
     do {
       cout << "Please guess my number between 0 and 100: ";
@@ -49,6 +49,5 @@ int main() {
         cout << i << endl;
       cout << "YOU WIN!" << endl;
     }
-
   }
 }
