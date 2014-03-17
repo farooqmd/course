@@ -1,0 +1,49 @@
+Time-stamp: <2014-03-17 14:35 olenz>
+
+git clone /group/cpp/C++.git
+
+"$1 bottles of beer on the wall, $1 bottles of beer.
+Take one down and pass it around, $2 bottles of beer on the wall."
+
+1. Write "99 bottles of beer on the wall" in plain C++
+- Basic loop
+- output
+
+2. Write a function 
+void replace_all(string &s, string target, string replacement)
+that replaces all occurrences of target in the string s with the
+replacement.
+- Write a function, read docs
+
+3. Use the function to rewrite "99 bottles of beer". 
+Use the text 
+"$1 bottles of beer on the wall, $1 bottles of beer.
+Take one down and pass it around, $2 bottles of beer on the wall."
+and replace $1 by the amount before and $2 by the amount after
+drinking.
+
+4. Now write a zeromq program that opens a pull server and bind to
+port 4242 on your machine and a push client that connect to port 4242
+on the neighboring machine to the right. 
+The program will receive a message that consists of a number and a
+text. In the text, it shall replace all occurrences of "$1" with the
+number and all occurrences of "$2" with (number-1) and output the
+text. Then it shall pass on the message with the number reduced by 1.
+
+You will need 
+  zmqpp::context
+  zmqpp::socket::socket(context, socket_type)
+    - socket_type can be zmqpp::socket_type::{pull,push}
+  zmqpp::socket::bind(endpoint) 
+   
+  zmqpp::socket::connect(string)
+  zmqpp::socket::send(message)
+  zmqpp::socket::receive(&message)
+  zmqpp::message
+  message << whatever 
+    - put whatever into message
+  message >> whatever 
+    - gets whatever from message
+
+Docs for string::find, string::replace and to_string from
+http://www.cplusplus.com.
