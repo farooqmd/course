@@ -117,8 +117,7 @@ LECTURE 2: OOP in C++
 * Declaration vs. Definition of classes
 * Constructor, Destructor
 * Default constructor
-* Encapsulation: private, public
-* friend
+* static members
 
 LECTURE 3: TDD in a Nutshell
 * gtest
@@ -145,6 +144,7 @@ Day 4
 -----
 LECTURE 1: Templates
 * Implementing templates
+* Using inheritance
 
 LECTURE 2: OOP in C++
 * Const Correctness
