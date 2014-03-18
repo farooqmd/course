@@ -21,4 +21,11 @@ int main() {
 
   s3.replace(7, 6, "scary ");
   cout << s3 << endl;
+
+  // conversion between numbers and string
+  s1 = to_string(3);
+  s2 = to_string(42.23);
+
+  int n = stoi(s1);
+  float f = stof(s2);
 }

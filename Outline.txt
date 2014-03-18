@@ -1,4 +1,4 @@
-Time-stamp: <2014-03-17 21:19 olenz>
+Time-stamp: <2014-03-18 08:39 olenz>
 
 Day 1
 -----
@@ -46,9 +46,9 @@ LECTURE 1: A Tour of the Standard Library
     * Float: fixed, scientific
     * Adjust: left, right
   * <iomanip>: setprecision, setw, setfill
-* Using templates
 * Containers
   * Example: vector
+  * Using templates
   * Ranged for loop (C++11)
   * Auto
   * Iterators
@@ -66,14 +66,38 @@ LECTURE 1: A Tour of the Standard Library
     * back(), front()
     * size(), resize()
   * Different containers
-    * <vector>: efficient random access, resizable
-    * <array>: efficient random access
-    * <list>/<forward_list>: efficient insertion, deletion, iteration
-    * <deque>: efficient insertion/deletion at front/end
-    * <unordered_[multi]set>: efficient insertion, deletion, find
-    * <[multi]set>: efficient insertion, deletion, find, ordered 
-    * <unordered_[multi]map>: associative list, unordered
-    * <[multi]map>: associative list, ordered
+
+list-like containers (keep insertion order)
+
+                                array   vector  list    forward_list    deque
+insertion/deletion at end       -       O(1)    O(1)    O(N)            O(1)
+insertion/deletion at begin     -       O(N)    O(1)    O(1)            O(1)
+random insertion/deletion       -       O(N)    O(1)    O(1)            O(1) 
+random_access                   O(1)    O(1)    O(N)    O(N)            O(2)
+underlying datastruct           array   array   dllist  sllist          array
+
+associative containers (use keys to find an element)
+* <unordered_set>: unordered_set, unordered_multiset
+  * store elements
+  * order is not kept (random order)
+  * quickly receive an element or test whether it is there
+  * multiset: keep the same element multiple times
+  * underlying datastructure: hashmap
+* <set>: set, multiset  
+  * like unordered_set
+  * keeps elements sorted
+  * slightly slower than unordered_set
+  * underlying datastructure: binary tree
+* <unordered_map>: unordered_map, unordered_multimap
+  * store elements indexed by a key
+  * quickly receive elements
+  * multimap: store several elements with the same key
+  * underlying datastructure: hashmap
+* <ordered_map>: ordered_map, unordered_multimap
+  * like unordered_map
+  * keeps elements sorted
+  * slightly slower than unordered_set
+  * underlying datastructure: binary tree
 * <algorithm>
   * works on ranges of elements
   * sort
@@ -104,16 +128,7 @@ TUTORIAL: Git
 
 Day 3 
 -----
-LECTURE 1: The Magic of Pointers
-* Data types
-  * Static
-  * Dynamic data structures
-    * Memory Layout: Stack vs. Heap
-    * Pointers and arithmetics
-    * Arrays
-    * delete, new
-  * Example: Linked lists
-* Debugging
+LECTURE 1: Exceptions and Namespaces
 
 LECTURE 2: OOP: Overloading, Inheritance and Polymorphism 
 * Function overloading
@@ -128,7 +143,8 @@ LECTURE 2: OOP: Overloading, Inheritance and Polymorphism
 
 Day 4
 -----
-LECTURE 1: Exceptions and Namespaces
+LECTURE 1: Templates
+* Implementing templates
 
 LECTURE 2: OOP in C++
 * Const Correctness
@@ -137,8 +153,16 @@ LECTURE 2: OOP in C++
 
 Day 5
 -----
-LECTURE 1: Templates
-* Implementing templates
+LECTURE 1: The Magic of Pointers
+* Data types
+  * Static
+  * Dynamic data structures
+    * Memory Layout: Stack vs. Heap
+    * Pointers and arithmetics
+    * Arrays
+    * delete, new
+  * Example: Linked lists
+* Debugging
 
 Further topics
 --------------
